@@ -60,7 +60,8 @@ Modul für Spendenstreams. Jeder Zuschauer kann einmal pro Stream 1€ spenden. 
 Befehl | Beschreibung
 ------ | ------------
 **!donate** | Spende wird um 1€ erhöht. Benutzer wird gespeichert, sodass jeder nur einmal spenden kann.
-**!donatemax** | Spendenlimit kann während des Streams geändert werden.
+**!donatemax:numeric** | Spendenlimit kann während des Streams geändert werden.
+**!donatemax:string** | Spendenziel kann während des Streams geändert werden.
 **!donatestart** | Startet das Modul.
 **!donatestop** | Beendet das Modul.
 **!donateclear** | Bereinigt das Modul vollständig.
