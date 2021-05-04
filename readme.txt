@@ -1,4 +1,6 @@
-```**Modul**: 
+#Craffels Craffeliger Craffelmat 
+
+```Modul: 
     Abenteuer [loot]
 Beschreibung:
     Abenteuer, auf dem die Zuschauer Gegenstände finden, stehlen und handeln können.
