@@ -1,0 +1,7 @@
+[
+    {"handle": 1, "value":"und verkauft es an", "mode": 2},
+    {"handle": 2, "value":"und schenkt es", "mode": 2},
+    {"handle": 3, "value":"und wirft es auf", "mode": 2},
+    {"handle": 4, "value":"und versteckt es vor", "mode": 1},
+    {"handle": 5, "value":"und zerstört es vor", "mode": 0}
+]

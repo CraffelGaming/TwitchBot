@@ -1,0 +1,19 @@
+[
+    {"handle": 1, "value":"erhält"},
+    {"handle": 2, "value":"erobert"},
+    {"handle": 3, "value":"erkämpft sich"},
+    {"handle": 4, "value":"erkämpft sich beim Dancebattle"},
+    {"handle": 5, "value":"erschleicht sich"},
+    {"handle": 6, "value":"gewinnt beim Singbattle"},
+    {"handle": 7, "value":"gewinnt bei Stein/Schere/Papier"},
+    {"handle": 8, "value":"lootet"},
+    {"handle": 9, "value":"erschnüffelt"},
+    {"handle": 10, "value":"ertastet"},
+    {"handle": 11, "value":"krallt sich"},
+    {"handle": 12, "value":"mopst"},
+    {"handle": 13, "value":"erkämpft sich bei einem Schwertkampf"},
+    {"handle": 14, "value":"klaut"},
+    {"handle": 15, "value":"stiehlt"},
+    {"handle": 16, "value":"entwendet"},
+    {"handle": 17, "value":"stibitzt"}
+]

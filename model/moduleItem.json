@@ -1,0 +1,31 @@
+
+[
+    {
+        "name": "loot",
+        "description" : ""
+    },
+    {
+        "name": "donate",
+        "description" : ""
+    },
+    {
+        "name": "time",
+        "description" : ""
+    },
+    {
+        "name": "support",
+        "description" : ""
+    },
+    {
+        "name": "key",
+        "description" : ""
+    },
+    {
+        "name": "help",
+        "description" : ""
+    },
+    {
+        "name": "administration",
+        "description" : ""
+    }
+]

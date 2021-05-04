@@ -1,0 +1,12 @@
+{
+    "startText" : "Das kann ich:",
+    "start" : "Hilfe wurde gestartet.",
+    "startError" : "Du kannst die Hilfe nicht starten.",
+    "alreadyStarted" : "Hilfe ist bereits gestartet.",
+    "stop" : "Hilfe wurde gestoppt.",
+    "stopError" : "Du kannst die Hilfe nicht anhalten.",
+    "alreadyStopped" : "Hilfe ist bereits gestoppt.",
+    "clear" : "Hilfe wurde zurückgesetzt.",
+    "clearError" : "Du kannst die Hilfe nicht zurücksetzen.",
+    "noHelp" : "Die Hilfe ist deaktiviert."
+}

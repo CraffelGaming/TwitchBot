@@ -1,0 +1,7 @@
+{
+    "start" : "The bot has started.",
+    "startError" : "You cannot start the bot.",
+    "startExists" : "You cannot start the bot.",
+    "stop" : "The bot has ended.",
+    "stopExists" : "You can't stop the bot."
+}

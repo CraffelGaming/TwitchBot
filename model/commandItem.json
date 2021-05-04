@@ -1,0 +1,69 @@
+[
+    {
+        "name": "donate",
+        "commands": [
+            "!donate",
+            "!donatemax",
+            "!donatedestination",
+            "!donatestart",
+            "!donatestop",
+            "!donateclear"
+        ]
+    },
+    {
+        "name": "time",
+        "commands":[
+            "!time",
+            "!timestart",
+            "!timestop",
+            "!timeclear"
+        ]
+    },
+    {
+        "name": "support",
+        "commands":[
+            "!support",
+            "!supportstart",
+            "!supportstop",
+            "!supportclear"
+        ]
+    },
+    {
+        "name": "help",
+        "commands":[
+            "!help",
+            "!helpstart",
+            "!helpstop",
+            "!helpclear"
+        ]
+    },
+    {
+        "name": "administration",
+        "commands":[
+            "!adminstart",
+            "!adminstop"
+        ]
+    },
+    {
+        "name": "loot",
+        "commands":[
+            "!loot",
+            "!inventory",
+            "!steal",
+            "!give",
+            "!find",
+            "!leave",
+            "!lootstart",
+            "!lootstop",
+            "!lootclear"
+        ]
+    },
+    {
+        "name": "key",
+        "commands":[
+            "!keystart",
+            "!keystop",
+            "!keyclear"
+        ]
+    }
+]
