@@ -1,0 +1,37 @@
+html,
+body {
+    height: 100%;
+    grid-template-areas: "header_section" "Site-content_section" "footer_section";
+    grid-template-rows: 100px 100% 50px;
+}
+
+#sticky-footer {
+    flex-shrink: unset;
+    grid-area: footer_section;
+}
+
+#page-content {
+    flex: 1 0 auto;
+    grid-area: Site-content_section;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+}
+
+footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}

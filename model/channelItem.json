@@ -1,11 +1,7 @@
 [
     {
-        "name": "#craffel",
-        "language": "de-DE",
-        "isActive": false
-    },
-    {
-        "name": "#superlootgeil",
+        "name": "#craffelmat",
+        "displayName": "Craffelmat",
         "language": "de-DE",
         "isActive": false
     }

@@ -4,6 +4,7 @@ const items = require('./channelItem.json');
 class ChannelItem {
     constructor(data){
         this.name = data.name;
+        this.displayName = data.displayName;
         this.language = data.language;
         this.isActive = data.isActive;
         this.database = {};
@@ -16,6 +17,10 @@ class ChannelItem {
                 type: DataTypes.STRING,
                 allowNull: false,
                 primaryKey: true
+            },
+            displayName: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             language: {
                 type: DataTypes.STRING,
