@@ -27,6 +27,7 @@ class Loot extends Module{
         this.players = await channel.database.sequelize.models.loot_hero.findAll({where: {isActive: true}});
 
         for (var player of Object.values(this.players)) {
+            player.startIndex = 0;
             player.items = await channel.database.sequelize.models.loot_inventory.findAll({where: {heroHandle: player.handle, isReload: true}});
         }
 
