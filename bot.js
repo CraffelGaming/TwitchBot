@@ -50,6 +50,7 @@ app.set('port', settings.port);
 app.set('channel', channel);
 app.set('client', client);
 
+/*
 if (fs.existsSync(path.join(__dirname, settings['key'])) && fs.existsSync(path.join(__dirname, settings['cert']))){
   https.createServer({
       key: fs.readFileSync(path.join(__dirname, settings['key'])),
@@ -64,7 +65,7 @@ if (fs.existsSync(path.join(__dirname, settings['key'])) && fs.existsSync(path.j
         console.log('Express server listening on port ' + app.get('port'));
       })
 }
-
+*/
 startup();
 
 // start twitch bot

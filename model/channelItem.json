@@ -2,13 +2,13 @@
     {
         "name": "#craffel",
         "displayName": "Craffel",
-        "language": "DE-de",
+        "language": "de-DE",
         "isActive": true
     },
     {
         "name": "#superlootgeil",
         "displayName": "SuperLootgeil",
-        "language": "DE-de",
+        "language": "de-DE",
         "isActive": true
     }
 ]

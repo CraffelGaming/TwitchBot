@@ -10,6 +10,8 @@ const ChannelItem = require('../model/channelItem');
 const ModuleItem = require('../model/moduleItem');
 const Puffer = require('./puffer');
 
+var path = require('path');
+
 class Channel {
     constructor(){
         this.globalDatabase = new Connection(new Buffer.from('global').toString('base64'));
@@ -40,7 +42,7 @@ class Channel {
 
                 for (var module of Object.values(modules)) {
                     var moduleItem = new ModuleItem(module.dataValues);
-                    var translation = require('../language/' + moduleItem.name + '/' + channelItem.language + '.json');
+                    var translation = require(path.join(__dirname, '../language/' + moduleItem.name + '/' + channelItem.language + '.json'));
                     console.log(`load ${module.name} for channel ${channelItem.name}`);
 
                     switch(moduleItem.name){
