@@ -1,38 +1,37 @@
 const Module = require('./module');
 
 class Administration extends Module {
-    constructor(database, translation, element, channel){
-        super(database, translation, element);
-        this.channel = channel;
+    constructor(translation, element){
+        super(translation, element);
     }
     
-    initialize(){
+    initialize(channel){
 
     }
 
-    execute(playerName, message, target, parameter){
+    execute(channel, playerName, message, target, parameter){
         switch(message){
             case "!adminstart":
                 if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                    return this.adminStart();
+                    return this.adminStart(channel);
                 } else return this.translation.startError;
             case "!adminstop":
                 if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                    return this.adminStop();
+                    return this.adminStop(channel);
                 } else return this.translation.stopError;
         }       
     }
  
-    adminStart(){
-        if(this.channel && !this.channel.isActive){
-            this.channel.isActive = true;
+    adminStart(channel){
+        if(channel && !channel.isActive){
+            channel.isActive = true;
             return this.translation.start;
         } else return this.translation.startExists;
     }
 
-    adminStop(){
-        if(this.channel && this.channel.isActive){
-            this.channel.isActive = false;
+    adminStop(channel){
+        if(channel && channel.isActive){
+            channel.isActive = false;
             return this.translation.stop;
         } else return this.translation.stopExists;
     }

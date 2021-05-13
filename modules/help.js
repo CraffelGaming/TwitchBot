@@ -1,20 +1,20 @@
 const Module = require('./module');
 
 class Help extends Module{
-    constructor(database, translation, element){
-        super(database, translation, element);
+    constructor(translation, element){
+        super(translation, element);
     }
 
-    initialize(){
+    initialize(channel){
 
     }
     
-    async execute(playerName, message, target, parameter){
+    async execute(channel, playerName, message, target, parameter){
         try{
             switch(message){
                 case "!help":
                     if(this.isRunning){
-                        return await this.buildMessage(); 
+                        return await this.buildMessage(channel); 
                     } else return this.translation.noHelp;
                 case "!helpstart":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
@@ -26,7 +26,7 @@ class Help extends Module{
                     } else return this.translation.stopError;
                 case "!helpclear":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                        return this.clear();
+                        return this.clear(channel);
                     } else return this.translation.clearError;
             }     
         } catch(ex){
@@ -34,28 +34,28 @@ class Help extends Module{
         }   
     }
 
-    clear(){
+    clear(channel){
         return this.translation.clear;
     }
 
-    async callMessage(){
+    async callMessage(channel){
         var message = "";
         if(this.isRunning){                    
-            message = await this.buildMessage();
+            message = await this.buildMessage(channel);
         }
         return message;
     }
 
-    async buildMessage(){
+    async buildMessage(channel){
         var result = `${this.translation.startText} `;
         try{
-            var module_donate = (await this.database.sequelize.models.module_donate.findOne()).dataValues;
-            var module_key = (await this.database.sequelize.models.module_key.findOne()).dataValues;
-            var module_time = (await this.database.sequelize.models.module_time.findOne()).dataValues;
-            var module_support = (await this.database.sequelize.models.module_support.findOne()).dataValues;
-            var module_loot = (await this.database.sequelize.models.module_loot.findOne()).dataValues;
-            var module_help = (await this.database.sequelize.models.module_help.findOne()).dataValues;
-            var module_administration = (await this.database.sequelize.models.module_administration.findOne()).dataValues;
+            var module_donate = (await channel.database.sequelize.models.module_donate.findOne()).dataValues;
+            var module_key = (await channel.database.sequelize.models.module_key.findOne()).dataValues;
+            var module_time = (await channel.database.sequelize.models.module_time.findOne()).dataValues;
+            var module_support = (await channel.database.sequelize.models.module_support.findOne()).dataValues;
+            var module_loot = (await channel.database.sequelize.models.module_loot.findOne()).dataValues;
+            var module_help = (await channel.database.sequelize.models.module_help.findOne()).dataValues;
+            var module_administration = (await channel.database.sequelize.models.module_administration.findOne()).dataValues;
 
             if(module_donate) result += `${module_donate.help} `;
             if(module_key)result += `${module_key.help} `;

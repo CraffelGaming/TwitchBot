@@ -1,17 +1,17 @@
 const Module = require('./module');
 
 class Key extends Module{
-    constructor(database, translation, element){
-        super(database, translation, element);
+    constructor(translation, element){
+        super(translation, element);
         this.keys = [];
         this.keyNext = 0;
     }
 
-    async initialize(){
-        this.keys = await this.database.sequelize.models.key.findAll();  
+    async initialize(channel){
+        this.keys = await channel.database.sequelize.models.key.findAll();  
     }
 
-    async execute(playerName, message, target, parameter){
+    async execute(channel, playerName, message, target, parameter){
         try{
             switch(message){
                 case "!keystart":
@@ -24,7 +24,7 @@ class Key extends Module{
                     } else return this.translation.stopError;
                 case "!helpclear":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                        return await this.clear();
+                        return await this.clear(channel);
                     } else return this.translation.clearError;
             }     
         } catch(ex){
@@ -32,13 +32,13 @@ class Key extends Module{
         }       
     }
 
-    async clear(){
-        this.keys = await this.database.sequelize.models.key.findAll();  
+    async clear(channel){
+        this.keys = await channel.database.sequelize.models.key.findAll();  
         this.keyNext = 0;
         return this.translation.clear;
     }
 
-    callMessage(){
+    callMessage(channel){
         var message = "";
         if(this.keys != null && this.isRunning){
             if(this.keyNext < this.keys.length){

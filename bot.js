@@ -8,8 +8,11 @@ const settings = require('./settings.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const path = require('path');
 const favicon = require('serve-favicon');
+const https = require('https');
+const http = require('http');
+const fs = require('fs')
+var path = require('path');
 
 let channel = new Channel();
 let client = {};
@@ -47,9 +50,20 @@ app.set('port', settings.port);
 app.set('channel', channel);
 app.set('client', client);
 
-var server = app.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + server.address().port);
-});
+if (fs.existsSync(path.join(__dirname, settings['key'])) && fs.existsSync(path.join(__dirname, settings['cert']))){
+  https.createServer({
+      key: fs.readFileSync(path.join(__dirname, settings['key'])),
+      cert: fs.readFileSync(path.join(__dirname, settings['cert']))
+  }, app)
+      .listen(app.get('port'), function () {
+        console.log('Express server listening on port ' + app.get('port'));
+      })
+} else {
+  http.createServer(app)
+      .listen(app.get('port'), function () {
+        console.log('Express server listening on port ' + app.get('port'));
+      })
+}
 
 startup();
 
@@ -79,6 +93,7 @@ async function startup(){
 
 // Called every time a message comes in
 async function onMessageHandler (target, context, message, self) {
+  try{
     if (self) { return; } // Ignore messages from the bot
     if(!message.trim().toLowerCase().startsWith('!')) { return; } // Ignore normal chat messages
     
@@ -87,18 +102,19 @@ async function onMessageHandler (target, context, message, self) {
     
     if(!response) {return;}
 
-    //PUFFER
     var channelItem = channel.channels.find(x => x.name === target)
     
     if(channelItem){
       channelItem.puffer.addMessage(response);
     }
-    //client.say(target, response);
+  } catch (ex){
+    console.error(`ERR: on message handler`, ex);
+  } 
 }
 
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
-  console.log(`* Connected to ${addr}:${port}`);
+  console.log(`INF: Connected to ${addr}:${port}`);
 }
 
 async function onDisconnectedHandler(){

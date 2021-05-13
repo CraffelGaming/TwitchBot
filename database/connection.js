@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
+
 const ObjectItem = require('../model/objectItem');
 const ActionItem = require('../model/actionItem');
 const LocationItem = require('../model/locationItem');
@@ -8,7 +9,6 @@ const ChannelItem = require('../model/channelItem');
 const ModuleItem = require('../model/moduleItem');
 const CommandItem = require('../model/commandItem');
 
-
 const ModuleAdministrationItem = require('../model/module/moduleAdministrationItem');
 const ModuleDonateItem = require('../model/module/moduleDonateItem');
 const ModuleHelpItem = require('../model/module/moduleHelpItem');
@@ -17,13 +17,18 @@ const ModuleLootItem = require('../model/module/moduleLootItem');
 const ModuleSupportItem = require('../model/module/moduleSupportItem');
 const ModuleTimeItem = require('../model/module/moduleTimeItem');
 
+const LootHeroItem = require('../model/loot/lootHeroItem');
+const LootInventoryItem = require('../model/loot/lootInventoryItem');
+
 const fs = require('fs')
+var path = require('path');
 
 class Connection {
     constructor(databaseName){
         this.databaseName = databaseName;
         //this.databasePath = 'opt/service/projects/TwitchBot/database/' + this.databaseName + '.sqlite';
-        this.databasePath = './database/' + this.databaseName + '.sqlite';
+        this.databasePath = path.join(__dirname, this.databaseName + '.sqlite') ;
+        
         this.isNewDatabase = !fs.existsSync(this.databasePath);
         this.sequelize = new Sequelize({ dialect: 'sqlite', storage: this.databasePath });
 
@@ -51,6 +56,9 @@ class Connection {
             ModuleLootItem.initialize(this.sequelize);
             ModuleSupportItem.initialize(this.sequelize);
             ModuleTimeItem.initialize(this.sequelize);
+
+            LootHeroItem.initialize(this.sequelize);
+            LootInventoryItem.initialize(this.sequelize);
 
             await this.sequelize.sync();
             

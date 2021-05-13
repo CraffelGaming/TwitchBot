@@ -55,7 +55,9 @@
             "!leave",
             "!lootstart",
             "!lootstop",
-            "!lootclear"
+            "!lootclear",
+            "!gold",
+            "!chest"
         ]
     },
     {

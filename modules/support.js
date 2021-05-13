@@ -1,15 +1,15 @@
 const Module = require('./module');
 
 class Support extends Module {
-    constructor(database, translation, element){
-        super(database, translation, element);
+    constructor(translation, element){
+        super(translation, element);
     }
 
-    initialize(){
+    initialize(channel){
         
     }
     
-    execute(playerName, message, target, parameter){
+    execute(channel, playerName, message, target, parameter){
         try{
             switch(message){
                 case "!support":
@@ -26,7 +26,7 @@ class Support extends Module {
                     } else return this.translation.stopError;
                 case "!supportclear":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                        return this.clear();
+                        return this.clear(channel);
                     } else return this.translation.clearError;
             }     
         } catch(ex){
@@ -34,11 +34,11 @@ class Support extends Module {
         }  
     }
 
-    clear(){
+    clear(channel){
         return this.translation.clear;
     }
 
-    callMessage(){
+    callMessage(channel){
         var message = "";
         if(this.isRunning){                    
             message = this.generateMessage();

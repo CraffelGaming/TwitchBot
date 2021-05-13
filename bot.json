@@ -4,6 +4,10 @@
       "username": "craffelmat",
       "password": "oauth:wws0160ztn9nxy4yvrl676ttd32xhc"
     },
+    "connection": 
+    {
+      "reconnect": true
+    },
     "channels": 
     []
 }

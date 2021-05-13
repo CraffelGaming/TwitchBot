@@ -1,17 +1,17 @@
 const Module = require('./module');
 
 class Donate extends Module {
-    constructor(database, translation, element){
-        super(database, translation, element);
+    constructor(translation, element){
+        super(translation, element);
         this.donationCurrent = 0;
         this.donationUser = [];
     }
 
-    initialize(){
+    initialize(channel){
         
     }
     
-    execute(playerName, message, target, parameter){
+    execute(channel, playerName, message, target, parameter){
         try{
             switch(message){
                 case "!donate":
@@ -50,7 +50,7 @@ class Donate extends Module {
                     } else return this.translation.stopError;
                 case "!donateclear":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                        return this.clear();
+                        return this.clear(channel);
                     } else return this.translation.clearError;
             }     
         } catch(ex){
@@ -58,7 +58,7 @@ class Donate extends Module {
         }  
     }
     
-    clear(){
+    clear(channel){
         this.donationCurrent = 0;
         this.donationUser = [];
         return this.translation.clear;
@@ -74,7 +74,7 @@ class Donate extends Module {
         } else return 0;
     }
 
-    callMessage(){ 
+    callMessage(channel){ 
         var message = "";
         if(this.isRunning){                    
             message = `${this.translation.donationInformation} ${this.element.destination}. (${this.translation.ofMaximum}: ${this.element.donationMax}€). ${this.translation.donationStatus}: ${this.donationCurrent}€ ${this.translation.ofMaximum} ${this.element.donationMax}€`;  

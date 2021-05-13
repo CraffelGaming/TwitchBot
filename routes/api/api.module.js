@@ -1,13 +1,13 @@
 var express = require('express');
 
 let router = express.Router();
-let endpoint = 'object';
+let endpoint = 'module';
 
 module.exports = router;
 
-router.get('/' + endpoint + '/', async function (req, res) {
+router.get('/' + endpoint + '/', function (req, res) {
     var channel = req.app.get('channel').channels.find(x => x.name === Buffer.from(req.query.channel, 'base64').toString('ascii'))
-	res.status(200).json(await channel.database.sequelize.models.loot_object.findAll());
+    console.log(channel.modules);
+	res.status(200).json(channel.modules);
 });
-
 module.exports = router;

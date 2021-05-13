@@ -1,17 +1,17 @@
 const Module = require('./module');
 
 class Time extends Module {
-    constructor(database, translation, element, channelName){
-        super(database, translation, element);
+    constructor(translation, element, channelName){
+        super(translation, element);
         this.channelName = channelName;
         this.startTime = Date.now();
     }
 
-    initialize(){
+    initialize(channel){
 
     }
     
-    execute(playerName, message, target, parameter){
+    execute(channel, playerName, message, target, parameter){
         try{
             switch(message){
                 case "!time":
@@ -20,7 +20,7 @@ class Time extends Module {
                     } else return this.translation.noTime;
                 case "!timeclear":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                        return this.clear();
+                        return this.clear(channel);
                     } else return this.translation.resetError;
                 case "!timestart":
                     if("#" + playerName.toLowerCase() === target.toLowerCase()){
@@ -40,12 +40,12 @@ class Time extends Module {
         }     
     }
 
-    async clear(){
+    async clear(channel){
         this.startTime = Date.now();
         return this.translation.clear;
     }
 
-    async callMessage(){
+    async callMessage(channel){
         var message = "";
         if(this.isRunning){                    
             message = this.getStreamingTime();

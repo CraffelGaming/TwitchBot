@@ -33,11 +33,16 @@
     "giveSelf" : "hat versucht sich selbst etwas zu geben.",
     "itemNotExists" : "Das Item existiert nicht.",
     "item" : "Das Item",
+    "items" : "Gegenstände",
     "owns" : "besitzt gerade",
     "give" : "gegeben",
     "not" : "nicht",
     "noPlayer1" : "leider nimmt",
     "noPlayer2" : "nicht am Abenteuer teil.",
     "notOwner" : "du besitzt",
-    "leftAdventure" : "hat das Abenteuer verlassen."
+    "leftAdventure" : "hat das Abenteuer verlassen.",
+    "notFound" : "muss noch gefunden werden",
+    "youHave" : "Du hast",
+    "gold" : "Gold",
+    "treasure": "In deiner Schatzkiste liegen"
 }

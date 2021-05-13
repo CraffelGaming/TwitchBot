@@ -1,23 +1,34 @@
 class Module {
-    constructor(database, translation, element){
+    constructor(translation, element){
         this.isRunning = false;
         this.element = element;
-        this.database = database;
         this.translation = translation;
+    }
+
+    isOwner(target, playerName){
+        try{
+            if("#" + playerName.toLowerCase() === target.toLowerCase())
+                return true;
+        } catch (ex){
+            console.error(`ERR: loot - is owner`, ex);
+        }
+        return false;
     }
 
     stop(){
         if(this.isRunning){
             this.isRunning = false;
-            return this.translation.stop;
-        } else return this.translation.alreadyStopped;
+            return true;
+        }
+        return false;
     }
 
     start(){
         if(!this.isRunning){
             this.isRunning = true;
-            return this.translation.start;
-        } else return this.translation.alreadyStarted;
+            return true;
+        }
+        return false;
     }
 }
 

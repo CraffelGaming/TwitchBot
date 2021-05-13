@@ -17,6 +17,11 @@ class ObjectItem {
             value: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            gold: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             }
           }, {freezeTableName: true});
     }

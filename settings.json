@@ -2,5 +2,7 @@
     "hostname" : "localhost",
     "port" : 80,
     "secret": "LEFFARC",
-    "favicon": "/public/images/favicon.png"
+    "favicon": "/public/images/favicon.png",
+    "key" : "/ssl/key.key",
+    "cert" : "/ssl/key.cert"
 }

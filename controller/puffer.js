@@ -5,17 +5,22 @@ class Puffer {
     }
 
     addMessage(message){
-        console.log(`MSG PUSH ${this.messages}`);
+        console.log(`MSG PUSH ${message}`);
         this.messages.push(message);
     }
 
     interval(client, channel){
         setInterval(
             () => {
-                if(this.messages.length > 0){
-                    console.log(`MSG SHIFT ${this.messages}`);
-                    client.say(channel.name, this.messages.shift());
-                }  
+                try{
+                    if(this.messages.length > 0){
+                        var message = this.messages.shift();
+                        console.log(`MSG SHIFT ${message}`);
+                        client.say(channel.name, message);
+                    } 
+                } catch (ex){
+                    console.error(`ERR: build`, ex);
+                }
             },
             1000 * 1.2 // 1.2 Sekunde(n)
         ); 

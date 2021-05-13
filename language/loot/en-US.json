@@ -33,11 +33,16 @@
     "giveSelf" : "tried to give himself something.",
     "itemNotExists" : "The item does not exist.",
     "item" : "The item",
+    "items" : "items",
     "owns" : "owns right now",
     "give" : "given",
     "not" : "not",
     "noPlayer1" : "unfortunately takes",
     "noPlayer2" : "not part of the adventure.",
     "notOwner" : "you own",
-    "leftAdventure" : "left the adventure."
+    "leftAdventure" : "left the adventure.",
+    "notFound" : "need to be found.",
+    "youHave" : "You have",
+    "gold" : "Gold",
+    "treasure": "In your treasure chest are"
 }

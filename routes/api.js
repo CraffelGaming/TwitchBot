@@ -1,12 +1,16 @@
 var express = require('express');
 
-let channel = require("./api/api.channel");
-let object = require("./api/api.object");
+let channels = require("./api/api.channel");
+let objects = require("./api/api.object");
+let modules = require("./api/api.module");
+
 let router = express.Router();
 
-router.get("/channel", channel);
-router.put("/channel", channel);
+router.get("/channel", channels);
+router.put("/channel", channels);
 
-router.get("/object", object);
+router.get("/object", objects);
+
+router.get("/module", modules);
 
 module.exports = router;
