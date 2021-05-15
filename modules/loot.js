@@ -93,17 +93,13 @@ class Loot extends Module{
 
     executeStop(channel, playerName, message, target, parameter){
         if(this.isOwner(target, playerName))
-            if(this.stop())
-                return this.translation.stop;
-            else return this.translation.alreadyStopped;
+            return this.stop();
         else return this.translation.stopError;
     }
 
     executeStart(channel, playerName, message, target, parameter){
         if(this.isOwner(target, playerName))
-            if(this.start())
-                return this.translation.start;
-            else return this.translation.alreadyStarted;
+            return this.start();
         else return this.translation.startError;
     }
 
@@ -460,10 +456,10 @@ class Loot extends Module{
                             }
                         }
                         if(options.player.items.length > 0){                            
-                            var steal = this.randomNumber(0, options.player.stealMultipler * 10);
+                            var steal = this.randomNumber(0, options.player.stealMultipler * 20);
                             var defence = this.randomNumber(0,player.defenceMultipler * 10);
 
-                            if(steal < defence && this.players.length > 1 && player.items.length > 0){
+                            if(steal <= defence && this.players.length > 1 && player.items.length > 0){
                                 randomIndex = this.randomNumber(0, player.items.length - 1);
                                 randomItem = player.items[randomIndex];
                                 var element = this.items.find(x => x.handle == randomItem.objectHandle);

@@ -18,17 +18,17 @@ class Module {
     stop(){
         if(this.isRunning){
             this.isRunning = false;
-            return true;
+            return this.translation.stop;
         }
-        return false;
+        return this.translation.alreadyStopped;
     }
 
     start(){
         if(!this.isRunning){
             this.isRunning = true;
-            return true;
+            return this.translation.start;
         }
-        return false;
+        return this.translation.alreadyStarted;
     }
 }
 
