@@ -15,21 +15,21 @@ class Time extends Module {
         try{
             switch(message){
                 case "!time":
-                    if(this.isRunning){
+                    if(this.isRunning)
                         return this.getStreamingTime();  
-                    } else return this.translation.noTime;
+                    else return this.translation.noTime;
                 case "!timeclear":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.clear(channel);
-                    } else return this.translation.resetError;
+                    else return this.translation.resetError;
                 case "!timestart":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.start();
-                    } else return this.translation.startError;
+                    else return this.translation.startError;
                 case "!timestop":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.stop();
-                    } else return this.translation.stopError;
+                    else return this.translation.stopError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);

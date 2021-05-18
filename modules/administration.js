@@ -12,13 +12,13 @@ class Administration extends Module {
     execute(channel, playerName, message, target, parameter){
         switch(message){
             case "!adminstart":
-                if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                if(this.isOwner(target, playerName))
                     return this.adminStart(channel);
-                } else return this.translation.startError;
+                else return this.translation.startError;
             case "!adminstop":
-                if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                if(this.isOwner(target, playerName))
                     return this.adminStop(channel);
-                } else return this.translation.stopError;
+                else return this.translation.stopError;
         }       
     }
  

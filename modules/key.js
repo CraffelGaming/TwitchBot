@@ -15,17 +15,17 @@ class Key extends Module{
         try{
             switch(message){
                 case "!keystart":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.start();
-                    } else return this.translation.startError;
+                    else return this.translation.startError;
                 case "!keystop":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.stop();
-                    } else return this.translation.stopError;
+                    else return this.translation.stopError;
                 case "!helpclear":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return await this.clear(channel);
-                    } else return this.translation.clearError;
+                    else return this.translation.clearError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);

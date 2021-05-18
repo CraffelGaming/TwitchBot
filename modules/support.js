@@ -13,21 +13,21 @@ class Support extends Module {
         try{
             switch(message){
                 case "!support":
-                    if(this.isRunning){
+                    if(this.isRunning)
                         return this.generateMessage();
-                    } else return this.translation.noSupport;
+                    else return this.translation.noSupport;
                 case "!supportstart":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.start();
-                    } else return this.translation.startError;
+                    else return this.translation.startError;
                 case "!supportstop":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.stop();
-                    } else return this.translation.stopError;
+                    else return this.translation.stopError;
                 case "!supportclear":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.clear(channel);
-                    } else return this.translation.clearError;
+                    else return this.translation.clearError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);

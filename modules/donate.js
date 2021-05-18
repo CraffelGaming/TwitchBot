@@ -27,31 +27,31 @@ class Donate extends Module {
                         } 
                     } else return this.translation.noDonation;
                 case "!donatemax":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName)){
                         if(!isNaN(parameter)){
                             this.element.donationMax = parameter;
                             return `${this.translation.donationLimitChanged} ${this.element.donationMax}€`;
                         } else return this.translation.notANumber;
                     } else return this.translation.donationLimitChangeError;
-                    case "!donatedestination":
-                        if("#" + playerName.toLowerCase() === target.toLowerCase()){
-                            if(parameter && parameter.length > 0){
-                                this.element.destination = parameter;
-                                return `${this.translation.donationDestinationChanged} ${this.element.destination}`;
-                            } else return this.translation.noDonationParameter;
-                        } else return this.translation.donationDestinationError;
+                case "!donatedestination":
+                    if(this.isOwner(target, playerName)){
+                        if(parameter && parameter.length > 0){
+                            this.element.destination = parameter;
+                            return `${this.translation.donationDestinationChanged} ${this.element.destination}`;
+                        } else return this.translation.noDonationParameter;
+                    } else return this.translation.donationDestinationError;
                 case "!donatestart":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.start();
-                    } else return this.translation.startError;
+                    else return this.translation.startError;
                 case "!donatestop":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.stop();
-                    } else return this.translation.stopError;
+                    else return this.translation.stopError;
                 case "!donateclear":
-                    if("#" + playerName.toLowerCase() === target.toLowerCase()){
+                    if(this.isOwner(target, playerName))
                         return this.clear(channel);
-                    } else return this.translation.clearError;
+                    else return this.translation.clearError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);
