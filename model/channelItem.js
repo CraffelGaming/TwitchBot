@@ -34,9 +34,9 @@ class ChannelItem {
     }
 
     static async fill(sequelize){
-        for(var item of Object.values(items)){
-            await sequelize.models.channel.create(item);
-        }
+        for(var item of Object.values(items))
+            if(await sequelize.models.channel.count({ where: { name: item.name } }) == 0)
+                await sequelize.models.channel.create(item);
     }
 }
 module.exports = ChannelItem

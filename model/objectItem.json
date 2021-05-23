@@ -103,5 +103,7 @@
     {"handle": 102, "value":"Göttlichkeit", "gold": 5000},
     {"handle": 103, "value":"den Quellcode vom Lootbot", "gold": 1000},
     {"handle": 104, "value":"einen Banshee, der dich ununterbrochen verfolgt", "gold": 350},
-    {"handle": 105, "value":"ein rostiges altes Schwert", "gold": 10}
+    {"handle": 105, "value":"ein rostiges altes Schwert", "gold": 10},
+    {"handle": 106, "value":"eine südvietnamesiche Hängebauchziege", "gold": 100},
+    {"handle": 107, "value":"einen Weißen Säbelzahn Hasenbären", "gold": 100}
 ]

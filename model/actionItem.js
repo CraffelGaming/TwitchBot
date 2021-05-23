@@ -22,9 +22,9 @@ class ActionItem {
     }
 
     static async fill(sequelize){
-        for(var item of Object.values(items)){
-            await sequelize.models.loot_action.create(item);
-        }
+        for(var item of Object.values(items))
+            if(await sequelize.models.loot_action.count({ where: { handle: item.handle } }) == 0)
+                await sequelize.models.loot_action.create(item);
     }
 }
 module.exports = ActionItem

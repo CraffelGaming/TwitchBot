@@ -1,3 +1,4 @@
+const Loot = require('./loot');
 const Module = require('./module');
 
 class Administration extends Module {
@@ -32,8 +33,17 @@ class Administration extends Module {
     adminStop(channel){
         if(channel && channel.isActive){
             channel.isActive = false;
+            this.modulesStop(channel);
             return this.translation.stop;
         } else return this.translation.stopExists;
+    }
+
+    modulesStop(channel){
+        if(channel){
+            for (var module of Object.values(channel.modules)){
+                module.object.stop();
+            }
+        }
     }
 }
 

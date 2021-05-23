@@ -1,6 +1,7 @@
 const Module = require('./module');
 const LootHeroItem = require('../model/loot/lootHeroItem');
 const LootInventoryItem = require('../model/loot/lootInventoryItem');
+const { Op } = require("sequelize")
 
 Array.prototype.min = function(propertySelector) { return Math.min(...this.map(propertySelector)) };
 Array.prototype.max = function(propertySelector) { return Math.max(...this.map(propertySelector)) };
@@ -24,6 +25,7 @@ class Loot extends Module{
         this.locations = await channel.database.sequelize.models.loot_location.findAll();
         this.actions = await channel.database.sequelize.models.loot_action.findAll();
         this.endings = await channel.database.sequelize.models.loot_ending.findAll();
+        this.enemies = await channel.database.sequelize.models.loot_enemy.findAll();
         this.players = await channel.database.sequelize.models.loot_hero.findAll({where: {isActive: true}});
 
         for (var player of Object.values(this.players)) {
@@ -61,6 +63,8 @@ class Loot extends Module{
                     return this.executeFind(channel, playerName, message, target, parameter);
                 case "!gold":
                     return this.showGold(playerName);
+                case "!level":
+                    return await this.showExperience(channel, playerName);
                 case "!chest":
                     return await this.showChest(channel, playerName);
             }
@@ -228,6 +232,8 @@ class Loot extends Module{
                     } else message = await this.collectItem(channel, player, action, location, item);
                     
                     message += await this.collectGold(player);
+                    message += await this.collectExperience(player);
+                    await player.save();
                 }
             }
         } catch (ex){
@@ -236,29 +242,65 @@ class Loot extends Module{
         return message;
     }
     //#endregion
+    
+    //#region Experience
+    async collectExperience(hero){
+        try{
+            var enemy = this.enemies[this.randomNumber(0, this.enemies.length - 1)];
+            
+            if(enemy != null)
+                hero.experience += enemy.experience;
+            
+            return `${enemy.experience} ${this.translation.experience})`;
+        } catch (ex){
+            console.error(`ERR: loot - collect experience`, ex);
+            return '';
+        }
+    }
 
+    async showExperience(channel, playerName){
+        if(this.players.length > 0){
+            var player = this.players.find(x => x.name === playerName);
+            if(player != undefined){
+                var level = await channel.database.sequelize.models.loot_level.findOne({ 
+                            where: { experienceMin :{[Op.lte]: player.experience}, 
+                            experienceMax :{[Op.gte]: player.experience }
+                        }});    
+                           
+                if(level != null){
+                    return `${playerName}, ${this.translation.level} ${level.handle} (${player.experience} ${this.translation.experience})`;
+                } else return `${playerName}, ${this.translation.levelError}`;  
+            } else return `${playerName}, ${this.translation.noParticipation}`;
+        } else return `${playerName}, ${this.translation.noParticipation}`;
+    }
+    //#endregion
+    
     //#region Gold
     async collectGold(hero){
-        var gold = this.randomNumber(50, 150);
-        var randomMultipler = this.randomNumber(1, 5);
-        
-        if(randomMultipler == 1)
-            gold *= 2;
-     
-        gold *= hero.goldMultipler;
-        hero.gold += gold;
-        await hero.save();
-
-        return ` (+ ${gold} ${this.translation.gold})`;
+        try{
+            var gold = this.randomNumber(50, 150);
+            var randomMultipler = this.randomNumber(1, 5);
+            
+            if(randomMultipler == 1)
+                gold *= 2;
+         
+            gold *= hero.goldMultipler;
+            hero.gold += gold;
+    
+            return ` (${gold} ${this.translation.gold}/`;
+        } catch (ex){
+            console.error(`ERR: loot - collect gold`, ex);
+            return '';
+        }
     }
 
     showGold(playerName){
         if(this.players.length > 0){
             var player = this.players.find(x => x.name === playerName);
             if(player != undefined){
-                return `${this.translation.youHave} ${player.gold} ${this.translation.gold}`;
-            } else return `${inventoryFrom}, ${this.translation.noParticipation}`;
-        } else return `${inventoryFrom}, ${this.translation.noParticipation}`;
+                return `${playerName}, ${this.translation.youHave} ${player.gold} ${this.translation.gold}`;
+            } else return `${playerName}, ${this.translation.noParticipation}`;
+        } else return `${playerName}, ${this.translation.noParticipation}`;
     }
     //#endregion
 
@@ -274,8 +316,7 @@ class Loot extends Module{
             object.isFound = true;
             ++element.quantity;
             element.isReload = true;
-            await element.save();  
-           
+            await element.save();             
         } catch (ex){
             console.error(`ERR: loot - add inventory`, ex);
         }
@@ -513,8 +554,8 @@ class Loot extends Module{
                     count += item.quantity
 
                 return `${this.translation.treasure} ${count} ${this.translation.items}`
-            } else return `${inventoryFrom}, ${this.translation.noParticipation}`;
-        } else return `${inventoryFrom}, ${this.translation.noParticipation}`;
+            } else return `${playerName}, ${this.translation.noParticipation}`;
+        } else return `${playerName}, ${this.translation.noParticipation}`;
     }
     //#endregion
 }

@@ -44,9 +44,9 @@ class ModuleSupportItem {
     }
 
     static async fill(sequelize){
-        for(var item of Object.values(items)){
-            await sequelize.models.module_support.create(item);
-        }
+        for(var item of Object.values(items))
+            if(await sequelize.models.module_support.count({ where: { name: item.name } }) == 0)
+                await sequelize.models.module_support.create(item);
     }
 }
 module.exports = ModuleSupportItem

@@ -6,6 +6,11 @@ class LootHeroItem {
         this.name = "";
         this.lastSteal = Date.now();
         this.startIndex = 0;
+        this.experience = 0;
+        this.gold = 0;
+        this.goldMultipler = 0;
+        this.stealMultipler = 0;
+        this.defenceMultipler = 0;
         this.isActive = false;
     }
 
@@ -27,6 +32,11 @@ class LootHeroItem {
                 defaultValue: Date.now()
             },
             startIndex: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
+            },
+            experience: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 0

@@ -34,9 +34,9 @@ class ModuleKeyItem {
     }
 
     static async fill(sequelize){
-        for(var item of Object.values(items)){
-            await sequelize.models.module_key.create(item);
-        }
+        for(var item of Object.values(items))
+            if(await sequelize.models.module_loot.count({ where: { name: item.name } }) == 0)
+                await sequelize.models.module_key.create(item);
     }
 }
 module.exports = ModuleKeyItem

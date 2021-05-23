@@ -57,7 +57,8 @@
             "!lootstop",
             "!lootclear",
             "!gold",
-            "!chest"
+            "!chest",
+            "!level"
         ]
     },
     {

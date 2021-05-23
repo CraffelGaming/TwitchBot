@@ -27,7 +27,8 @@ class CommandItem {
         for(var item of Object.values(items)){
             for(var command of Object.values(item.commands)){
                 var element = {name: item.name, command: command}
-                await sequelize.models.command.create(element);
+                if(await sequelize.models.command.count({ where: { name: element.name,  command: element.command } }) == 0)
+                    await sequelize.models.command.create(element);
             }
         }
     }

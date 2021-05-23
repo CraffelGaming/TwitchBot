@@ -44,5 +44,8 @@
     "notFound" : "need to be found.",
     "youHave" : "You have",
     "gold" : "Gold",
-    "treasure": "In your treasure chest are"
+    "experience" : "EXP",
+    "treasure": "In your treasure chest are",
+    "level": "Your level is",
+    "levelError": "Your level is unbelievable."
 }

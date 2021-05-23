@@ -43,7 +43,7 @@ class Key extends Module{
         if(this.keys != null && this.isRunning){
             if(this.keyNext < this.keys.length){
                 console.log(`${this.translation.free} ${this.keys[this.keyNext].dataValues.name} ${this.translation.key}: ${this.keys[this.keyNext].dataValues.key}.`);
-                //message = `Gratis ${this.keys[this.keyNext].dataValues.name} Key: ${this.keys[this.keyNext].dataValues.key}.`;
+                message = `Gratis ${this.keys[this.keyNext].dataValues.name} Key: ${this.keys[this.keyNext].dataValues.key}.`;
                 ++this.keyNext;
             }
         }

@@ -1,0 +1,12 @@
+[
+    {"handle": 1, "value":"Skelett", "experience": 100, "defence": 5, "attack": 10, "life": 50},
+    {"handle": 2, "value":"Ratte", "experience": 50, "defence": 3, "attack": 6, "life": 25},
+    {"handle": 3, "value":"Goblin", "experience": 50, "defence": 3, "attack": 6, "life": 25},
+    {"handle": 4, "value":"Ork", "experience": 500, "defence": 30, "attack": 60, "life": 250},
+    {"handle": 5, "value":"Dieb", "experience": 200, "defence": 10, "attack": 20, "life": 100},
+    {"handle": 6, "value":"Kultulist", "experience": 200, "defence": 10, "attack": 20, "life": 100},
+    {"handle": 7, "value":"Wolf", "experience": 100, "defence": 5, "attack": 10, "life": 50},
+    {"handle": 8, "value":"Skritt", "experience": 50, "defence": 3, "attack": 6, "life": 25},
+    {"handle": 9, "value":"Oger", "experience": 500, "defence": 30, "attack": 60, "life": 250},
+    {"handle": 10, "value":"Spinne", "experience": 100, "defence": 5, "attack": 10, "life": 50}
+]

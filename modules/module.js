@@ -10,7 +10,7 @@ class Module {
             if("#" + playerName.toLowerCase() === target.toLowerCase())
                 return true;
         } catch (ex){
-            console.error(`ERR: loot - is owner`, ex);
+            console.error(`ERR: is not a owner`, ex);
         }
         return false;
     }

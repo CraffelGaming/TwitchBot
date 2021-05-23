@@ -44,5 +44,8 @@
     "notFound" : "muss noch gefunden werden",
     "youHave" : "Du hast",
     "gold" : "Gold",
-    "treasure": "In deiner Schatzkiste liegen"
+    "experience" : "EXP",
+    "treasure": "In deiner Schatzkiste liegen",
+    "level": "Du hast Level",
+    "levelError": "Dein Level ist unbeschreiblich."
 }

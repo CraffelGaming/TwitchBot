@@ -27,9 +27,9 @@ class EndingItem {
     }
 
     static async fill(sequelize){
-        for(var item of Object.values(items)){
-            await sequelize.models.loot_ending.create(item);
-        }
+        for(var item of Object.values(items))
+            if(await sequelize.models.loot_ending.count({ where: { handle: item.handle } }) == 0)
+                await sequelize.models.loot_ending.create(item);
     }
 }
 module.exports = EndingItem

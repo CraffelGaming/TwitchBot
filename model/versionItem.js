@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./moduleItem.json');
+const items = require('./versionItem.json');
 
-class ModuleItem {
+class VersionItem {
     constructor(data){
         this.name = data.name;
         this.description = data.name;
@@ -10,23 +10,24 @@ class ModuleItem {
     }
 
     static initialize(sequelize){
-        sequelize.define('module', {
-            name: {
+        sequelize.define('version', {
+            handle: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 primaryKey: true
             },
-            description: {
-                type: DataTypes.STRING,
-                allowNull: true
+            isInstalled: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
           }, {freezeTableName: true});
     }
 
     static async fill(sequelize){
         for(var item of Object.values(items))
-            if(await sequelize.models.module.count({ where: { name: item.name } }) == 0)
-                await sequelize.models.module.create(item);
+            if(await sequelize.models.version.count({ where: { handle: item.handle } }) == 0)
+                await sequelize.models.version.create(item);
     }
 }
-module.exports = ModuleItem
+module.exports = VersionItem

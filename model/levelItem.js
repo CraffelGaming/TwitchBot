@@ -1,36 +1,35 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./objectItem.json');
+const items = require('./levelItem.json');
 
-class ObjectItem {
+class LevelItem {
     constructor(){
         this.handle = 0;
-        this.value = "";
+        this.experienceMin = 0;
+        this.experienceMax = 0;
     }
 
     static initialize(sequelize){
-        sequelize.define('loot_object', {
+        sequelize.define('loot_level', {
             handle: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true
-             },
-            value: {
-                type: DataTypes.STRING,
+            },
+            experienceMin: {
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
-            gold: {
+            experienceMax: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                defaultValue: 0
+                allowNull: false
             }
           }, {freezeTableName: true});
     }
 
     static async fill(sequelize){
         for(var item of Object.values(items))
-            if(await sequelize.models.loot_object.count({ where: { handle: item.handle } }) == 0)
-                await sequelize.models.loot_object.create(item);
+            if(await sequelize.models.loot_level.count({ where: { handle: item.handle } }) == 0)
+                await sequelize.models.loot_level.create(item);
     }
 }
-
-module.exports = ObjectItem
+module.exports = LevelItem
