@@ -5,6 +5,7 @@ let objects = require("./api/api.object");
 let modules = require("./api/api.module");
 let statistic = require("./api/api.statistic");
 let level = require("./api/api.level");
+let hero = require("./api/api.hero");
 
 let router = express.Router();
 
@@ -22,5 +23,8 @@ router.get("/statistic/gold", statistic);
 router.get("/statistic/experience", statistic);
 
 router.get("/level", level);
+
+router.get("/hero", hero);
+router.get("/hero/:handle", hero);
 
 module.exports = router;

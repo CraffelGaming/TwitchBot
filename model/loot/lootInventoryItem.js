@@ -8,7 +8,7 @@ class LootInventoryItem {
     }
 
     static initialize(sequelize){
-        sequelize.define('loot_inventory', {
+        var item = sequelize.define('loot_inventory', {
             objectHandle: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

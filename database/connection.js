@@ -65,6 +65,12 @@ class Connection {
             LootHeroItem.initialize(this.sequelize);
             LootInventoryItem.initialize(this.sequelize);
 
+            this.sequelize.models.loot_hero.hasMany(this.sequelize.models.loot_inventory, {foreignKey: 'heroHandle'} );
+            this.sequelize.models.loot_inventory.belongsTo(this.sequelize.models.loot_hero, {foreignKey: 'heroHandle'});
+
+            this.sequelize.models.loot_object.hasOne(this.sequelize.models.loot_inventory, {foreignKey: 'objectHandle'} );
+            this.sequelize.models.loot_inventory.belongsTo(this.sequelize.models.loot_object, {foreignKey: 'objectHandle'});
+            
             await this.sequelize.sync();
             
             await VersionItem.fill(this.sequelize);
