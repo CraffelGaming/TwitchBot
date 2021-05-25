@@ -5,9 +5,23 @@ block content
     body.d-flex.flex-column
         div#container.container.mb-4.mt-4.pb-6
             .dropdown.show
-            a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle.w-100(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                 | Helden
             #list.dropdown-menu(aria-labelledby='dropdownMenuLink')
+            div#information.d-none
+                .jumbotron.jumbotron-fluid.m-0
+                        .container
+                            h1#name.display-5
+                            p#name.lead Name 
+                div.row.p-3
+                    .jumbotron.jumbotron-fluid.col-6.m-0
+                        .container
+                            h1#gold.display-5
+                            p.lead Gold      
+                    .jumbotron.jumbotron-fluid.col-6.m-0
+                        .container
+                            h1#experience.display-5
+                            p.lead Erfahrung   
             div#hero
     footer#sticky-footer.bg-dark.footer
         div.text-center

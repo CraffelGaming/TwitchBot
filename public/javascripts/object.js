@@ -22,22 +22,27 @@ $(() => {
 
         let header = document.createElement("h4");
         header.setAttribute('class', 'card-header');
-        header.textContent = title;
+        header.textContent = "Schatzkiste";
         card.appendChild(header);
 
         for (var item of Object.values(items)) {
             let row =  document.createElement("div");
             row.setAttribute('class', 'row p-2')
-             
-            let description = document.createElement("div");
-            description.setAttribute('class', 'col-2')
-            description.textContent = item.handle;
-            row.appendChild(description);
+            
+            let index = document.createElement("div");
+            index.setAttribute('class', 'col-2')
+            index.textContent = item.handle;
+            row.appendChild(index);
 
-            let description2 = document.createElement("div");
-            description2.setAttribute('class', 'col-10')
-            description2.textContent = item.value;
-            row.appendChild(description2);
+            let name = document.createElement("div");
+            name.setAttribute('class', 'col-8')
+            name.textContent = item.value;
+            row.appendChild(name);
+
+            let value = document.createElement("div");
+            value.setAttribute('class', 'col-2 text-right')
+            value.textContent = item.gold + " Gold";
+            row.appendChild(value);
 
             card.appendChild(row);
         }

@@ -1,6 +1,8 @@
 $(() => {
 
     $(".dropdown-menu").on('click', 'a', function(element){
+        $(".btn:first-child").text($(this).text());
+        $(".btn:first-child").val($(this).text());
         fetch('./api/hero/' + element.currentTarget.id, {
             method: 'get',
             headers: {
@@ -30,6 +32,11 @@ $(() => {
 
     function showHero(hero) {
         let container = document.getElementById("hero");
+        
+        document.getElementById("information").classList.remove("d-none");
+        document.getElementById("gold").innerText = hero.gold;
+        document.getElementById("experience").innerText = hero.experience;
+        document.getElementById("name").innerText = hero.name;
 
         while (container.firstChild) {
             container.removeChild(container.firstChild);
@@ -41,7 +48,7 @@ $(() => {
 
         let header = document.createElement("h4");
         header.setAttribute('class', 'card-header');
-        header.textContent = hero.name;
+        header.textContent = "Gegenstände";
         card.appendChild(header);
 
         console.log(hero.loot_inventories);
@@ -49,15 +56,20 @@ $(() => {
             let row =  document.createElement("div");
             row.setAttribute('class', 'row p-2')
              
-            let description = document.createElement("div");
-            description.setAttribute('class', 'col-sm')
-            description.textContent = inventory.quantity + "x";
-            row.appendChild(description);
+            let quantity = document.createElement("div");
+            quantity.setAttribute('class', 'col-1')
+            quantity.textContent = inventory.quantity + "x";
+            row.appendChild(quantity);
 
-            let description2 = document.createElement("div");
-            description2.setAttribute('class', 'col-sm')
-            description2.textContent = inventory.loot_object.value;
-            row.appendChild(description2);
+            let object = document.createElement("div");
+            object.setAttribute('class', 'col-8')
+            object.textContent = inventory.loot_object.value;
+            row.appendChild(object);
+
+            let value = document.createElement("div");
+            value.setAttribute('class', 'col-3 text-right')
+            value.textContent = (inventory.loot_object.gold * inventory.quantity) + " Gold";
+            row.appendChild(value);
 
             card.appendChild(row);
         }
