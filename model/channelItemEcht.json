@@ -1,0 +1,14 @@
+[
+    {
+        "name": "#craffel",
+        "displayName": "Craffel",
+        "language": "de-DE",
+        "isActive": true
+    },
+    {
+        "name": "#superlootgeil",
+        "displayName": "SuperLootgeil",
+        "language": "de-DE",
+        "isActive": true
+    }
+]

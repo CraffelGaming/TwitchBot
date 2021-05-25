@@ -34,12 +34,11 @@ $(() => {
         });
     }
 
-
     function showChannel(channel, modules) {
         let container = document.getElementById("container");
 
         let card = document.createElement("div");
-        card.setAttribute('class', 'card custom-card-s');
+        card.setAttribute('class', 'card custom-card-s  mb-2');
         card.setAttribute('id', 'card_' + channel.displayName);
         container.appendChild(card);
 
@@ -51,13 +50,11 @@ $(() => {
 
         for (var module of Object.values(modules)) {
             let description = document.createElement("div");
-            description.setAttribute('class', 'card-body')
+            description.setAttribute('class', 'p-2')
             description.setAttribute('id', 'name_' + module.name);
             description.textContent = module.name;
             card.appendChild(description);
         }
-
-
 
         let button_group = document.createElement("div");
         button_group.setAttribute('class', 'btn-group')
@@ -69,11 +66,27 @@ $(() => {
         button.setAttribute('id', 'button_' + channel.displayName);
         button.textContent = "Verwenden";
         button.addEventListener("click", function () {
-            editClick(channel.displayName);
+            selectClick(channel);
         });
 
         button_group.appendChild(button);
     }
 
+    function selectClick(channel){
+        fetch('./api/channel/select?channel=' + window.btoa(channel.name), {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            console.log(json);
+            let header = document.getElementById("header");
+            header.innerText = json;
+        });
+    }
 });
 

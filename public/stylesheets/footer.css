@@ -35,3 +35,8 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.pb-6,
+.py-6 {
+  padding-bottom: 7rem !important;
+}

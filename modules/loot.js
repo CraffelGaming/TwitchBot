@@ -1,7 +1,7 @@
 const Module = require('./module');
 const LootHeroItem = require('../model/loot/lootHeroItem');
 const LootInventoryItem = require('../model/loot/lootInventoryItem');
-const { Op } = require("sequelize")
+const { Op } = require("sequelize");
 
 Array.prototype.min = function(propertySelector) { return Math.min(...this.map(propertySelector)) };
 Array.prototype.max = function(propertySelector) { return Math.max(...this.map(propertySelector)) };
@@ -265,8 +265,7 @@ class Loot extends Module{
                 var level = await channel.database.sequelize.models.loot_level.findOne({ 
                             where: { experienceMin :{[Op.lte]: player.experience}, 
                             experienceMax :{[Op.gte]: player.experience }
-                        }});    
-                           
+                        }});       
                 if(level != null){
                     return `${playerName}, ${this.translation.level} ${level.handle} (${player.experience} ${this.translation.experience})`;
                 } else return `${playerName}, ${this.translation.levelError}`;  
