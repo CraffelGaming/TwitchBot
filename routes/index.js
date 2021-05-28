@@ -3,6 +3,9 @@ let object = require('./object');
 let statistic = require('./statistic');
 let level = require('./level');
 let hero = require('./hero');
+let twitch = require('./twitch');
+let error = require('./error');
+let Authorize = require('./twitch/authorize');
 
 let endpoint = 'index';
 let type = 'app';
@@ -13,6 +16,8 @@ router.get('/object', object);
 router.get('/statistic', statistic);
 router.get('/level', level);
 router.get('/hero', hero);
+router.get('/twitch', twitch);
+router.get('/error', error);
 
 //index
 router.get('/', (req, res) => {
@@ -20,5 +25,4 @@ router.get('/', (req, res) => {
         title: 'Craffels Abenteuer'
     });
 });
-
 module.exports = router;

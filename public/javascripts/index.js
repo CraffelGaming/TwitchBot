@@ -29,7 +29,6 @@ $(() => {
                 return res.json();
             }
         }).then(async function (json) {
-            console.log(json);
             showChannel(channel, json)
         });
     }
@@ -83,7 +82,6 @@ $(() => {
                 return res.json();
             }
         }).then(async function (json) {
-            console.log(json);
             let header = document.getElementById("header");
             header.innerText = json;
         });

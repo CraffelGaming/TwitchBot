@@ -6,6 +6,7 @@ let modules = require("./api/api.module");
 let statistic = require("./api/api.statistic");
 let level = require("./api/api.level");
 let hero = require("./api/api.hero");
+let twitch = require("./api/api.twitch");
 
 let router = express.Router();
 
@@ -26,5 +27,7 @@ router.get("/level", level);
 
 router.get("/hero", hero);
 router.get("/hero/:handle", hero);
+
+router.get("/twitch/url", twitch);
 
 module.exports = router;

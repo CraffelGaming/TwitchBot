@@ -1,5 +1,7 @@
 doctype html
 html
+    script. 
+        let twitch = "!{twitch}";
     head
         title= title
         link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
@@ -22,7 +24,7 @@ html
                     a.nav-item.nav-link(href='hero') Held
                     a.nav-item.nav-link(href='object') Gegenstände
                     a.nav-item.nav-link(href='statistic') Statistiken
-                    a.nav-item.nav-link(href='level') Level
-
+                    a.nav-item.nav-link(href='level') Level 
+                    a#twitch.nav-item.nav-link(href='/') Twitch
     body
     block content

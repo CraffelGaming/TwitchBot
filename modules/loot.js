@@ -435,8 +435,7 @@ class Loot extends Module{
         if(player != undefined){
             if(player.items != undefined){
                 var item = player.items.find(x => x.objectHandle === options.itemHandle);
-                //var itemIndex = player.items.findIndex(x => x.objectHandle === options.itemHandle);
-
+                
                 if(item != undefined){
                     if(options.player != undefined){
                         if(player.name.toLowerCase() === options.player.name.toLowerCase()){

@@ -5,6 +5,7 @@ const Channel = require('./controller/channel');
 const Command = require('./controller/command');
 const opts = require('./bot.json');
 const settings = require('./settings.json');
+const twitch = require('./twitch.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -49,7 +50,7 @@ app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist')
 app.set('port', settings.port);
 app.set('channel', channel);
 app.set('client', client);
-
+app.set('twitch', twitch);
 
 if (fs.existsSync(path.join(__dirname, settings['key'])) && fs.existsSync(path.join(__dirname, settings['cert']))){
   https.createServer({
