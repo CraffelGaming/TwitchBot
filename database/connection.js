@@ -25,6 +25,7 @@ const LootHeroItem = require('../model/loot/lootHeroItem');
 const LootInventoryItem = require('../model/loot/lootInventoryItem');
 
 const TwitchItem = require('../model/twitch/TwitchItem');
+const TwitchUserItem = require('../model/twitch/TwitchUserItem');
 
 const fs = require('fs')
 var path = require('path');
@@ -112,6 +113,7 @@ class Connection {
             ModuleItem.initialize(this.sequelize);
             CommandItem.initialize(this.sequelize); 
             TwitchItem.initialize(this.sequelize);
+            TwitchUserItem.initialize(this.sequelize);
             
             await this.sequelize.sync();
             

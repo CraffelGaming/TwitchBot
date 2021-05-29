@@ -1,5 +1,5 @@
 /node_modules
 bot.json
 twitch.json
-ssl1/craffel.de_ssl_certificate.cer
-ssl1/craffel.de_private_key.key
+ssl/craffel.de_ssl_certificate.cer
+ssl/craffel.de_private_key.key

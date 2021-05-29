@@ -25,6 +25,12 @@ $(() => {
     }).then(async function (json) {
         let twitch = document.getElementById("twitch");
         twitch.href = json.url;
+
+        let name = document.getElementById("name");
+        name.innerText = json.userName;
+
+        let image = document.getElementById("image");
+        image.src = json.userImage;
     });
 });
 

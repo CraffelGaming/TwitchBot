@@ -2,6 +2,7 @@ const TwitchItem = require('../../model/twitch/TwitchItem');
 var express = require('express');
 const request = require('request');
 var uniqid = require('uniqid');
+const TwitchUserItem = require('../../model/twitch/TwitchUserItem');
 
 class Authorize {
     static WebAuth(req, res, callback) {
@@ -17,46 +18,74 @@ class Authorize {
             if (TwitchErr) { return console.log(TwitchErr); }
             switch(TwitchRes.statusCode){
                 case 200:
-                    var item = await TwitchItem.get(req.app.get('channel').globalDatabase.sequelize, req.session.state);
-                    item.channelName = "test";
-                    item.accessToken = TwitchRes.body.access_token;
-                    item.refreshToken = TwitchRes.body.refresh_token;
-                    item.scope = TwitchRes.body.scope.join(' ');
-                    item.tokenType = TwitchRes.body.token_type;
-                    await item.save();
-
+                    console.log(TwitchRes.body);
+                    req.session.twitch = TwitchRes.body;
+                    this.WebPush(req, res,"GET", "/users?client_id=" + twitch.client_id, this.WebAuthChannel);
                     callback(req, res);
                     break;
                 default:
                     break;
             }      
         });
-    }
-  
-    static WebPush(req, res, endpoint, method, callback) {
+    }    
+    
+    static WebPush(req, res, method, endpoint, callback) {
         var twitch = req.app.get('twitch');
 
         request(twitch.url_base + endpoint, { 
-                json: true, 
-                method: method
-            }, (TwitchErr, TwitchRes, TwitchBody) => {
-                if (TwitchErr) { return console.log(TwitchErr); }
-                callback(req, res, TwitchErr, TwitchRes, TwitchBody);
-            });
+            method : method,
+            auth : { "bearer": req.session.twitch.access_token }, 
+            headers : { 'client-id' : twitch.client_id }
+        }, (twitchErr, twitchRes, twitchBody) => {
+            if (twitchErr) { return console.log(twitchErr); }
+            callback(req, res, twitchErr, twitchRes, JSON.parse(twitchRes.body));
+        });
     }
 
-    static GetUrl(req, res) {
+    static async WebAuthChannel(req, res, twitchErr, twitchRes, twitchBody){
+        var twitchItem = await TwitchItem.get(req.app.get('channel').globalDatabase.sequelize, req.session.state);
+        twitchItem.channelName = twitchBody.data[0].login;
+        twitchItem.accessToken = req.session.twitch.access_token;
+        twitchItem.refreshToken = req.session.twitch.refresh_token;
+        twitchItem.scope = req.session.twitch.scope.join(' ');
+        twitchItem.tokenType = req.session.twitch.token_type;
+        await twitchItem.save();   
+
+        var twitchUserItem = await TwitchUserItem.get(req.app.get('channel').globalDatabase.sequelize, twitchBody.data[0].login);
+        twitchUserItem.displayName = twitchBody.data[0].display_name;
+        twitchUserItem.type = twitchBody.data[0].type;
+        twitchUserItem.broadcaster_type = twitchBody.data[0].broadcaster_type;
+        twitchUserItem.description = twitchBody.data[0].description;
+        twitchUserItem.profileImageUrl = twitchBody.data[0].profile_image_url;
+        twitchUserItem.viewCount = twitchBody.data[0].view_count;
+        twitchUserItem.eMail = twitchBody.data[0].email;
+
+        console.log(twitchUserItem);
+        await twitchUserItem.save();    
+    }
+
+    static async GetConnection(req, res) {
         var twitch = req.app.get('twitch');
         var result = {};
 
-        if(!req.session.state){
+        if(req.session.state){
+            var twitchItem = await req.app.get('channel').globalDatabase.sequelize.models.twitch.findOne({ where: { state: req.session.state } });
+            if(twitchItem){
+                var twitchUserItem = await TwitchUserItem.get(req.app.get('channel').globalDatabase.sequelize, twitchItem.channelName);
+                result.userName = twitchUserItem.displayName; 
+                result.userImage = twitchUserItem.profileImageUrl; 
+            } else {
+                result.userName = ""; 
+                result.userImage = "";
+            }
+        } else {
             req.session.state = uniqid();
         }
         result.url = twitch.url_authorize + '?client_id=' + twitch.client_id +
-                                      '&redirect_uri=' + twitch.redirect_uri +
-                                      '&response_type=' + twitch.response_type +
-                                      '&scope=' + twitch.scope +
-                                      '&state=' + req.session.state;
+                                            '&redirect_uri=' + twitch.redirect_uri +
+                                            '&response_type=' + twitch.response_type +
+                                            '&scope=' + twitch.scope +
+                                            '&state=' + req.session.state;
         return result;
     }
 }
