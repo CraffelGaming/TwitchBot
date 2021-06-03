@@ -32,10 +32,24 @@ html
                 div.col-2.font-weight-bold.text-right Channel:
                 div#header.col-3.font-weight-bold.text-left
 
-                div.col-3.font-weight-bold.text-right Anmeldung:
-                div#name.col-3.font-weight-bold.text-left
+                div#userNameLabel.col-3.font-weight-bold.text-right Anmeldung:
+                div#userName.col-3.font-weight-bold.text-left
 
-                div.col-1.font-weight-bold.text-right.pr-2
+                div#imageLabel.col-1.font-weight-bold.text-right.pr-2
                     image#image.font-weight-bold.headerImage
     body
+        #toastBody.fixed-bottom.p-4
+            .toast.bg-info.text-white.w-100.mw-100(role='alert' data-autohide='false')
+                .toast-body.d-flex.flex-column.p-4
+                    h4 Ich will Kekse
+                    p 
+                    | Wie jede Webseite speichern wir Daten in Form von Keksen, um dir ein geiles Erlebnis bieten zu können. 
+                    | Wenn du unsere Seite nicht nutzen willst, klick bitte auf "Ablehnen".
+                    | Wenn du keine Lust hast, das deine Daten an miesen Konzernen verkauft werden, dann klick bitte auf "Zustimmen", denn das machen wir nicht. 
+                    | Wenn du meinst, dass diese Kekswarnung nicht richtlinienkonform ist, dann schau dir mal einige andere Webseiten an, was die falsch machen.
+                    | Auf dieser Webseite kannst du dich mit Twitch verbinden, was dir für Kekse backen, zeigen die dir sicher auch schon wieder.
+                    .ml-auto
+                        button#btnDeny.btn.btn-outline-light.mr-3(type='button') Ablehnen
+                        button#btnAccept.btn.btn-light(type='button') Zustimmen
+
     block content

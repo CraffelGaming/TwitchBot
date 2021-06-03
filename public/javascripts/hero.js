@@ -1,8 +1,6 @@
 $(() => {
 
     $(".dropdown-menu").on('click', 'a', function(element){
-        $(".btn:first-child").text($(this).text());
-        $(".btn:first-child").val($(this).text());
         fetch('./api/hero/' + element.currentTarget.id, {
             method: 'get',
             headers: {
@@ -13,7 +11,7 @@ $(() => {
                 return res.json();
             }
         }).then(async function (json) {
-            showHero(json[0]);
+            getLevel(json);
         });
      });
 
@@ -30,28 +28,36 @@ $(() => {
         showHeroes(json);
     });
 
-    function showHero(hero) {
+    function getLevel(hero){
+        fetch('./api/level/' + hero.experience, {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            showHero(hero, json);
+        });
+    }
+    function showHero(hero, level) {
         let container = document.getElementById("hero");
-        
+
         document.getElementById("information").classList.remove("d-none");
         document.getElementById("gold").innerText = hero.gold;
+        document.getElementById("level").innerText = level.handle;
         document.getElementById("experience").innerText = hero.experience;
         document.getElementById("name").innerText = hero.name;
+        document.getElementById("goldMultipler").innerText = hero.goldMultipler + 'x';
+        document.getElementById("stealMultipler").innerText = hero.stealMultipler + 'x';
+        document.getElementById("defenceMultipler").innerText = hero.defenceMultipler + 'x';
 
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
-
-        let card = document.createElement("div");
-        card.setAttribute('class', 'card custom-card-s mt-2');
-        container.appendChild(card);
-
-        let header = document.createElement("h4");
-        header.setAttribute('class', 'card-header');
-        header.textContent = "Gegenstände";
-        card.appendChild(header);
-
-        console.log(hero.loot_inventories);
+        
         for (var inventory of hero.loot_inventories) {
             let row =  document.createElement("div");
             row.setAttribute('class', 'row p-2')
@@ -71,7 +77,7 @@ $(() => {
             value.textContent = (inventory.loot_object.gold * inventory.quantity) + " Gold";
             row.appendChild(value);
 
-            card.appendChild(row);
+            container.appendChild(row);
         }
     }
 

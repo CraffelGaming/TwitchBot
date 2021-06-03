@@ -24,6 +24,7 @@ router.get("/statistic/gold", statistic);
 router.get("/statistic/experience", statistic);
 
 router.get("/level", level);
+router.get("/level/:experience", level);
 
 router.get("/hero", hero);
 router.get("/hero/:handle", hero);

@@ -74,9 +74,6 @@ class Authorize {
                 var twitchUserItem = await TwitchUserItem.get(req.app.get('channel').globalDatabase.sequelize, twitchItem.channelName);
                 result.userName = twitchUserItem.displayName; 
                 result.userImage = twitchUserItem.profileImageUrl; 
-            } else {
-                result.userName = ""; 
-                result.userImage = "";
             }
         } else {
             req.session.state = uniqid();

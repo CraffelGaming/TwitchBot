@@ -8,20 +8,44 @@ block content
             a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle.w-100(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                 | Helden
             #list.dropdown-menu(aria-labelledby='dropdownMenuLink')
-            div#information.d-none
-                .jumbotron.jumbotron-fluid.m-0
+            div#information.pt-4.d-none
+                div.row.pl-3.pr-3.pb-5
+                    .col-6.m-0
                         .container
                             h1#name.display-5
-                            p#name.lead Name 
-                div.row.p-3
-                    .jumbotron.jumbotron-fluid.col-6.m-0
+                            p.lead Name
+                    .col-6.m-0.text-right
                         .container
-                            h1#gold.display-5
+                            h1#level.display-5
+                            p.lead Level 
+                div.row.pl-3.pr-3
+                    .col-4.m-0
+                        .container
+                            h2#gold.display-5
                             p.lead Gold      
-                    .jumbotron.jumbotron-fluid.col-6.m-0
+                    .col-4.m-0
                         .container
-                            h1#experience.display-5
-                            p.lead Erfahrung   
-            div#hero
+                            h2#experience.display-5
+                            p.lead Erfahrung 
+                div.row.pl-3.pr-3
+                    .col-4.m-0
+                        .container
+                            h3#goldMultipler.display-5
+                            p.lead Gold   
+                    .col-4.m-0
+                        .container
+                            h3#stealMultipler.display-5
+                            p.lead Diebstahl     
+                    .col-4.m-0
+                        .container
+                            h3#defenceMultipler.display-5
+                            p.lead Verteidigung
+                #accordionExample.accordion
+                    .card
+                        #headingOne.card-header
+                            button.btn.btn-block.text-left(type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne') Gegenstände
+                        #collapseOne.collapse.show(aria-labelledby='headingOne' data-parent='#accordionExample')
+                            .card-body
+                                div#hero
     footer#sticky-footer.bg-dark.footer
         div.text-center
