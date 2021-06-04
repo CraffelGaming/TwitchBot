@@ -59,8 +59,6 @@ class Authorize {
         twitchUserItem.profileImageUrl = twitchBody.data[0].profile_image_url;
         twitchUserItem.viewCount = twitchBody.data[0].view_count;
         twitchUserItem.eMail = twitchBody.data[0].email;
-
-        console.log(twitchUserItem);
         await twitchUserItem.save();    
     }
 

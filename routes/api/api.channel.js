@@ -10,13 +10,17 @@ router.get('/' + endpoint + '/', async function (req, res) {
 });
 
 router.put('/' + endpoint + '/', async function (req, res) {
-	res.status(200).json(await req.app.get('channel').globalDatabase.sequelize.models.channel.findAll());
+	var twitchItem = await req.app.get('channel').globalDatabase.sequelize.models.twitch.findOne({ where: { state: req.session.state } });
+	if(twitchItem){
+		req.app.get('channel').addChannel(twitchItem.channelName, req.app.get('client'));
+		res.status(200);
+	} else res.status(401);	
 });
 
 router.get('/' + endpoint + '/select/', async function (req, res) {	
 	if(!req.session.channel)
 		req.session.channel = '#craffel';
-	res.status(200).json(req.session.channel.toString('base64'));
+	res.status(200).json(req.session.channel);
 });
 
 router.post('/' + endpoint + '/select/', async function (req, res) {

@@ -29,7 +29,7 @@ $(() => {
         button.setAttribute('type', 'button');
         button.innerText = 'Auswählen'
         button.addEventListener("click", function () {
-            selectClick(channel);
+            selectClick(channel.name);
         });
 
         let innerGroup = document.createElement("div");
@@ -45,8 +45,8 @@ $(() => {
         container.appendChild(group);
     }
 
-    function selectClick(channel){
-        fetch('./api/channel/select?channel=' + window.btoa(channel.name), {
+    function selectClick(channelName){
+        fetch('./api/channel/select?channel=' + window.btoa(channelName), {
             method: 'post',
             headers: {
                 'Content-type': 'application/json'
@@ -57,7 +57,10 @@ $(() => {
             }
         }).then(async function (json) {
             let header = document.getElementById("header");
-            header.innerText = json;
+            header.value = json;
+            console.log(json);
+            if(getCookie('allowCookies'))
+                setCookie('channelName', json, 7);
         });
     }
 });

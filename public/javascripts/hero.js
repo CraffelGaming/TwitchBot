@@ -1,7 +1,27 @@
 $(() => {
+    getHeros();
 
     $(".dropdown-menu").on('click', 'a', function(element){
-        fetch('./api/hero/' + element.currentTarget.id, {
+        getHero(element.currentTarget.id)
+    });
+
+    function getHeros(){
+        fetch('./api/hero', {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            showHeroes(json);
+        });
+    }
+
+    function getHero(heroName){
+        fetch('./api/hero/' + heroName, {
             method: 'get',
             headers: {
                 'Content-type': 'application/json'
@@ -13,20 +33,7 @@ $(() => {
         }).then(async function (json) {
             getLevel(json);
         });
-     });
-
-    fetch('./api/hero', {
-        method: 'get',
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }).then(async function (res) {
-        if (res.status == 200) {
-            return res.json();
-        }
-    }).then(async function (json) {
-        showHeroes(json);
-    });
+    }
 
     function getLevel(hero){
         fetch('./api/level/' + hero.experience, {
@@ -89,9 +96,13 @@ $(() => {
                 element.setAttribute('class', 'dropdown-item');
                 element.setAttribute('id', hero.handle);
                 element.href = '#';
+
                 element.innerText = hero.name;
                 element.val = hero.handle;
                 list.appendChild(element);
+
+                if(getCookie('userName') == hero.name)
+                    getHero(hero.handle);
             }
         }
     }

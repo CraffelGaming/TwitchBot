@@ -1,5 +1,5 @@
 [
-    {"handle": 1, "experienceMin" : 0, "experienceMax" : 0},
+    {"handle": 1, "experienceMin" : 0, "experienceMax" : 499},
     {"handle": 2, "experienceMin" : 500, "experienceMax" : 1499},
     {"handle": 3, "experienceMin" : 1500, "experienceMax" : 2999},
     {"handle": 4, "experienceMin" : 3000, "experienceMax" : 4999},

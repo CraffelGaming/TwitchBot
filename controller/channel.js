@@ -17,11 +17,13 @@ class Channel {
         this.globalDatabase = new Connection(new Buffer.from('global').toString('base64'));
         this.channels = [];
         this.commands = [];
+        this.client = {};
     }
 
-    async initialize(){
+    async initialize(client){
         await this.globalDatabase.initializeGlobal();
         this.commands = await this.getCommand();
+        this.client = client;
     }
 
     async getChannels(){
@@ -32,95 +34,118 @@ class Channel {
         return await this.globalDatabase.sequelize.models.command.findAll();
     }
 
-    async build(channels, client){     
+    addChannel(channelName){
+        if(!this.channels.find(x => x.name == "#" + channelName)){
+            var channel = {};
+            channel.name = "#" + channelName
+            channel.displayName = channelName;
+            channel.language = "de-DE";
+            channel.isActive = true;
+            return this.buildChannel(channel);
+        }
+        return false;
+    }
+
+    async buildChannels(channels){
         try {
-            for (var channel of Object.values(channels)) {
-                var channelItem = new ChannelItem(channel.dataValues);
-                channelItem.database = new Connection(new Buffer.from(channel.name).toString('base64'));
-                await channelItem.database.initialize();
-                var modules = await this.globalDatabase.sequelize.models.module.findAll();
-
-                for (var module of Object.values(modules)) {
-                    var moduleItem = new ModuleItem(module.dataValues);
-                    var translation = require(path.join(__dirname, '../language/' + moduleItem.name + '/' + channelItem.language + '.json'));
-                    console.log(`load ${module.name} for channel ${channelItem.name}`);
-
-                    switch(moduleItem.name){
-                        case "donate":
-                            var element = (await channelItem.database.sequelize.models.module_donate.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var donation = new Donation(translation, element);
-                                await donation.initialize(channelItem);
-                                this.interval(element, client, channelItem, donation);
-                                moduleItem.object = donation;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "key":
-                            var element = (await channelItem.database.sequelize.models.module_key.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var key = new Key(translation, element);
-                                await key.initialize(channelItem);
-                                this.interval(element, client, channelItem, key);
-                                moduleItem.object = key;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "time":
-                            var element = (await channelItem.database.sequelize.models.module_time.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var time = new Time(translation, element, channelItem.name);
-                                await time.initialize(channelItem);
-                                this.interval(element, client, channelItem, time);
-                                moduleItem.object = time;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "support":
-                            var element = (await channelItem.database.sequelize.models.module_support.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var support = new Support(translation, element);
-                                await support.initialize(channelItem);
-                                this.interval(element, client, channelItem, support);
-                                moduleItem.object = support;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "loot":
-                            var element = (await channelItem.database.sequelize.models.module_loot.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var loot = new Loot(translation, element);
-                                await loot.initialize(channelItem);
-                                this.interval(element, client, channelItem, loot);
-                                moduleItem.object = loot;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "help":
-                            var element = (await channelItem.database.sequelize.models.module_help.findOne()).dataValues; //TODO: Mehr als 1x...
-                            if(element.minutes > 0){
-                                var help = new Help(translation, element);
-                                await help.initialize(channelItem);
-                                this.interval(element, client, channelItem, help);
-                                moduleItem.object = help;
-                                channelItem.modules.push(moduleItem);
-                            }
-                            break;
-                        case "administration":
-                                var element = (await channelItem.database.sequelize.models.module_administration.findOne()).dataValues; //TODO: Mehr als 1x...
-                                var administration = new Administration(translation, element, channelItem);
-                                await administration.initialize(channelItem);
-                                moduleItem.object = administration;
-                                channelItem.modules.push(moduleItem);
-                            break;
-                    }
-                }
-                channelItem.puffer = new Puffer(client, channelItem);
-                this.channels.push(channelItem);
-            }
+            for (var channel of Object.values(channels))
+                this.buildChannel(channel);
         } catch (ex){
-            console.error(`ERR: build`, ex);
+            console.error(`ERR: build channels`, ex);
         } 
+    }
+
+    async buildChannel(channel){     
+        try {
+            var channelItem = new ChannelItem(channel);
+            channelItem.database = new Connection(new Buffer.from(channel.name).toString('base64'));
+            await channelItem.database.initialize();
+            var modules = await this.globalDatabase.sequelize.models.module.findAll();
+
+            for (var module of Object.values(modules)) {
+                var moduleItem = new ModuleItem(module);
+                var translation = require(path.join(__dirname, '../language/' + moduleItem.name + '/' + channelItem.language + '.json'));
+                console.log(`load ${module.name} for channel ${channelItem.name}`);
+
+                switch(moduleItem.name){
+                    case "donate":
+                        var element = (await channelItem.database.sequelize.models.module_donate.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var donation = new Donation(translation, element);
+                            await donation.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, donation);
+                            moduleItem.object = donation;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "key":
+                        var element = (await channelItem.database.sequelize.models.module_key.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var key = new Key(translation, element);
+                            await key.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, key);
+                            moduleItem.object = key;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "time":
+                        var element = (await channelItem.database.sequelize.models.module_time.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var time = new Time(translation, element, channelItem.name);
+                            await time.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, time);
+                            moduleItem.object = time;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "support":
+                        var element = (await channelItem.database.sequelize.models.module_support.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var support = new Support(translation, element);
+                            await support.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, support);
+                            moduleItem.object = support;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "loot":
+                        var element = (await channelItem.database.sequelize.models.module_loot.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var loot = new Loot(translation, element);
+                            await loot.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, loot);
+                            moduleItem.object = loot;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "help":
+                        var element = (await channelItem.database.sequelize.models.module_help.findOne()); //TODO: Mehr als 1x...
+                        if(element.minutes > 0){
+                            var help = new Help(translation, element);
+                            await help.initialize(channelItem);
+                            this.interval(element, this.client, channelItem, help);
+                            moduleItem.object = help;
+                            channelItem.modules.push(moduleItem);
+                        }
+                        break;
+                    case "administration":
+                            var element = (await channelItem.database.sequelize.models.module_administration.findOne()); //TODO: Mehr als 1x...
+                            var administration = new Administration(translation, element, channelItem);
+                            await administration.initialize(channelItem);
+                            moduleItem.object = administration;
+                            channelItem.modules.push(moduleItem);
+                        break;
+                }
+            }
+            channelItem.puffer = new Puffer(this.client, channelItem);  
+            channelItem.register(this.globalDatabase.sequelize);         
+            this.channels.push(channelItem);
+            this.client.join(channelItem.name.replace('#', ''));
+            return true;
+        } catch (ex){
+            console.error(`ERR: build channel`, ex);
+        }
+        return false;
     }
 
     interval(module, client, channel, object){

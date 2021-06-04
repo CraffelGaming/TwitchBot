@@ -1,5 +1,4 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./channelItem.json');
 
 class ChannelItem {
     constructor(data){
@@ -33,10 +32,9 @@ class ChannelItem {
           }, {freezeTableName: true});
     }
 
-    static async fill(sequelize){
-        for(var item of Object.values(items))
-            if(await sequelize.models.channel.count({ where: { name: item.name } }) == 0)
-                await sequelize.models.channel.create(item);
+    async register(sequelize){
+            if(await sequelize.models.channel.count({ where: { name: this.name } }) == 0)
+                await sequelize.models.channel.create(this);
     }
 }
 module.exports = ChannelItem

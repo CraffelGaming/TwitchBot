@@ -6,7 +6,7 @@ let endpoint = 'twitch';
 
 module.exports = router;
 
-router.get('/' + endpoint + '/url', async function (req, res) {
+router.get('/' + endpoint, async function (req, res) {
     res.status(200).json(await Authorize.GetConnection(req, res));
 });
 

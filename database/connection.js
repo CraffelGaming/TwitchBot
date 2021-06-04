@@ -117,7 +117,6 @@ class Connection {
             
             await this.sequelize.sync();
             
-            await ChannelItem.fill(this.sequelize);
             await ModuleItem.fill(this.sequelize);
             await CommandItem.fill(this.sequelize);
 

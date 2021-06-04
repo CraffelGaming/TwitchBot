@@ -71,26 +71,22 @@ startup();
 
 // start twitch bot
 async function startup(){
-  await channel.initialize();
-
-  var channelList = await channel.getChannels()
-
-  for (var channelItem of Object.values(channelList)) {
-      opts.channels.push(channelItem.name.replace('#', ''));
-  }
-
   // Create a client with our options
   client = new tmi.client(opts);
-
-  await channel.build(channelList, client);
-
+    
   // Register our event handlers (defined below)
   client.on('message', onMessageHandler);
   client.on('connected', onConnectedHandler);
   client.on('disconnected', onDisconnectedHandler);
-
+  
   // Connect to Twitch:
-  client.connect();
+  await client.connect();
+
+  // Channel init
+  await channel.initialize(client);
+
+  // Channels build
+  await channel.buildChannels(await channel.getChannels(), client);
 }
 
 // Called every time a message comes in

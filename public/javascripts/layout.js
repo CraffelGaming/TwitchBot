@@ -1,76 +1,79 @@
 $(() => {
-    fetch('./api/channel/select', {
-        method: 'get',
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }).then(async function (res) {
-        if (res.status == 200) {
-            return res.json();
-        }
-    }).then(async function (json) {
-        let header = document.getElementById("header");
-        header.innerText = json;
-    });
+    var url = './api/channel/select';
+    var method = 'get';
 
-    fetch('./api/twitch/url', {
-        method: 'get',
-        headers: {
-            'Content-type': 'application/json'
-        }
-    }).then(async function (res) {
-        if (res.status == 200) {
-            return res.json();
-        }
-    }).then(async function (json) {
-        let twitch = document.getElementById("twitch");
-        twitch.href = json.url;
+    if(getCookie('channelName')){
+        url += '?channel=' + window.btoa(getCookie('channelName'));
+        method = 'post';
+    }
 
-        if(!json.userName) {
-            document.getElementById("userName").classList.add("d-none");
-            document.getElementById("userNameLabel").classList.add("d-none");
-        } else {
-            document.getElementById("userName").innerText = json.userName;
-            document.getElementById("userName").classList.remove("d-none");
-            document.getElementById("userNameLabel").classList.remove("d-none");
-        }
+    setChannel(url, method);
 
-        if(!json.userImage){
-            document.getElementById("image").classList.add("d-none");
-            document.getElementById("imageLabel").classList.add("d-none");
-        } else {
-            document.getElementById("image").classList.remove("d-none");
-            document.getElementById("imageLabel").classList.remove("d-none");
-            document.getElementById("image").src = json.userImage;
-        }
-    });
+    function getURL(){
+        fetch('./api/twitch', {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            let twitch = document.getElementById("twitch");
+            twitch.href = json.url;
     
+            if(!json.userName) {
+                document.getElementById("account").classList.add("d-none");
+                document.getElementById("activate").removeEventListener("click", activateAccount, true);
+            } else {
+                if(getCookie('allowCookies'))
+                    setCookie('userName', json.userName, 7); 
+                document.getElementById("account").classList.remove("d-none");
+                document.getElementById("userName").value = json.userName;
+
+                document.getElementById("activate").addEventListener("click", activateAccount);
+            }
+        });
+    }
+
+    function activateAccount(){
+        fetch('./api/channel/', {
+            method: 'put',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            document.getElementById("activate").classList.add('btn-secondary');
+            document.getElementById("activate").classList.remove('btn-success');
+        });
+    }
+
+    function setChannel(url, method){
+        fetch(url, {
+            method: method,
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(async function (res) {
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then(async function (json) {
+            let header = document.getElementById("header");
+            header.value = json;
+
+            if(getCookie('allowCookies'))
+                setCookie('channelName', json, 7);
+            getURL();
+        });
+    }
+
     cookieConsent();
-    
-    function setCookie(name,value,days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-    }
-
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
-    }
-    
-    function eraseCookie(name) {   
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
     
     function cookieConsent() {
         if (!getCookie('allowCookies')) {
@@ -88,4 +91,3 @@ $(() => {
         $('.toast').toast('hide');
     });
 });
-

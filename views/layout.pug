@@ -10,7 +10,8 @@ html
 
         script(src='/jquery/jquery.min.js')
         script(src='/bootstrap/js/bootstrap.bundle.min.js')
-        
+
+        script(src='/javascripts/cookie.js')
         script(src='/javascripts/layout.js')
 
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
@@ -29,15 +30,17 @@ html
                     a#twitch.nav-item.nav-link(href='/') Twitch
         div.alert.alert-dark 
             div.row
-                div.col-2.font-weight-bold.text-right Channel:
-                div#header.col-3.font-weight-bold.text-left
-
-                div#userNameLabel.col-3.font-weight-bold.text-right Anmeldung:
-                div#userName.col-3.font-weight-bold.text-left
-
-                div#imageLabel.col-1.font-weight-bold.text-right.pr-2
-                    image#image.font-weight-bold.headerImage
-    body
+                .input-group.col-5
+                    .input-group-prepend
+                        label.input-group-text Channel
+                    input#header.form-control(type='text' readonly='' aria-describedby='basic-addon2')
+                #account.input-group.col-7
+                    .input-group-prepend
+                        label.input-group-text Account
+                    input#userName.form-control(type='text' readonly='' aria-describedby='basic-addon2')
+                    .input-group-append
+                        button#activate.btn.btn-success(type='button') Aktivieren
+            body
         #toastBody.fixed-bottom.p-4
             .toast.bg-info.text-white.w-100.mw-100(role='alert' data-autohide='false')
                 .toast-body.d-flex.flex-column.p-4

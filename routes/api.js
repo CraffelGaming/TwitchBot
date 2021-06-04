@@ -29,6 +29,6 @@ router.get("/level/:experience", level);
 router.get("/hero", hero);
 router.get("/hero/:handle", hero);
 
-router.get("/twitch/url", twitch);
+router.get("/twitch", twitch);
 
 module.exports = router;
