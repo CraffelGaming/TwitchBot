@@ -15,30 +15,36 @@ html
         script(src='/javascripts/layout.js')
 
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-            a#brand(href='/')
-            img#navbar-image.navbar-image(src='/images/craffel.png' width="96" height="96" alt="")
-            a.navbar-brand(href='/') Craffels Abenteuer
-            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation')
-                span.navbar-toggler-icon
-            #navbarNavAltMarkup.collapse.navbar-collapse
-                div.navbar-nav
-                    a.nav-item.nav-link(href='/') Channel
-                    a.nav-item.nav-link(href='hero') Held
-                    a.nav-item.nav-link(href='object') Gegenstände
-                    a.nav-item.nav-link(href='statistic') Statistiken
-                    a.nav-item.nav-link(href='level') Level 
-                    a#twitch.nav-item.nav-link(href='/') Twitch
+            .container-fluid
+                a#brand(href='/')
+                    img#navbar-image.navbar-image(src='/images/craffel.png' width="96" height="96" alt="")
+                a.navbar-brand(href='#') Craffels Abenteuer
+                button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarNav.collapse.navbar-collapse
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link.active(aria-current='page' href='/') Channel
+                        li.nav-item
+                            a.nav-link(href='hero') Held
+                        li.nav-item
+                            a.nav-link(href='object') Gegenstände
+                        li.nav-item
+                            a.nav-link(href='statistic') Statistiken
+                        li.nav-item
+                            a.nav-link(href='level') Level
+                        li.nav-item
+                            a#twitch.nav-link(href='/') Twitch
         div.alert.alert-dark 
             div.row
-                .input-group.col-5
-                    .input-group-prepend
+                div.col-5
+                    .input-group
                         label.input-group-text Channel
-                    input#header.form-control(type='text' readonly='' aria-describedby='basic-addon2')
-                #account.input-group.col-7
-                    .input-group-prepend
+                        input#header.form-control(type='text' readonly='')
+                div.col-7
+                    #account.input-group
                         label.input-group-text Account
-                    input#userName.form-control(type='text' readonly='' aria-describedby='basic-addon2')
-                    .input-group-append
+                        input#userName.form-control(type='text' readonly='' aria-describedby='basic-addon2')
                         button#activate.btn.btn-success(type='button') Aktivieren
             body
         #toastBody.fixed-bottom.p-4

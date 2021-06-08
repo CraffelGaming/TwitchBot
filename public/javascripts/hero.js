@@ -92,14 +92,16 @@ $(() => {
         let list = document.getElementById("list");
         if(list){
             for (var hero of Object.values(heroes)) {
-                let element = document.createElement("a");
-                element.setAttribute('class', 'dropdown-item');
-                element.setAttribute('id', hero.handle);
-                element.href = '#';
+                let a = document.createElement("a");
+                a.setAttribute('class', 'dropdown-item');
+                a.setAttribute('id', hero.handle);
+                a.href = '#';
 
-                element.innerText = hero.name;
-                element.val = hero.handle;
-                list.appendChild(element);
+                a.innerText = hero.name;
+                a.val = hero.handle;
+
+                list.appendChild(document.createElement("li"));
+                list.appendChild(a);
 
                 if(getCookie('userName') == hero.name)
                     getHero(hero.handle);

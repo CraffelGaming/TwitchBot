@@ -6,10 +6,10 @@ block content
     
     body.d-flex.flex-column
         div#container.container.mb-4.mt-4.pb-6
-            .dropdown.show
-            a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle.w-100(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                | Helden
-            #list.dropdown-menu(aria-labelledby='dropdownMenuLink')
+            .dropdown
+                button#dropdownMenuLink.btn.btn-secondary.dropdown-toggle.w-100(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                    | Held auswählen
+                ul#list.dropdown-menu(aria-labelledby='dropdownMenuLink')
             div#information.pt-4.d-none
                 div.row.pl-3.pr-3.pb-5
                     .col-6.m-0
@@ -50,4 +50,6 @@ block content
                             .card-body
                                 div#hero
     footer#sticky-footer.bg-dark.footer
-        div.text-center
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            div.navbar-nav
+                a.m-4.nav-item.nav-link(href='impressum') Impressum 

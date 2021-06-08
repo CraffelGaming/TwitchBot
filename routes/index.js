@@ -5,6 +5,8 @@ let level = require('./level');
 let hero = require('./hero');
 let twitch = require('./twitch');
 let error = require('./error');
+let impressum = require('./impressum');
+
 let Authorize = require('./twitch/authorize');
 
 let endpoint = 'index';
@@ -18,6 +20,7 @@ router.get('/level', level);
 router.get('/hero', hero);
 router.get('/twitch', twitch);
 router.get('/error', error);
+router.get('/impressum', impressum);
 
 //index
 router.get('/', (req, res) => {
