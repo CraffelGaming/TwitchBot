@@ -18,7 +18,7 @@ html
             .container-fluid
                 a#brand(href='/')
                     img#navbar-image.navbar-image(src='/images/craffel.png' width="96" height="96" alt="")
-                a.navbar-brand(href='#') Craffels Abenteuer
+                a.navbar-brand(href='/') Craffels Abenteuer
                 button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 #navbarNav.collapse.navbar-collapse
@@ -57,8 +57,8 @@ html
                     | Wenn du keine Lust hast, das deine Daten an miesen Konzernen verkauft werden, dann klick bitte auf "Zustimmen", denn das machen wir nicht. 
                     | Wenn du meinst, dass diese Kekswarnung nicht richtlinienkonform ist, dann schau dir mal einige andere Webseiten an, was die falsch machen.
                     | Auf dieser Webseite kannst du dich mit Twitch verbinden, was dir für Kekse backen, zeigen die dir sicher auch schon wieder.
-                    .ml-auto
-                        button#btnDeny.btn.btn-outline-light.mr-3(type='button') Ablehnen
-                        button#btnAccept.btn.btn-light(type='button') Zustimmen
+                    .btn-group.pt-4.w-25
+                            button#btnDeny.btn.btn-outline-dark.mr-3(type='button') Ablehnen
+                            button#btnAccept.btn.btn-outline-dark(type='button') Zustimmen
 
     block content

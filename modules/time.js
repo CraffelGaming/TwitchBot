@@ -33,10 +33,6 @@ class Time extends Module {
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);
-        } 
-
-        switch(message){
-
         }     
     }
 

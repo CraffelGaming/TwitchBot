@@ -20,6 +20,7 @@ const ModuleKeyItem = require('../model/module/moduleKeyItem');
 const ModuleLootItem = require('../model/module/moduleLootItem');
 const ModuleSupportItem = require('../model/module/moduleSupportItem');
 const ModuleTimeItem = require('../model/module/moduleTimeItem');
+const ModuleDiscordItem = require('../model/module/moduleDiscordItem');
 
 const LootHeroItem = require('../model/loot/lootHeroItem');
 const LootInventoryItem = require('../model/loot/lootInventoryItem');
@@ -64,6 +65,7 @@ class Connection {
             ModuleLootItem.initialize(this.sequelize);
             ModuleSupportItem.initialize(this.sequelize);
             ModuleTimeItem.initialize(this.sequelize);
+            ModuleDiscordItem.initialize(this.sequelize);
 
             LootHeroItem.initialize(this.sequelize);
             LootInventoryItem.initialize(this.sequelize);
@@ -94,6 +96,7 @@ class Connection {
             await ModuleLootItem.fill(this.sequelize);
             await ModuleSupportItem.fill(this.sequelize);
             await ModuleTimeItem.fill(this.sequelize);
+            await ModuleDiscordItem.fill(this.sequelize);
 
             console.log('DATABASE Connection has been established successfully.');
             return true;

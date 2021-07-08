@@ -1,6 +1,5 @@
 $(() => {
     getHeros();
-
     $(".dropdown-menu").on('click', 'a', function(element){
         getHero(element.currentTarget.id)
     });
@@ -69,13 +68,39 @@ $(() => {
             let row =  document.createElement("div");
             row.setAttribute('class', 'row p-2')
              
+            if(getCookie('userName') == hero.name){
+                let switch_group = document.createElement("div");
+                switch_group.setAttribute('class', 'col-1 form-check form-switch');
+                
+                let switches = document.createElement("input");
+                switches.setAttribute('class', 'form-check-input');
+                switches.setAttribute('type', 'checkbox');
+
+                let switch_label = document.createElement("label");
+                switch_label.setAttribute('class', 'form-check-label');
+                switch_label.setAttribute('type', 'checkbox');
+
+                switch_group.appendChild(switches);
+                switch_group.appendChild(switch_label);
+                row.appendChild(switch_group);
+
+                let amount = document.createElement("input");
+                amount.setAttribute('class', 'col-1');
+                amount.setAttribute('type', 'number');
+                amount.setAttribute('value', inventory.quantity);
+                amount.setAttribute('min', 1);
+                amount.setAttribute('max', inventory.quantity);
+                amount.setAttribute('step', 1);
+                row.appendChild(amount);
+            }
+
             let quantity = document.createElement("div");
-            quantity.setAttribute('class', 'col-1')
+            quantity.setAttribute('class', 'col-1');
             quantity.textContent = inventory.quantity + "x";
             row.appendChild(quantity);
 
             let object = document.createElement("div");
-            object.setAttribute('class', 'col-8')
+            object.setAttribute('class', 'col-6')
             object.textContent = inventory.loot_object.value;
             row.appendChild(object);
 

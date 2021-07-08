@@ -9,7 +9,7 @@
     {"handle": 8, "value":"eine einzigartige Fuchsstatue mit Juwelenaugen", "gold": 250},
     {"handle": 9, "value":"ein Quietscheentchen", "gold": 7},
     {"handle": 10, "value":"ein singendes Jedischwert", "gold": 500},
-    {"handle": 11, "value":"eine Topfpflanze", "gold": 12},
+    {"handle": 11, "value":"eine Topfpflanze", "gold": 12, "type": 1},
     {"handle": 12, "value":"eine Leiche", "gold": 1},
     {"handle": 13, "value":"ein Zepter der Überraschung", "gold": 75},
     {"handle": 14, "value":"eine einsame, dunkle Seele", "gold": 100},
@@ -117,5 +117,7 @@
     {"handle": 116, "value":"ein NEO-ONE von Pokemon Snap", "gold": 1250},
     {"handle": 117, "value":"Napstablooks Kopfhörer/Mix-Tape", "gold": 75},
     {"handle": 118, "value":"Mettatons Tagebuch", "gold": 150},
-    {"handle": 119, "value":"Craffels Kaffeetasse", "gold": 25}
+    {"handle": 119, "value":"Craffels Kaffeetasse", "gold": 25},
+    {"handle": 120, "value":"ein mit Schätzen prallgefüllter Chester", "gold": 750},
+    {"handle": 121, "value":"Einhomels Göttlichkeit", "gold": 1000}
 ]

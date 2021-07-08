@@ -4,6 +4,7 @@ const Time = require('../modules/time.js');
 const Support = require('../modules/support.js');
 const Loot = require('../modules/loot');
 const Help = require('../modules/help');
+const Discord = require('../modules/discord');
 const Administration = require('../modules/administration');
 const Connection = require('../database/connection');
 const ChannelItem = require('../model/channelItem');
@@ -69,7 +70,7 @@ class Channel {
 
                 switch(moduleItem.name){
                     case "donate":
-                        var element = (await channelItem.database.sequelize.models.module_donate.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_donate.findOne());
                         if(element.minutes > 0){
                             var donation = new Donation(translation, element);
                             await donation.initialize(channelItem);
@@ -79,7 +80,7 @@ class Channel {
                         }
                         break;
                     case "key":
-                        var element = (await channelItem.database.sequelize.models.module_key.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_key.findOne());
                         if(element.minutes > 0){
                             var key = new Key(translation, element);
                             await key.initialize(channelItem);
@@ -89,7 +90,7 @@ class Channel {
                         }
                         break;
                     case "time":
-                        var element = (await channelItem.database.sequelize.models.module_time.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_time.findOne());
                         if(element.minutes > 0){
                             var time = new Time(translation, element, channelItem.name);
                             await time.initialize(channelItem);
@@ -99,7 +100,7 @@ class Channel {
                         }
                         break;
                     case "support":
-                        var element = (await channelItem.database.sequelize.models.module_support.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_support.findOne());
                         if(element.minutes > 0){
                             var support = new Support(translation, element);
                             await support.initialize(channelItem);
@@ -109,7 +110,7 @@ class Channel {
                         }
                         break;
                     case "loot":
-                        var element = (await channelItem.database.sequelize.models.module_loot.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_loot.findOne());
                         if(element.minutes > 0){
                             var loot = new Loot(translation, element);
                             await loot.initialize(channelItem);
@@ -119,7 +120,7 @@ class Channel {
                         }
                         break;
                     case "help":
-                        var element = (await channelItem.database.sequelize.models.module_help.findOne()); //TODO: Mehr als 1x...
+                        var element = (await channelItem.database.sequelize.models.module_help.findOne());
                         if(element.minutes > 0){
                             var help = new Help(translation, element);
                             await help.initialize(channelItem);
@@ -129,11 +130,18 @@ class Channel {
                         }
                         break;
                     case "administration":
-                            var element = (await channelItem.database.sequelize.models.module_administration.findOne()); //TODO: Mehr als 1x...
-                            var administration = new Administration(translation, element, channelItem);
-                            await administration.initialize(channelItem);
-                            moduleItem.object = administration;
-                            channelItem.modules.push(moduleItem);
+                        var element = (await channelItem.database.sequelize.models.module_administration.findOne());
+                        var administration = new Administration(translation, element, channelItem);
+                        await administration.initialize(channelItem);
+                        moduleItem.object = administration;
+                        channelItem.modules.push(moduleItem);
+                        break;
+                    case "discord":
+                        var element = (await channelItem.database.sequelize.models.module_discord.findOne());
+                        var discord = new Discord(translation, element, channelItem);
+                        await discord.initialize(channelItem);
+                        moduleItem.object = discord;
+                        channelItem.modules.push(moduleItem);
                         break;
                 }
             }

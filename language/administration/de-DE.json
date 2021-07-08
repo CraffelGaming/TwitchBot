@@ -1,7 +1,8 @@
 {
     "start" : "Der Bot wurde gestartet.",
     "startError" : "Du kannst den Bot nicht starten.",
-    "startExists" : "Du kannst den Bot nicht starten.",
+    "startExists" : "Der Bot ist bereits gestartet.",
     "stop" : "Der Bot wurde beendet.",
-    "stopExists" : "Du kannst den Bot nicht beenden."
+    "stopExists" : "Du kannst den Bot nicht beenden.",
+    "stopError" : "Der Bot ist bereits beendet."
 }

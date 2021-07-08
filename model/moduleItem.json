@@ -27,5 +27,9 @@
     {
         "name": "administration",
         "description" : ""
+    },
+    {
+        "name": "discord",
+        "description" : ""
     }
 ]

@@ -5,6 +5,7 @@ class LootHeroItem {
         this.handle = 0;
         this.name = "";
         this.lastSteal = Date.now();
+        this.lastJoin = Date.now();
         this.startIndex = 0;
         this.experience = 0;
         this.gold = 0;
@@ -30,6 +31,11 @@ class LootHeroItem {
                 type: DataTypes.DATE,
                 allowNull: false,
                 defaultValue: Date.now()
+            },
+            lastJoin: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: Date.UTC(2020, 1, 1)
             },
             startIndex: {
                 type: DataTypes.INTEGER,

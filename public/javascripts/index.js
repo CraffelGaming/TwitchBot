@@ -32,14 +32,10 @@ $(() => {
             selectClick(channel.name);
         });
 
-        let innerGroup = document.createElement("div");
-        innerGroup.setAttribute('class', 'input-group-append');
-        innerGroup.appendChild(button)
-
         let group = document.createElement("div");
         group.setAttribute('class', 'input-group mb-3');
         group.appendChild(input);
-        group.appendChild(innerGroup);
+        group.appendChild(button);
 
         let container = document.getElementById("container");
         container.appendChild(group);

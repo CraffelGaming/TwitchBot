@@ -41,6 +41,7 @@
     "noPlayer2" : "nicht am Abenteuer teil.",
     "notOwner" : "du besitzt",
     "leftAdventure" : "hat das Abenteuer verlassen.",
+    "leftAdventureTimeout" : "hat das Abenteuer eben erst verlassen und wartet noch",
     "notFound" : "muss noch gefunden werden",
     "youHave" : "Du hast",
     "gold" : "Gold",

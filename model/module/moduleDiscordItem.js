@@ -1,28 +1,27 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./moduleLootItem.json');
+const items = require('./moduleDiscordItem.json');
 
-class ModuleLootItem {
+class ModuleDiscordItem {
     constructor(){
         this.handle = 0;
-        this.name = "";
+        this.link = "";
         this.minutes = 0;
         this.help = "";
-        this.stealTimeout = 0;
     }
 
     static initialize(sequelize){
-        sequelize.define('module_loot', {
+        sequelize.define('module_discord', {
             handle: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true
             },
-            name: {
+            link: {
                 type: DataTypes.STRING,
                 allowNull: false
-             },
-             minutes: {
+            },
+            minutes: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
                 defaultValue: 0
@@ -30,24 +29,14 @@ class ModuleLootItem {
             help: {
                 type: DataTypes.STRING,
                 allowNull: true
-            },
-            stealTimeout: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                defaultValue: 15
-            },
-            joinTimeout: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                defaultValue: 30
             }
           }, {freezeTableName: true});
     }
 
     static async fill(sequelize){
         for(var item of Object.values(items))
-            if(await sequelize.models.module_loot.count({ where: { name: item.name } }) == 0)
-                await sequelize.models.module_loot.create(item);
+            if(await sequelize.models.module_discord.count({ where: { link: item.link } }) == 0)
+                await sequelize.models.module_discord.create(item);
     }
 }
-module.exports = ModuleLootItem
+module.exports = ModuleDiscordItem

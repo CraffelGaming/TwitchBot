@@ -74,9 +74,7 @@ class Loot extends Module{
     }
     async executeLoot(channel, playerName, message, target, parameter){
         if(this.isRunning)
-            if(await this.newPlayer(channel, playerName))
-                return `${playerName} ${this.translation.joinedAdventure}`;
-            else return `${playerName} ${this.translation.alreadyJoinedAdventure}`;
+            return await this.newPlayer(channel, playerName);
         else return this.translation.noAdventure;
     }
 
@@ -132,21 +130,32 @@ class Loot extends Module{
             if(!this.players.some(x => x.name === playerName)){  
                 var hero = await LootHeroItem.get(channel.database.sequelize, playerName);
     
-                hero.isActive = true;
-                hero.items = [];
-                
-                if(this.players.length > 0){
-                    hero.startIndex = this.players.min(x => x.items.length + x.startIndex);
-                } else hero.startIndex = 0;
+                var now = Date.now();
+                var difference = Math.floor((now - hero.lastJoin) / 1000 / 60);
+                var rest = difference - this.element.joinTimeout;
+
+                if(rest > -1){
+                    hero.isActive = true;
+                    hero.items = [];
+                    hero.lastJoin = now;
+                    
+                    if(this.players.length > 0){
+                        hero.startIndex = this.players.min(x => x.items.length + x.startIndex);
+                    } else hero.startIndex = 0;
+        
+                    await hero.save();
+                    this.players.push(hero);
     
-                await hero.save();
-                this.players.push(hero);
-                return true;
+                    return `${playerName} ${this.translation.joinedAdventure}`;  
+                } else {
+                    rest *= -1;
+                    return `${playerName} ${this.translation.leftAdventureTimeout} ${rest} ${this.translation.minutes}`;
+                }
             }
         } catch (ex){
             console.error(`ERR: loot - new player`, ex);
         }
-        return false;
+        return `${playerName} ${this.translation.alreadyJoinedAdventure}`;
     }
 
     async leavePlayer(playerName, parameter){
@@ -447,6 +456,8 @@ class Loot extends Module{
                         if(element != undefined){
                             await this.addInventory(channel,options.player, element);
                             await this.removeInventory(channel,player, element);
+                            --options.player.startIndex;
+                            ++player.startIndex;
                             return `${playerName} ${this.translation.has} ${options.playerName} ${element.value} ${this.translation.give}.`;  
                         }
                          
@@ -505,6 +516,8 @@ class Loot extends Module{
                                 if(element != undefined){
                                     await this.addInventory(channel, options.player, element);
                                     await this.removeInventory(channel, player, element);
+                                    --options.player.startIndex;
+                                    ++player.startIndex;
                                     return `${player.name} ${this.translation.stealCaught1} ${options.player.name} ${this.translation.stealCaught2}. ${this.translation.stealCaught3} ${element.value} ${this.translation.lost}.`;
                                 }
                             } else {
@@ -521,6 +534,8 @@ class Loot extends Module{
                                     if(element != undefined){
                                         await this.addInventory(channel, player, element);
                                         await this.removeInventory(channel, options.player, element);
+                                        --player.startIndex;
+                                        ++options.player.startIndex;
                                         return `${player.name} ${this.translation.has} ${options.player.name} ${this.translation.stolen} ${element.value} ${this.translation.get}.`;
                                     }
                                 } else {

@@ -1,0 +1,12 @@
+{
+    "start" : "Discord wurde gestartet.",
+    "startError" : "Du kannst Discord nicht starten.",
+    "alreadyStarted" : "Discord ist bereits gestartet.",
+    "stop" : "Discord wurde gestoppt.",
+    "stopError" : "Du kannst Discord nicht anhalten.",
+    "alreadyStopped" : "Discord ist bereits gestoppt.",
+    "noDiscord" : "Discord ist deaktiviert.",
+    "linkError": "Du kannst den Discord-Link nicht verändern.",
+    "linkChanged": "Discord-Link geändert auf",
+    "noLinkParameter": "Du hast keinen Discord-Link angegeben"
+}
