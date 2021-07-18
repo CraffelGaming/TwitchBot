@@ -21,16 +21,15 @@ router.post('/' + endpoint + '/sell', async function (req, res) {
             for (var sell of Object.values(req.body)) {
                 var object = hero.loot_inventories.find(x => x.objectHandle == sell.objectHandle);
 
-                if(object.quantity >= sell.quantity){
+                if((object.isReload && object.quantity - 1 >= sell.quantity) || (!object.isReload && object.quantity >= sell.quantity)){
                     hero.gold += (object.loot_object.gold * parseInt(sell.quantity));
                     object.quantity -= parseInt(sell.quantity);
                     if(object.quantity > 0) 
                         await object.save();
                     else await object.destroy();
                 }
-                console.log(hero);
                 await hero.save();
-                res.status(200);
+                res.status(200).json(req.body);
             }
         } else res.status(401);
     }

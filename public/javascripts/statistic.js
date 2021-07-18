@@ -31,6 +31,7 @@ $(() => {
 
     function showTopGold(heroes, title) {
         let container = document.getElementById("container");
+        let index = 0;
 
         let card = document.createElement("div");
         card.setAttribute('class', 'card custom-card-s');
@@ -41,9 +42,16 @@ $(() => {
         header.textContent = title;
         card.appendChild(header);
 
+        let body = document.createElement("div");
+        body.setAttribute('class', 'card-body');
+        card.appendChild(body);
+
         for (var hero of Object.values(heroes)) {
             let row =  document.createElement("div");
-            row.setAttribute('class', 'row p-2')
+            if(index % 2 == 0)
+                row.setAttribute('class', 'row p-2')
+            else row.setAttribute('class', 'row p-2 bg-light')
+            ++index;
              
             let description = document.createElement("div");
             description.setAttribute('class', 'col-sm')
@@ -55,12 +63,13 @@ $(() => {
             description2.textContent = hero.gold + " Gold";
             row.appendChild(description2);
 
-            card.appendChild(row);
+            body.appendChild(row);
         }
     }
 
     function showTopExperience(heroes, title) {
         let container = document.getElementById("container");
+        let index = 0;
 
         let card = document.createElement("div");
         card.setAttribute('class', 'card custom-card-s mt-2');
@@ -71,9 +80,16 @@ $(() => {
         header.textContent = title;
         card.appendChild(header);
 
+        let body = document.createElement("div");
+        body.setAttribute('class', 'card-body');
+        card.appendChild(body);
+
         for (var hero of Object.values(heroes)) {
             let row =  document.createElement("div");
-            row.setAttribute('class', 'row p-2')
+            if(index % 2 == 0)
+                row.setAttribute('class', 'row p-2')
+            else row.setAttribute('class', 'row p-2 bg-light')
+            ++index;
              
             let description = document.createElement("div");
             description.setAttribute('class', 'col-sm')
@@ -85,7 +101,7 @@ $(() => {
             description2.textContent = hero.experience + " EXP";
             row.appendChild(description2);
 
-            card.appendChild(row);
+            body.appendChild(row);
         }
     }
 });

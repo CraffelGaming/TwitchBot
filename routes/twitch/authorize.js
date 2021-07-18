@@ -14,6 +14,29 @@ class Authorize {
                                    '&redirect_uri=' + twitch.redirect_uri, { 
                                         json: true, 
                                         method: "POST" 
+                                    }, (TwitchErr, TwitchRes, TwitchBody) => {
+            if (TwitchErr) { return console.log(TwitchErr); }
+            switch(TwitchRes.statusCode){
+                case 200:
+                    req.session.twitch = TwitchRes.body;
+                    this.WebPush(req, res,"GET", "/users?client_id=" + twitch.client_id, this.WebAuthChannel);
+                    callback(req, res);
+                    break;
+                default:
+                    //WebRefresh(req, res, callback); Noch nicht getestet
+                    break;
+            }      
+        });
+    }  
+
+    static WebRefresh(req, res, callback) {
+        var twitch = req.app.get('twitch');
+        request(twitch.url_token + '?client_id=' + twitch.client_id +
+                                   '&client_secret=' + twitch.client_secret +
+                                   '&grant_type=' + twitch.refresh_type +
+                                   '&refresh_token=' + req.session.twitch.refresh_token, { 
+                                        json: true, 
+                                        method: "POST" 
                                     }, async (TwitchErr, TwitchRes, TwitchBody) => {
             if (TwitchErr) { return console.log(TwitchErr); }
             switch(TwitchRes.statusCode){
@@ -26,11 +49,10 @@ class Authorize {
                     break;
             }      
         });
-    }    
-    
+    } 
+
     static WebPush(req, res, method, endpoint, callback) {
         var twitch = req.app.get('twitch');
-
         request(twitch.url_base + endpoint, { 
             method : method,
             auth : { "bearer": req.session.twitch.access_token }, 
@@ -49,7 +71,6 @@ class Authorize {
         twitchItem.scope = req.session.twitch.scope.join(' ');
         twitchItem.tokenType = req.session.twitch.token_type;
         twitchItem.state = req.session.state;
-        console.log(twitchItem);
         await twitchItem.save();   
 
         var twitchUserItem = await TwitchUserItem.get(req.app.get('channel').globalDatabase.sequelize, twitchBody.data[0].login);
@@ -75,7 +96,7 @@ class Authorize {
                 result.userImage = twitchUserItem.profileImageUrl; 
             }
         } else {
-            req.session.state = uniqid();
+            req.session.state = uniqid(); 
         }
         result.url = twitch.url_authorize + '?client_id=' + twitch.client_id +
                                             '&redirect_uri=' + twitch.redirect_uri +

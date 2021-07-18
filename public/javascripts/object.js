@@ -15,6 +15,7 @@ $(() => {
 
     function showObject(items, title) {
         let container = document.getElementById("container");
+        let index = 0;
 
         let card = document.createElement("div");
         card.setAttribute('class', 'card custom-card-s');
@@ -25,14 +26,22 @@ $(() => {
         header.textContent = "Schatzkiste";
         card.appendChild(header);
 
+        let body = document.createElement("div");
+        body.setAttribute('class', 'card-body');
+        card.appendChild(body);
+
         for (var item of Object.values(items)) {
             let row =  document.createElement("div");
-            row.setAttribute('class', 'row p-2')
+
+            if(index % 2 == 0)
+                row.setAttribute('class', 'row p-2')
+            else row.setAttribute('class', 'row p-2 bg-light')
+            ++index;
             
-            let index = document.createElement("div");
-            index.setAttribute('class', 'col-2')
-            index.textContent = item.handle;
-            row.appendChild(index);
+            let handle = document.createElement("div");
+            handle.setAttribute('class', 'col-2')
+            handle.textContent = item.handle;
+            row.appendChild(handle);
 
             let name = document.createElement("div");
             name.setAttribute('class', 'col-8')
@@ -44,7 +53,7 @@ $(() => {
             value.textContent = item.gold + " Gold";
             row.appendChild(value);
 
-            card.appendChild(row);
+            body.appendChild(row);
         }
     }
 });

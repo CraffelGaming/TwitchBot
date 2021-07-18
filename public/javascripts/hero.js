@@ -51,6 +51,7 @@ $(() => {
 
     function showHero(hero, level) {
         let container = document.getElementById("hero");
+        let index = 0;
         document.getElementById("information").classList.remove("d-none");
         document.getElementById("gold").innerText = hero.gold;
         document.getElementById("level").innerText = level.handle;
@@ -64,10 +65,13 @@ $(() => {
             container.removeChild(container.firstChild);
         }
         
-        for (var inventory of hero.loot_inventories) {
-            let row =  document.createElement("div");
-            row.setAttribute('class', 'row p-2')
-             
+        for (var inventory of hero.loot_inventories) {          
+            let row = document.createElement("div");
+            if(index % 2 == 0)
+                row.setAttribute('class', 'row p-2')
+            else row.setAttribute('class', 'row p-2 bg-light')
+            ++index;
+
             if(getCookie('userName') == hero.name){
                 let switch_group = document.createElement("div");
                 switch_group.setAttribute('class', 'col-1 form-check form-switch');
@@ -86,11 +90,20 @@ $(() => {
                 row.appendChild(switch_group);
 
                 let amount = document.createElement("input");
-                amount.setAttribute('class', 'col-1');
                 amount.setAttribute('type', 'number');
-                amount.setAttribute('value', inventory.quantity);
-                amount.setAttribute('min', 1);
-                amount.setAttribute('max', inventory.quantity);
+
+                if(inventory.isReload){
+                    amount.setAttribute('class', 'col-1 text-warning');
+                    amount.setAttribute('max', inventory.quantity - 1);
+                    amount.setAttribute('value', inventory.quantity - 1);
+                }
+                else {
+                    amount.setAttribute('class', 'col-1');
+                    amount.setAttribute('max', inventory.quantity);
+                    amount.setAttribute('value', inventory.quantity);
+                }
+               
+                amount.setAttribute('min', 0);
                 amount.setAttribute('step', 1);
                 amount.id = "amount_" + inventory.objectHandle;;
                 row.appendChild(amount);
@@ -149,7 +162,7 @@ $(() => {
                     return res.json();
                 }
             }).then(async function (json) {
-                console.log(json);
+                getHero(hero.handle);
             });
         }
     }

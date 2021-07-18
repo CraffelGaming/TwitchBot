@@ -14,6 +14,7 @@ $(() => {
 
     function showLevel(levels, title) {
         let container = document.getElementById("container");
+        let index = 0;
 
         let card = document.createElement("div");
         card.setAttribute('class', 'card custom-card-s');
@@ -24,10 +25,18 @@ $(() => {
         header.textContent = title;
         card.appendChild(header);
 
+        let body = document.createElement("div");
+        body.setAttribute('class', 'card-body');
+        card.appendChild(body);
+
         for (var level of Object.values(levels)) {
+            
             let row =  document.createElement("div");
-            row.setAttribute('class', 'row p-2')
-             
+            if(index % 2 == 0)
+                row.setAttribute('class', 'row p-2')
+            else row.setAttribute('class', 'row p-2 bg-light')
+            ++index;
+            
             let description = document.createElement("div");
             description.setAttribute('class', 'col-2')
             description.textContent = "Level " + level.handle;
@@ -38,7 +47,7 @@ $(() => {
             description2.textContent = level.experienceMin + " Erfahrung";
             row.appendChild(description2);
 
-            card.appendChild(row);
+            body.appendChild(row);
         }
     }
 });
