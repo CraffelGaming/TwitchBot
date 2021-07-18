@@ -22,6 +22,11 @@ class ObjectItem {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 0
+            },
+            type: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             }
           }, {freezeTableName: true});
     }
@@ -30,6 +35,10 @@ class ObjectItem {
         for(var item of Object.values(items))
             if(await sequelize.models.loot_object.count({ where: { handle: item.handle } }) == 0)
                 await sequelize.models.loot_object.create(item);
+                else await sequelize.models.loot_object.update(
+                    { title: item.title, gold: item.gold, type: item.type },
+                    { where: { handle: item.handle } }
+                  )
     }
 }
 

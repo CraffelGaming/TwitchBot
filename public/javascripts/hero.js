@@ -48,9 +48,9 @@ $(() => {
             showHero(hero, json);
         });
     }
+
     function showHero(hero, level) {
         let container = document.getElementById("hero");
-
         document.getElementById("information").classList.remove("d-none");
         document.getElementById("gold").innerText = hero.gold;
         document.getElementById("level").innerText = level.handle;
@@ -75,6 +75,7 @@ $(() => {
                 let switches = document.createElement("input");
                 switches.setAttribute('class', 'form-check-input');
                 switches.setAttribute('type', 'checkbox');
+                switches.id = "switch_" + inventory.objectHandle;
 
                 let switch_label = document.createElement("label");
                 switch_label.setAttribute('class', 'form-check-label');
@@ -91,6 +92,7 @@ $(() => {
                 amount.setAttribute('min', 1);
                 amount.setAttribute('max', inventory.quantity);
                 amount.setAttribute('step', 1);
+                amount.id = "amount_" + inventory.objectHandle;;
                 row.appendChild(amount);
             }
 
@@ -108,8 +110,47 @@ $(() => {
             value.setAttribute('class', 'col-3 text-right')
             value.textContent = (inventory.loot_object.gold * inventory.quantity) + " Gold";
             row.appendChild(value);
-
             container.appendChild(row);
+        }
+        if(getCookie('userName') == hero.name){
+            let sell_items = document.createElement("button");
+            sell_items.setAttribute('class', 'col-2 float-right btn btn-outline-secondary');
+            sell_items.textContent = "Auswahl verkaufen";
+            sell_items.addEventListener("click", function() {
+                sellObjects(hero);
+              });
+            container.appendChild(sell_items);    
+        }
+    }
+
+    function sellObjects(hero){
+        var objects = [];
+
+        for (var inventory of hero.loot_inventories) {
+            var switches = document.getElementById("switch_" + inventory.objectHandle);
+
+            if(switches && switches.checked){
+                var quantity = document.getElementById("amount_" + inventory.objectHandle);
+                if(quantity){
+                    objects.push({objectHandle: inventory.objectHandle, quantity: quantity.value})         
+                }
+            }
+        }
+
+        if(objects.length > 0){
+            fetch('./api/shop/sell?hero=' + hero.name, {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body : JSON.stringify(objects)
+            }).then(async function (res) {
+                if (res.status == 200) {
+                    return res.json();
+                }
+            }).then(async function (json) {
+                console.log(json);
+            });
         }
     }
 
@@ -134,4 +175,3 @@ $(() => {
         }
     }
 });
-

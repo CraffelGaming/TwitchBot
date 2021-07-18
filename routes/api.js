@@ -7,11 +7,14 @@ let statistic = require("./api/api.statistic");
 let level = require("./api/api.level");
 let hero = require("./api/api.hero");
 let twitch = require("./api/api.twitch");
+let shop = require("./api/api.shop");
 
 let router = express.Router();
 
 router.get("/channel", channels);
 router.put("/channel", channels);
+
+router.post("/shop/sell", shop);
 
 router.get("/channel/select", channels);
 router.post("/channel/select", channels);

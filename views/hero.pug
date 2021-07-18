@@ -11,7 +11,7 @@ block content
                     | Held auswählen
                 ul#list.dropdown-menu(aria-labelledby='dropdownMenuLink')
             div#information.pt-4.d-none
-                div.row.pl-3.pr-3.pb-5
+                div.row.pl-3.pr-3
                     .col-6.m-0
                         .container
                             h1#name.display-5
@@ -21,7 +21,10 @@ block content
                             h1#level.display-5
                             p.lead Level
                 div.row
-                    div.col-6
+                    div.col-2
+                    div.col-2
+                        img.img-fluid(src='/images/character/sillhouette_man_472x591.jpg' width="236" height="296" alt="")
+                    div.col-2
                     div.col-6
                         div.row.pl-3.pr-3
                             .col-4.m-0
@@ -52,7 +55,7 @@ block content
                         #collapseOne.collapse.show(aria-labelledby='headingOne' data-parent='#accordionExample')
                             .card-body
                                 div#hero
-                                button.col-2.float-right.btn.btn-outline-secondary Auswahl verkaufen
+                                button#heroSellItems.col-2.float-right.btn.btn-outline-secondary.d-none Auswahl verkaufen
     footer#sticky-footer.bg-dark.footer
         nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
             div.navbar-nav

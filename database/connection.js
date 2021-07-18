@@ -3,6 +3,7 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const VersionItem = require('../model/versionItem');
 
 const ObjectItem = require('../model/objectItem');
+const ObjectTypeItem = require('../model/objectTypeItem');
 const ActionItem = require('../model/actionItem');
 const LocationItem = require('../model/locationItem');
 const EndingItem = require('../model/endingItem');
@@ -51,6 +52,7 @@ class Connection {
             VersionItem.initialize(this.sequelize);
 
             ObjectItem.initialize(this.sequelize);
+            ObjectTypeItem.initialize(this.sequelize);
             ActionItem.initialize(this.sequelize);
             LocationItem.initialize(this.sequelize);
             EndingItem.initialize(this.sequelize);
@@ -82,6 +84,7 @@ class Connection {
             await this.updater();
 
             await ObjectItem.fill(this.sequelize);
+            await ObjectTypeItem.fill(this.sequelize);
             await ActionItem.fill(this.sequelize);
             await LocationItem.fill(this.sequelize);
             await EndingItem.fill(this.sequelize);

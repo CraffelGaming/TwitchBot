@@ -1,3 +1,11 @@
 [
-    { "handle": 1, "name": "Head"}
+    { "handle": 1, "name": "Kopf"},
+    { "handle": 2, "name": "Brust"},
+    { "handle": 3, "name": "Hand"},
+    { "handle": 4, "name": "Beine"},
+    { "handle": 5, "name": "Füße"},
+    { "handle": 6, "name": "Accessoire"},
+    { "handle": 7, "name": "Minipet"},
+    { "handle": 8, "name": "Hals"},
+    { "handle": 9, "name": "Finger"}
 ]

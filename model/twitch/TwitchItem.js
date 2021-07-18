@@ -14,12 +14,12 @@ class TwitchItem {
         sequelize.define('twitch', {
             state: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                primaryKey: true
+                allowNull: false
             },
             channelName: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                primaryKey: true
             },
             accessToken: {
                 type: DataTypes.STRING,
@@ -40,9 +40,10 @@ class TwitchItem {
           }, {freezeTableName: true});
     }
 
-    static async get(sequelize, state){
-        var [twitch, created] = await sequelize.models.twitch.findOrCreate({ 
-            where: { state: state }
+    static async get(sequelize, state, channelName){
+        var [twitch, created] = await sequelize.models.twitch.findOrCreate({
+            defaults: { state: state },
+            where: { channelName: channelName }
         });
         console.log(`INF: new twitch ${twitch.state}, created: ${created}`);
         return twitch;

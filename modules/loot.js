@@ -196,6 +196,8 @@ class Loot extends Module{
             for (var player of Object.values(this.players)) {
                 for (var element of Object.values(player.items)) {
                     element.isReload = false;
+                    element.lastJoin = Date.UTC(2020, 1, 1);
+                    element.lastSteal = Date.UTC(2020, 1, 1);
                     await element.save();
                 }
                 player.isActive = false;

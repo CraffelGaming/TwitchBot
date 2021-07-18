@@ -18,7 +18,6 @@ class Authorize {
             if (TwitchErr) { return console.log(TwitchErr); }
             switch(TwitchRes.statusCode){
                 case 200:
-                    console.log(TwitchRes.body);
                     req.session.twitch = TwitchRes.body;
                     this.WebPush(req, res,"GET", "/users?client_id=" + twitch.client_id, this.WebAuthChannel);
                     callback(req, res);
@@ -43,12 +42,14 @@ class Authorize {
     }
 
     static async WebAuthChannel(req, res, twitchErr, twitchRes, twitchBody){
-        var twitchItem = await TwitchItem.get(req.app.get('channel').globalDatabase.sequelize, req.session.state);
+        var twitchItem = await TwitchItem.get(req.app.get('channel').globalDatabase.sequelize,req.session.state, twitchBody.data[0].login);
         twitchItem.channelName = twitchBody.data[0].login;
         twitchItem.accessToken = req.session.twitch.access_token;
         twitchItem.refreshToken = req.session.twitch.refresh_token;
         twitchItem.scope = req.session.twitch.scope.join(' ');
         twitchItem.tokenType = req.session.twitch.token_type;
+        twitchItem.state = req.session.state;
+        console.log(twitchItem);
         await twitchItem.save();   
 
         var twitchUserItem = await TwitchUserItem.get(req.app.get('channel').globalDatabase.sequelize, twitchBody.data[0].login);
