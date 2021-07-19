@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./ObjectTypeItem.json');
+const items = require('./objectTypeItem.json');
 
 class ObjectTypeItem {
     constructor(){

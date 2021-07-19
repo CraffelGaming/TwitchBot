@@ -44,7 +44,7 @@ $(() => {
 
             let description2 = document.createElement("div");
             description2.setAttribute('class', 'col-10')
-            description2.textContent = level.experienceMin + " Erfahrung";
+            description2.textContent = level.experienceMin.toLocaleString('de') + " Erfahrung";
             row.appendChild(description2);
 
             body.appendChild(row);

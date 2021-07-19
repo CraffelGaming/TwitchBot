@@ -53,9 +53,9 @@ $(() => {
         let container = document.getElementById("hero");
         let index = 0;
         document.getElementById("information").classList.remove("d-none");
-        document.getElementById("gold").innerText = hero.gold;
+        document.getElementById("gold").innerText = hero.gold.toLocaleString('de');
         document.getElementById("level").innerText = level.handle;
-        document.getElementById("experience").innerText = hero.experience;
+        document.getElementById("experience").innerText = hero.experience.toLocaleString('de');
         document.getElementById("name").innerText = hero.name;
         document.getElementById("goldMultipler").innerText = hero.goldMultipler + 'x';
         document.getElementById("stealMultipler").innerText = hero.stealMultipler + 'x';
@@ -115,13 +115,13 @@ $(() => {
             row.appendChild(quantity);
 
             let object = document.createElement("div");
-            object.setAttribute('class', 'col-6')
+            object.setAttribute('class', 'col-sm')
             object.textContent = inventory.loot_object.value;
             row.appendChild(object);
 
             let value = document.createElement("div");
-            value.setAttribute('class', 'col-3 text-right')
-            value.textContent = (inventory.loot_object.gold * inventory.quantity) + " Gold";
+            value.setAttribute('class', 'col-sm-auto')
+            value.textContent = (inventory.loot_object.gold * inventory.quantity).toLocaleString('de') + " Gold";
             row.appendChild(value);
             container.appendChild(row);
         }

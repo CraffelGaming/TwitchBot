@@ -44,12 +44,12 @@ $(() => {
             row.appendChild(handle);
 
             let name = document.createElement("div");
-            name.setAttribute('class', 'col-8')
+            name.setAttribute('class', 'col-sm')
             name.textContent = item.value;
             row.appendChild(name);
 
             let value = document.createElement("div");
-            value.setAttribute('class', 'col-2 text-right')
+            value.setAttribute('class', 'col-sm-auto')
             value.textContent = item.gold + " Gold";
             row.appendChild(value);
 

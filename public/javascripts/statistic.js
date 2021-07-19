@@ -11,7 +11,7 @@ $(() => {
         }
     }).then(async function (json) {
         console.log(json);
-        showTopGold(json, 'Helden - Reichtum');
+        showTopGold(json, 'Top 10 - Reichtum');
     });
 
     fetch('./api/statistic/experience', {
@@ -26,7 +26,7 @@ $(() => {
         }
     }).then(async function (json) {
         console.log(json);
-        showTopExperience(json, 'Helden - Erfahrung');
+        showTopExperience(json, 'Top 10 - Erfahrung');
     });
 
     function showTopGold(heroes, title) {
@@ -59,8 +59,8 @@ $(() => {
             row.appendChild(description);
 
             let description2 = document.createElement("div");
-            description2.setAttribute('class', 'col-sm')
-            description2.textContent = hero.gold + " Gold";
+            description2.setAttribute('class', 'col-sm-auto')
+            description2.textContent = hero.gold.toLocaleString('de') + " Gold";
             row.appendChild(description2);
 
             body.appendChild(row);
@@ -91,18 +91,37 @@ $(() => {
             else row.setAttribute('class', 'row p-2 bg-light')
             ++index;
              
-            let description = document.createElement("div");
-            description.setAttribute('class', 'col-sm')
-            description.textContent = hero.name;
-            row.appendChild(description);
+            let heroName = document.createElement("div");
+            heroName.setAttribute('class', 'col-sm')
+            heroName.textContent = hero.name;
+            row.appendChild(heroName);
 
-            let description2 = document.createElement("div");
-            description2.setAttribute('class', 'col-sm')
-            description2.textContent = hero.experience + " EXP";
-            row.appendChild(description2);
+            getLevel(hero, row)
+
+            let experience = document.createElement("div");
+            experience.setAttribute('class', 'col-sm')
+            experience.textContent = hero.experience.toLocaleString('de') + " EXP";
+            row.appendChild(experience);
 
             body.appendChild(row);
         }
+
+        function getLevel(hero, row){
+            fetch('./api/level/' + hero.experience, {
+                method: 'get',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(async function (res) {
+                if (res.status == 200) {
+                    return res.json();
+                }
+            }).then(async function (json) {
+                let level = document.createElement("div");
+                level.setAttribute('class', 'col-sm')
+                level.textContent = "Level " + json.handle;
+                row.appendChild(level);
+            });
+        }
     }
 });
-

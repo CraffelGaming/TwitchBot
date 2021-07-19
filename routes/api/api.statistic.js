@@ -13,7 +13,7 @@ router.get('/' + endpoint + '/gold/', async function (req, res) {
         res.status(200).json(
             await channel.database.sequelize.models.loot_hero.findAll({ 
                 where: { gold :{[Op.gt]: 0}
-            }, order: [['gold', 'DESC']], offset: 0, limit: 100}) 
+            }, order: [['gold', 'DESC']], offset: 0, limit: 10}) 
         );
     else res.status(404);
 });
@@ -24,7 +24,7 @@ router.get('/' + endpoint + '/experience/', async function (req, res) {
         res.status(200).json(
             await channel.database.sequelize.models.loot_hero.findAll({ 
                 where: { experience :{[Op.gt]: 0}
-            }, order: [['experience', 'DESC']], offset: 0, limit: 100}) 
+            }, order: [['experience', 'DESC']], offset: 0, limit: 10}) 
         );
     else res.status(404);
 });
