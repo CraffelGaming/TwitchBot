@@ -21,6 +21,7 @@ class Discord extends Module {
                     if(this.isOwner(target, playerName)){
                         if(parameter && parameter.length > 0){
                             this.element.link = parameter;
+                            this.element.save();
                             return `${this.translation.linkChanged} ${this.element.link}`;
                         } else return this.translation.noLinkParameter;
                     } else return this.translation.linkError;

@@ -30,6 +30,7 @@ class Donate extends Module {
                     if(this.isOwner(target, playerName)){
                         if(!isNaN(parameter)){
                             this.element.donationMax = parameter;
+                            this.element.save();
                             return `${this.translation.donationLimitChanged} ${this.element.donationMax}€`;
                         } else return this.translation.notANumber;
                     } else return this.translation.donationLimitChangeError;
@@ -37,6 +38,7 @@ class Donate extends Module {
                     if(this.isOwner(target, playerName)){
                         if(parameter && parameter.length > 0){
                             this.element.destination = parameter;
+                            this.element.save();
                             return `${this.translation.donationDestinationChanged} ${this.element.destination}`;
                         } else return this.translation.noDonationParameter;
                     } else return this.translation.donationDestinationError;

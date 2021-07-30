@@ -64,7 +64,7 @@ $(() => {
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
-        
+        addSellButton(hero, container);
         for (var inventory of hero.loot_inventories) {          
             let row = document.createElement("div");
             if(index % 2 == 0)
@@ -125,6 +125,9 @@ $(() => {
             row.appendChild(value);
             container.appendChild(row);
         }
+        addSellButton(hero, container);
+    }
+    function addSellButton(hero, container){
         if(getCookie('userName') == hero.name){
             let sell_items = document.createElement("button");
             sell_items.setAttribute('class', 'col-2 float-right btn btn-outline-secondary');

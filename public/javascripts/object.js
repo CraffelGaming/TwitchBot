@@ -9,7 +9,6 @@ $(() => {
             return res.json();
         }
     }).then(async function (json) {
-        console.log(json);
         showObject(json, "Gegenstände")
     });
 
@@ -38,6 +37,13 @@ $(() => {
             else row.setAttribute('class', 'row p-2 bg-light')
             ++index;
             
+            let image = document.createElement("img");
+            image.setAttribute('class', 'col-1 img-fluid')
+            image.src = imagePath(item.handle);
+            image.width = 25;
+            image.height = 25;
+            row.appendChild(image);
+
             let handle = document.createElement("div");
             handle.setAttribute('class', 'col-2')
             handle.textContent = item.handle;
@@ -54,6 +60,17 @@ $(() => {
             row.appendChild(value);
 
             body.appendChild(row);
+        }
+    }
+
+    function imagePath(handle){
+        var image = new Image();
+        var url_image = '/images/objects/' + handle  + '.png';
+        image.src = url_image;
+        if (image.width == 0) {
+            return '/images/objects/empty.png';
+        } else {
+            return url_image;
         }
     }
 });
