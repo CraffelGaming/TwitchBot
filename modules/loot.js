@@ -67,6 +67,8 @@ class Loot extends Module{
                     return await this.showExperience(channel, playerName);
                 case "!chest":
                     return await this.showChest(channel, playerName);
+                case "!adventure":
+                    return await this.showAdventure(channel);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -288,12 +290,7 @@ class Loot extends Module{
     //#region Gold
     async collectGold(hero){
         try{
-            var gold = this.randomNumber(50, 150);
-            var randomMultipler = this.randomNumber(1, 5);
-            
-            if(randomMultipler == 1)
-                gold *= 2;
-         
+            var gold = this.randomNumber(50 + this.players.length, 150 + this.players.length);
             gold *= hero.goldMultipler;
             hero.gold += gold;
     
@@ -571,6 +568,12 @@ class Loot extends Module{
                 return `${this.translation.treasure} ${count} ${this.translation.items}`
             } else return `${playerName}, ${this.translation.noParticipation}`;
         } else return `${playerName}, ${this.translation.noParticipation}`;
+    }
+    //#endregion
+
+    //#region Adventure
+    async showAdventure(channel){
+        return "Es befinden sich " + this.players.length.toString() + " Helden auf Abenteuer."
     }
     //#endregion
 }

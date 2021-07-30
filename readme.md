@@ -12,6 +12,13 @@ Befehl | Beschreibung
 **!steal** | Stiehlt einen zufällen Zuschauer ein Gegenstand und gibt es den, der den Befehl eingibt. 10%ige Chance auf Fehlschlag.
 **!steal:iten @spieler** | Stiehlt dem angegebenen Zuschauer den genannten Gegenstand und gibt es den, der den Befehl eingibt. 50%ige Chance auf Fehlschlag.
 **!give:item @spieler** | Der Zuschauer, der den Befehl eingibt, gibt einen anderen Zuschauer ein Item aus dem Inventar. Es muss die Itemnummer aus dem Inventar und ein Zuschauer als Ziel eingegeben werden, der am Abenteuer teilnimmt.
+**!find:item** | Sucht den Gegenstand mit der angegebenen Itemnummer in den Inventaren der Abenteurer. Wenn der Gegenstand gefunden wurde, wir dies angezeigt. 
+**!adventure** | Zeigt die Anzahl der Zuschauer ein, die gerade am Abenteuer teilnehmen.
+
+**!gold** | Zeigt das insgesamt gesammelte Gold des Zuschauers über alle Abenteuer hinweg an.
+**!chest** | Zeigt die Anzahl der gesammelten Gegenstände des Zuschauers über alle Abenteuer hinweg an.
+**!level** | Zeigt das aktuelle level des Zuschauers über alle Abenteuer hinweg an.
+**!leave** | Der Zuschauer, das das eingibt, verlässt das Abenteuer.
 
 ## Einstellungsmöglichkeiten
 - Zeit in Minuten, wie oft ein Item zufällig vergeben werden soll.
@@ -53,6 +60,23 @@ Befehl | Beschreibung
 
 
 
+# Discord [discord]
+Modul für das einblenden der Discord-URL incl. Zusatztext.
+
+## Befehle
+Befehl | Beschreibung
+------ | ------------
+**!discord** | Zeigt die Discord-URL incl. Zusatztext an. 
+**!discordlink:string** | Die Discord-URL incl. Zusatztext kann jederzeit geändert werden.
+**!discordstart** | Startet das Modul.
+**!discordstop** | Beendet das Modul.
+
+## Einstellungsmöglichkeiten
+- Zeit in Minuten, wie oft die Discord-URL incl. Zusatztext im Chat angezeigt weden soll.
+- Spendenziel, Organisation 
+
+
+
 # Spenden [donate]
 Modul für Spendenstreams. Jeder Zuschauer kann einmal pro Stream 1€ spenden. Das Geld muss vom Streamer bezahlt werden, kein Payment von Zuschauern. Ist super für Creators, die Affiliate werden möchten.
 
@@ -67,7 +91,7 @@ Befehl | Beschreibung
 **!donateclear** | Bereinigt das Modul vollständig.
 
 ## Einstellungsmöglichkeiten
-- Zeit in Minuten, wie die Spendenaktion im Chat angezeigt weden soll.
+- Zeit in Minuten, wie oft die Spendenaktion im Chat angezeigt weden soll.
 - Spendenziel, Organisation 
 
 

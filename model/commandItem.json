@@ -58,7 +58,8 @@
             "!lootclear",
             "!gold",
             "!chest",
-            "!level"
+            "!level",
+            "!adventure"
         ]
     },
     {
