@@ -14,7 +14,6 @@ Befehl | Beschreibung
 **!give:item @spieler** | Der Zuschauer, der den Befehl eingibt, gibt einen anderen Zuschauer ein Item aus dem Inventar. Es muss die Itemnummer aus dem Inventar und ein Zuschauer als Ziel eingegeben werden, der am Abenteuer teilnimmt.
 **!find:item** | Sucht den Gegenstand mit der angegebenen Itemnummer in den Inventaren der Abenteurer. Wenn der Gegenstand gefunden wurde, wir dies angezeigt. 
 **!adventure** | Zeigt die Anzahl der Zuschauer ein, die gerade am Abenteuer teilnehmen.
-
 **!gold** | Zeigt das insgesamt gesammelte Gold des Zuschauers über alle Abenteuer hinweg an.
 **!chest** | Zeigt die Anzahl der gesammelten Gegenstände des Zuschauers über alle Abenteuer hinweg an.
 **!level** | Zeigt das aktuelle level des Zuschauers über alle Abenteuer hinweg an.
