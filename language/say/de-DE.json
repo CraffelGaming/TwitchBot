@@ -1,0 +1,13 @@
+{
+    "start" : "Modul wurde gestartet.",
+    "startError" : "Du kannst das Modul nicht starten.",
+    "alreadyStarted" : "Das Modul ist bereits gestartet.",
+    "stop" : "Das Modul wurde gestoppt.",
+    "stopError" : "Du kannst das Modul nicht anhalten.",
+    "alreadyStopped" : "Das Modul ist bereits gestoppt.",
+    "notActive" : "Das Modul ist deaktiviert.",
+    "changeError": "Du kannst den Wert nicht ändern.",
+    "textChanged": "Text geändert auf",
+    "intervalChanged": "Intervall geändert auf",
+    "noParameter": "Du hast keinen Parameter angegeben"
+}

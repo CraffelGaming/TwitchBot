@@ -69,14 +69,5 @@
             "!keystop",
             "!keyclear"
         ]
-    },
-    {
-        "name": "discord",
-        "commands":[
-            "!discord",
-            "!discordstart",
-            "!discordstop",
-            "!discordlink"
-        ]
     }
 ]

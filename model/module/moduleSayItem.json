@@ -1,0 +1,37 @@
+[
+    {
+        "command": "discord",
+        "minutes": 60,
+        "help": "",
+        "text": "Lege mit !discordtext:<string> deinen Discord-Server fest.",
+        "isActive": false
+    },
+    {
+        "command": "multistream",
+        "minutes": 60,
+        "help": "",
+        "text": "Lege mit !mstext:<string> deine Multistream Adresse fest.",
+        "isActive": false
+    },
+    {
+        "command": "craffel",
+        "minutes": 60,
+        "help": "",
+        "text": "Du willst den Craffelmat auch für dich? Kostenlos auf https://craffel.de/",
+        "isActive": true
+    },
+    {
+        "command": "follow",
+        "minutes": 60,
+        "help": "",
+        "text": "Ich freue mich, wenn dir meine Streams gefallen. Lass gerne ein Follow da, falls du mich unterstützen möchtest.",
+        "isActive": true
+    },
+    {
+        "command": "support",
+        "minutes": 1,
+        "help": "",
+        "text": "Lege mit !supporttext:<string> deinen Supporttext fest.",
+        "isActive": false
+    }
+]

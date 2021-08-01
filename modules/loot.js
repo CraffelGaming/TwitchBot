@@ -573,7 +573,7 @@ class Loot extends Module{
 
     //#region Adventure
     async showAdventure(channel){
-        return "Es befinden sich " + this.players.length.toString() + " Helden auf Abenteuer."
+        return `${this.translation.thereAre} ${this.players.length.toString()} ${this.translation.heroesOnAdventure}`
     }
     //#endregion
 }

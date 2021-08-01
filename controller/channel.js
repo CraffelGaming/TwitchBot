@@ -1,10 +1,9 @@
 const Donation = require('../modules/donate.js');
 const Key = require('../modules/key.js');
 const Time = require('../modules/time.js');
-const Support = require('../modules/support.js');
 const Loot = require('../modules/loot');
 const Help = require('../modules/help');
-const Discord = require('../modules/discord');
+const Say = require('../modules/say');
 const Administration = require('../modules/administration');
 const Connection = require('../database/connection');
 const ChannelItem = require('../model/channelItem');
@@ -12,6 +11,7 @@ const ModuleItem = require('../model/moduleItem');
 const Puffer = require('./puffer');
 
 var path = require('path');
+const { abort } = require('process');
 
 class Channel {
     constructor(){
@@ -71,63 +71,48 @@ class Channel {
                 switch(moduleItem.name){
                     case "donate":
                         var element = (await channelItem.database.sequelize.models.module_donate.findOne());
-                        if(element.minutes > 0){
-                            var donation = new Donation(translation, element);
-                            await donation.initialize(channelItem);
+                        var donation = new Donation(translation, element);
+                        await donation.initialize(channelItem);
+                        if(element.minutes > 0)
                             this.interval(element, this.client, channelItem, donation);
-                            moduleItem.object = donation;
-                            channelItem.modules.push(moduleItem);
-                        }
+                        moduleItem.object = donation;
+                        channelItem.modules.push(moduleItem);
                         break;
                     case "key":
                         var element = (await channelItem.database.sequelize.models.module_key.findOne());
-                        if(element.minutes > 0){
-                            var key = new Key(translation, element);
-                            await key.initialize(channelItem);
+                        var key = new Key(translation, element);
+                        await key.initialize(channelItem);
+                        if(element.minutes > 0)
                             this.interval(element, this.client, channelItem, key);
-                            moduleItem.object = key;
-                            channelItem.modules.push(moduleItem);
-                        }
+                        moduleItem.object = key;
+                        channelItem.modules.push(moduleItem);
                         break;
                     case "time":
                         var element = (await channelItem.database.sequelize.models.module_time.findOne());
-                        if(element.minutes > 0){
-                            var time = new Time(translation, element, channelItem.name);
-                            await time.initialize(channelItem);
+                        var time = new Time(translation, element, channelItem.name);
+                        await time.initialize(channelItem);
+                        if(element.minutes > 0)
                             this.interval(element, this.client, channelItem, time);
-                            moduleItem.object = time;
-                            channelItem.modules.push(moduleItem);
-                        }
-                        break;
-                    case "support":
-                        var element = (await channelItem.database.sequelize.models.module_support.findOne());
-                        if(element.minutes > 0){
-                            var support = new Support(translation, element);
-                            await support.initialize(channelItem);
-                            this.interval(element, this.client, channelItem, support);
-                            moduleItem.object = support;
-                            channelItem.modules.push(moduleItem);
-                        }
+                        moduleItem.object = time;
+                        channelItem.modules.push(moduleItem);
                         break;
                     case "loot":
                         var element = (await channelItem.database.sequelize.models.module_loot.findOne());
-                        if(element.minutes > 0){
-                            var loot = new Loot(translation, element);
-                            await loot.initialize(channelItem);
+                        var loot = new Loot(translation, element);
+                        await loot.initialize(channelItem);
+                        if(element.minutes > 0)
                             this.interval(element, this.client, channelItem, loot);
-                            moduleItem.object = loot;
-                            channelItem.modules.push(moduleItem);
-                        }
+                        moduleItem.object = loot;
+                        channelItem.modules.push(moduleItem);
                         break;
                     case "help":
-                        var element = (await channelItem.database.sequelize.models.module_help.findOne());
-                        if(element.minutes > 0){
-                            var help = new Help(translation, element);
-                            await help.initialize(channelItem);
+                        var element = (await channelItem.database.sequelize.models.module_help.findOne());             
+                        var help = new Help(translation, element);
+                        await help.initialize(channelItem);
+                        if(element.minutes > 0)
                             this.interval(element, this.client, channelItem, help);
-                            moduleItem.object = help;
-                            channelItem.modules.push(moduleItem);
-                        }
+                        moduleItem.object = help;
+                        channelItem.modules.push(moduleItem);
                         break;
                     case "administration":
                         var element = (await channelItem.database.sequelize.models.module_administration.findOne());
@@ -136,12 +121,25 @@ class Channel {
                         moduleItem.object = administration;
                         channelItem.modules.push(moduleItem);
                         break;
-                    case "discord":
-                        var element = (await channelItem.database.sequelize.models.module_discord.findOne());
-                        var discord = new Discord(translation, element, channelItem);
-                        await discord.initialize(channelItem);
-                        moduleItem.object = discord;
-                        channelItem.modules.push(moduleItem);
+                    case "say":
+                        for (var element of Object.values(await channelItem.database.sequelize.models.module_say.findAll())) {
+                            var say = new Say(translation, element, channelItem);
+                            await say.initialize(channelItem);
+
+                            var sayItem = new ModuleItem(module);
+                            sayItem.object = say;
+                            sayItem.name = element.command;
+
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}`}));
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}text`}));
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}start`}));
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}stop`}));
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}interval`}));
+                            if(element.minutes > 0)
+                                this.interval(element, this.client, channelItem, say);
+
+                            channelItem.modules.push(sayItem);
+                        }
                         break;
                 }
             }
@@ -159,7 +157,8 @@ class Channel {
     interval(module, client, channel, object){
         setInterval(
             async () => {  
-                if(channel && channel.isActive){
+                var difference = Math.floor((Date.now() - object.lastRun) / 1000 / 60)
+                if(channel && channel.isActive && difference >= module.minutes && module.minutes > 0){
                     try{
                         console.log(`INF: intervall module [${module.name}]`);
                         var message = await object.callMessage(channel);
@@ -171,7 +170,7 @@ class Channel {
                     }
                 }
             },
-            1000 * 60 * module.minutes
+            1000 * 60
         ); 
     }
 
@@ -180,7 +179,6 @@ class Channel {
             var channel = this.channels.find(x => x.name === target);
             if(channel && (channel.isActive || message == "!adminstart" || message == "!adminstop")){
                 var module = channel.modules.find(x => x.name === moduleName);
-                
                 if(module){
                     return await module.object.execute(channel, playerName, message, target, parameter);
                 }

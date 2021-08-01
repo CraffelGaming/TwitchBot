@@ -64,14 +64,7 @@ $(() => {
     }
 
     function imagePath(handle){
-        var image = new Image();
-        var url_image = '/images/objects/' + handle  + '.png';
-        image.src = url_image;
-        if (image.width == 0) {
-            return '/images/objects/empty.png';
-        } else {
-            return url_image;
-        }
+        return '/images/objects/' + handle  + '.png';
     }
 });
 

@@ -1,0 +1,13 @@
+{
+    "start" : "Modul started.",
+    "startError" : "You cannot start the modul.",
+    "alreadyStarted" : "Modul already started.",
+    "stop" : "Modul stopped.",
+    "stopError" : "You cannot stop the modul.",
+    "alreadyStopped" : "Modul already stopped.",
+    "notActive" : "Modul ist not active.",
+    "changeError": "You cannot change the Text.",
+    "textChanged": "Text changed to",
+    "intervalChanged": "Interval changed to",
+    "noParameter": "You have not set a Text."
+}

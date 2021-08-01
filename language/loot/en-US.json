@@ -47,6 +47,8 @@
     "gold" : "Gold",
     "experience" : "EXP",
     "treasure": "In your treasure chest are",
-    "level": "Your level is",
-    "levelError": "Your level is unbelievable."
+    "level": "Your are level",
+    "levelError": "Your level is unbelievable.",
+    "thereAre": "There are",
+    "heroesOnAdventure" : "heroes on adventure"
 }

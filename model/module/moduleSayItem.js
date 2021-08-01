@@ -1,23 +1,25 @@
 const { DataTypes, Model } = require('sequelize');
-const items = require('./moduleDiscordItem.json');
+const items = require('./moduleSayItem.json');
 
-class ModuleDiscordItem {
+class ModuleSayItem {
     constructor(){
         this.handle = 0;
-        this.link = "";
+        this.text = "";
         this.minutes = 0;
         this.help = "";
+        this.command = "";
+        this.counter = 0;
     }
 
     static initialize(sequelize){
-        sequelize.define('module_discord', {
+        sequelize.define('module_say', {
             handle: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true
             },
-            link: {
+            text: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -29,14 +31,22 @@ class ModuleDiscordItem {
             help: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            command: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            isActive: {
+                type: DataTypes.BOOLEAN,
+                allowNull: true
             }
           }, {freezeTableName: true});
     }
 
     static async fill(sequelize){
         for(var item of Object.values(items))
-            if(await sequelize.models.module_discord.count({ where: { link: item.link } }) == 0)
-                await sequelize.models.module_discord.create(item);
+            if(await sequelize.models.module_say.count({ where: { command: item.command } }) == 0)
+                await sequelize.models.module_say.create(item);
     }
 }
-module.exports = ModuleDiscordItem
+module.exports = ModuleSayItem

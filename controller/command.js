@@ -19,6 +19,7 @@ class Command {
 
     async execute(){
         try{
+            
             for (var item of Object.values(this.channel.commands)) {
                 if(item.command == this.commandName){
                     console.log(`* Executed command ${item.command} for module ${item.name} on channel ${this.target} with parameter ${this.parameter}`); 

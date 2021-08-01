@@ -3,6 +3,7 @@ class Module {
         this.isRunning = false;
         this.element = element;
         this.translation = translation;
+        this.lastRun = Date.now();
     }
 
     isOwner(target, playerName){

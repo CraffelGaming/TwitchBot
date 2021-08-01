@@ -47,6 +47,8 @@
     "gold" : "Gold",
     "experience" : "EXP",
     "treasure": "In deiner Schatzkiste liegen",
-    "level": "Du hast Level",
-    "levelError": "Dein Level ist unbeschreiblich."
+    "level": "Du bist Level",
+    "levelError": "Dein Level ist unbeschreiblich.",
+    "thereAre": "Es befinden sich",
+    "heroesOnAdventure" : "Helden auf Abenteuer"
 }
