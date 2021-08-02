@@ -10,26 +10,26 @@
         "command": "multistream",
         "minutes": 60,
         "help": "",
-        "text": "Lege mit !mstext:<string> deine Multistream Adresse fest.",
+        "text": "Lege mit !multistreamtext:<string> deine Multistream Adresse fest.",
         "isActive": false
     },
     {
         "command": "craffel",
         "minutes": 60,
         "help": "",
-        "text": "Du willst den Craffelmat auch für dich? Kostenlos auf https://craffel.de/",
+        "text": "Schau dir deinen Helden auf craffel.de an.",
         "isActive": true
     },
     {
         "command": "follow",
         "minutes": 60,
         "help": "",
-        "text": "Ich freue mich, wenn dir meine Streams gefallen. Lass gerne ein Follow da, falls du mich unterstützen möchtest.",
-        "isActive": true
+        "text": "Lege mit !followtext:<string> deinen Followtext fest.",
+        "isActive": false
     },
     {
         "command": "support",
-        "minutes": 1,
+        "minutes": 60,
         "help": "",
         "text": "Lege mit !supporttext:<string> deinen Supporttext fest.",
         "isActive": false

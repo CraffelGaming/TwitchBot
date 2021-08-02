@@ -9,6 +9,7 @@ class ModuleSayItem {
         this.help = "";
         this.command = "";
         this.counter = 0;
+        this.name = "";
     }
 
     static initialize(sequelize){

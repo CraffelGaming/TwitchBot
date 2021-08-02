@@ -29,8 +29,8 @@ class Say extends Module {
                     } else return this.translation.changeError;
                     case `!${this.element.command}interval`:
                         if(this.isOwner(target, playerName)){
-                            if(Number.isInteger(parameter)){
-                                this.element.minutes = parameter;
+                            if(!isNaN(parameter)){
+                                this.element.minutes = parseInt(parameter);
                                 this.element.save();
                                 return `${this.translation.intervalChanged} ${this.element.minutes}`;
                             } else return this.translation.noParameter;

@@ -129,6 +129,7 @@ class Channel {
                             var sayItem = new ModuleItem(module);
                             sayItem.object = say;
                             sayItem.name = element.command;
+                            element.name = element.command;
 
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}`}));
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}text`}));
