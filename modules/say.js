@@ -13,8 +13,6 @@ class Say extends Module {
     
     execute(channel, playerName, message, target, parameter){
         try{
-            console.log(message);
-            console.log(this.element.command);
             switch(message){
                 case `!${this.element.command}`:
                     if(this.isRunning)
