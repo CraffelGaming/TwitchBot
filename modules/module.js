@@ -27,6 +27,7 @@ class Module {
     start(){
         if(!this.isRunning){
             this.isRunning = true;
+            this.lastRun = Date.now();
             return this.translation.start;
         }
         return this.translation.alreadyStarted;

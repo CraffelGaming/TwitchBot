@@ -161,6 +161,7 @@ class Channel {
                 var difference = Math.floor((Date.now() - object.lastRun) / 1000 / 60)
                 if(channel && channel.isActive && difference >= module.minutes && module.minutes > 0){
                     try{
+                        object.lastRun = Date.now();
                         console.log(`INF: intervall module [${module.name}]`);
                         var message = await object.callMessage(channel);
                         if(message && message.length > 0){
