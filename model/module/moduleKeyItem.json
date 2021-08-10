@@ -2,6 +2,7 @@
     {
         "name": "key",
         "minutes": 60,
-        "help": ""
+        "help": "",
+        "isActive": false
     }
 ]

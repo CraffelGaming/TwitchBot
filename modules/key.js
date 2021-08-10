@@ -1,8 +1,8 @@
 const Module = require('./module');
 
 class Key extends Module{
-    constructor(translation, element){
-        super(translation, element);
+    constructor(translation, element, language){
+        super(translation, element, language);
         this.keys = [];
         this.keyNext = 0;
     }
@@ -12,20 +12,15 @@ class Key extends Module{
     }
 
     async execute(channel, playerName, message, target, parameter){
+        var result = super.execute(channel, playerName, message, target, parameter, "key");
+        if(result) return result;
+
         try{
             switch(message){
-                case "!keystart":
-                    if(this.isOwner(target, playerName))
-                        return this.start();
-                    else return this.translation.startError;
-                case "!keystop":
-                    if(this.isOwner(target, playerName))
-                        return this.stop();
-                    else return this.translation.stopError;
                 case "!helpclear":
                     if(this.isOwner(target, playerName))
                         return await this.clear(channel);
-                    else return this.translation.clearError;
+                    else return this.basicTranslation.clearError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);
@@ -35,12 +30,12 @@ class Key extends Module{
     async clear(channel){
         this.keys = await channel.database.sequelize.models.key.findAll();  
         this.keyNext = 0;
-        return this.translation.clear;
+        return this.basicTranslation.clear;
     }
 
     callMessage(channel){
         var message = "";
-        if(this.keys != null && this.isRunning){
+        if(this.keys != null && this.element.isActive){
             if(this.keyNext < this.keys.length){
                 console.log(`${this.translation.free} ${this.keys[this.keyNext].dataValues.name} ${this.translation.key}: ${this.keys[this.keyNext].dataValues.key}.`);
                 message = `Gratis ${this.keys[this.keyNext].dataValues.name} Key: ${this.keys[this.keyNext].dataValues.key}.`;

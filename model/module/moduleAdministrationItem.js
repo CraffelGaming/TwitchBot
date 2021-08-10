@@ -7,6 +7,7 @@ class ModuleAdministrationItem {
         this.name = "";
         this.minutes = 0;
         this.help = "";
+        this.isActive = true;
     }
 
     static initialize(sequelize){
@@ -29,6 +30,11 @@ class ModuleAdministrationItem {
             help: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            isActive: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: true
             }
           }, {freezeTableName: true});
     }

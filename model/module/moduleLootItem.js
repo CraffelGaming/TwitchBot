@@ -7,7 +7,8 @@ class ModuleLootItem {
         this.name = "";
         this.minutes = 0;
         this.help = "";
-        this.stealTimeout = 0;
+        this.stealTimeout = 0;;
+        this.isActive = false;
     }
 
     static initialize(sequelize){
@@ -40,6 +41,11 @@ class ModuleLootItem {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 30
+            },
+            isActive: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
           }, {freezeTableName: true});
     }

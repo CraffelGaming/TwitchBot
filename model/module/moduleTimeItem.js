@@ -6,7 +6,8 @@ class ModuleTimeItem {
         this.handle = 0;
         this.name = "";
         this.minutes = 0;
-        this.help = "";
+        this.help = "";;
+        this.isActive = false;
     }
 
     static initialize(sequelize){
@@ -29,6 +30,11 @@ class ModuleTimeItem {
             help: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            isActive: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
           }, {freezeTableName: true});
     }

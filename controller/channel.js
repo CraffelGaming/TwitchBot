@@ -11,7 +11,6 @@ const ModuleItem = require('../model/moduleItem');
 const Puffer = require('./puffer');
 
 var path = require('path');
-const { abort } = require('process');
 
 class Channel {
     constructor(){
@@ -71,59 +70,54 @@ class Channel {
                 switch(moduleItem.name){
                     case "donate":
                         var element = (await channelItem.database.sequelize.models.module_donate.findOne());
-                        var donation = new Donation(translation, element);
+                        var donation = new Donation(translation, element, channelItem.language);
                         await donation.initialize(channelItem);
-                        if(element.minutes > 0)
-                            this.interval(element, this.client, channelItem, donation);
+                        this.interval(element, this.client, channelItem, donation);
                         moduleItem.object = donation;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "key":
                         var element = (await channelItem.database.sequelize.models.module_key.findOne());
-                        var key = new Key(translation, element);
+                        var key = new Key(translation, element, channelItem.language);
                         await key.initialize(channelItem);
-                        if(element.minutes > 0)
-                            this.interval(element, this.client, channelItem, key);
+                        this.interval(element, this.client, channelItem, key);
                         moduleItem.object = key;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "time":
                         var element = (await channelItem.database.sequelize.models.module_time.findOne());
-                        var time = new Time(translation, element, channelItem.name);
+                        var time = new Time(translation, element, channelItem.name, channelItem.language);
                         await time.initialize(channelItem);
-                        if(element.minutes > 0)
-                            this.interval(element, this.client, channelItem, time);
+                        this.interval(element, this.client, channelItem, time);
                         moduleItem.object = time;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "loot":
                         var element = (await channelItem.database.sequelize.models.module_loot.findOne());
-                        var loot = new Loot(translation, element);
+                        var loot = new Loot(translation, element, channelItem.language);
                         await loot.initialize(channelItem);
-                        if(element.minutes > 0)
-                            this.interval(element, this.client, channelItem, loot);
+                        this.interval(element, this.client, channelItem, loot);
                         moduleItem.object = loot;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "help":
                         var element = (await channelItem.database.sequelize.models.module_help.findOne());             
-                        var help = new Help(translation, element);
+                        var help = new Help(translation, element, channelItem.language);
                         await help.initialize(channelItem);
-                        if(element.minutes > 0)
-                            this.interval(element, this.client, channelItem, help);
+                        this.interval(element, this.client, channelItem, help);
                         moduleItem.object = help;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "administration":
                         var element = (await channelItem.database.sequelize.models.module_administration.findOne());
-                        var administration = new Administration(translation, element, channelItem);
+                        var administration = new Administration(translation, element, channelItem.language);
                         await administration.initialize(channelItem);
                         moduleItem.object = administration;
                         channelItem.modules.push(moduleItem);
                         break;
                     case "say":
                         for (var element of Object.values(await channelItem.database.sequelize.models.module_say.findAll())) {
-                            var say = new Say(translation, element, channelItem);
+                            var say = new Say(translation, element, channelItem, channelItem.language);
                             await say.initialize(channelItem);
 
                             var sayItem = new ModuleItem(module);
@@ -133,9 +127,11 @@ class Channel {
 
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}`}));
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}text`}));
+                            this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}help`}));
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}start`}));
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}stop`}));
                             this.commands.push(this.globalDatabase.sequelize.models.command.build({ name: element.command, command: `!${element.command}interval`}));
+                            
                             if(element.minutes > 0)
                                 this.interval(element, this.client, channelItem, say);
 

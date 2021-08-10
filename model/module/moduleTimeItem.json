@@ -2,6 +2,7 @@
     {
         "name": "time",
         "minutes": 45,
-        "help": "!time um anzuzeigen, wie lange ich schon streame."
+        "help": "!time um anzuzeigen, wie lange ich schon streame.",
+        "isActive": false
     }
 ]

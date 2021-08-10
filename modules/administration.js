@@ -1,9 +1,8 @@
-const Loot = require('./loot');
 const Module = require('./module');
 
 class Administration extends Module {
-    constructor(translation, element){
-        super(translation, element);
+    constructor(translation, element, language){
+        super(translation, element, language);
     }
     
     initialize(channel){
@@ -15,27 +14,29 @@ class Administration extends Module {
             case "!adminstart":
                 if(this.isOwner(target, playerName))
                     return this.adminStart(channel);
-                else return this.translation.startError;
+                else return this.basicTranslation.startError;
             case "!adminstop":
                 if(this.isOwner(target, playerName))
                     return this.adminStop(channel);
-                else return this.translation.stopError;
+                else return this.basicTranslation.stopError;
         }       
     }
  
     adminStart(channel){
         if(channel && !channel.isActive){
             channel.isActive = true;
-            return this.translation.start;
-        } else return this.translation.startExists;
+            channel.save();
+            return this.basicTranslation.start;
+        } else return this.basicTranslation.startExists;
     }
 
     adminStop(channel){
         if(channel && channel.isActive){
             channel.isActive = false;
+            channel.save();
             this.modulesStop(channel);
-            return this.translation.stop;
-        } else return this.translation.stopExists;
+            return this.basicTranslation.stop;
+        } else return this.basicTranslation.stopExists;
     }
 
     modulesStop(channel){

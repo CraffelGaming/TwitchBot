@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes} = require('sequelize');
 const items = require('./moduleSayItem.json');
 
 class ModuleSayItem {
@@ -8,8 +8,7 @@ class ModuleSayItem {
         this.minutes = 0;
         this.help = "";
         this.command = "";
-        this.counter = 0;
-        this.name = "";
+        this.isActive = false;
     }
 
     static initialize(sequelize){

@@ -1,7 +1,8 @@
 [
     {
         "name": "administration",
-        "minutes": 60,
-        "help": ""
+        "minutes": 0,
+        "help": "",
+        "isActive": true
     }
 ]

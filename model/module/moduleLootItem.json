@@ -2,6 +2,7 @@
     {
         "name": "loot",
         "minutes": 10,
-        "help": "!loot um an einem Abenteuer teilzunehmen. !inventory um die gefundenen Items anzuzeigen. !steal um ein Item zu stehlen. !give:itemnummer @abenteurer um ein Item zu schenken."
+        "help": "!loot um an einem Abenteuer teilzunehmen. !inventory um die gefundenen Items anzuzeigen. !steal um ein Item zu stehlen. !give:itemnummer @abenteurer um ein Item zu schenken.",
+        "isActive": false
     }
 ]

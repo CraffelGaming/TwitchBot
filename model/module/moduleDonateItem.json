@@ -4,6 +4,7 @@
         "minutes": 35,
         "destination": "Community",
         "donationMax": 10,
-        "help": "!donate damit ich 1€ an eine gemeinnützige Organisation spende."
+        "help": "!donate damit ich 1€ an eine gemeinnützige Organisation spende.",
+        "isActive": false
     }
 ]

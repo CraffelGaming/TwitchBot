@@ -9,5 +9,7 @@
     "changeError": "You cannot change the Text.",
     "textChanged": "Text changed to",
     "intervalChanged": "Interval changed to",
-    "noParameter": "You have not set a Text."
+    "noParameter": "You have not set a Text.",
+    "clear" : "Reset module complete.",
+    "clearError" : "You cannot reset the module."
 }

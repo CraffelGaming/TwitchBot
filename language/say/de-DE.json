@@ -9,5 +9,7 @@
     "changeError": "Du kannst den Wert nicht ändern.",
     "textChanged": "Text geändert auf",
     "intervalChanged": "Intervall geändert auf",
-    "noParameter": "Du hast keinen Parameter angegeben"
+    "noParameter": "Du hast keinen Parameter angegeben",
+    "clear" : "Modul wurde zurückgesetzt.",
+    "clearError" : "Du kannst das Modul nicht zurücksetzen."
 }

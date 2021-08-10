@@ -8,9 +8,8 @@ Array.prototype.max = function(propertySelector) { return Math.max(...this.map(p
 
 class Loot extends Module{
     //#region Constructor
-    constructor(translation, element){
-        super(translation, element);
-        this.isRunning = true;
+    constructor(translation, element, language){
+        super(translation, element, language);
         this.players = [];
         this.items = [];
         this.locations = [];
@@ -41,6 +40,9 @@ class Loot extends Module{
 
     //#region Execute
     async execute(channel, playerName, message, target, parameter){    
+        var result = super.execute(channel, playerName, message, target, parameter, "loot");
+        if(result) return result;
+
         try{
             switch(message){
                 case "!loot":
@@ -49,10 +51,6 @@ class Loot extends Module{
                     return await this.executeLeave(channel, playerName, message, target, parameter);
                 case "!lootclear":
                     return await this.executeClear(channel, playerName, message, target, parameter);
-                case "!lootstart":
-                    return this.executeStart(channel, playerName, message, target, parameter);
-                case "!lootstop":
-                    return this.executeStop(channel, playerName, message, target, parameter);
                 case "!inventory":
                     return this.showInventory(playerName, parameter);
                 case "!steal":
@@ -75,13 +73,13 @@ class Loot extends Module{
         }
     }
     async executeLoot(channel, playerName, message, target, parameter){
-        if(this.isRunning)
+        if(this.element.isActive)
             return await this.newPlayer(channel, playerName);
         else return this.translation.noAdventure;
     }
 
     async executeLeave(channel, playerName, message, target, parameter){
-        if(this.isRunning)
+        if(this.element.isActive)
             if(await this.leavePlayer(playerName))
                 return `${playerName}, ${this.translation.leftAdventure}`;  
             else return `${playerName}, ${this.translation.noParticipation}`
@@ -91,36 +89,24 @@ class Loot extends Module{
     async executeClear(channel, playerName, message, target, parameter){
         if(this.isOwner(target, playerName))
             if(await this.clear(channel))
-                return this.translation.clear;
-        return this.translation.clearresetError;
-    }
-
-    executeStop(channel, playerName, message, target, parameter){
-        if(this.isOwner(target, playerName))
-            return this.stop();
-        else return this.translation.stopError;
-    }
-
-    executeStart(channel, playerName, message, target, parameter){
-        if(this.isOwner(target, playerName))
-            return this.start();
-        else return this.translation.startError;
+                return this.basicTranslation.clear;
+        return this.basicTranslation.clearError;
     }
 
     async executeSteal(channel, playerName, message, target, parameter){
-        if(this.isRunning)
+        if(this.element.isActive)
             return await this.stealItem(channel, playerName, parameter);
         return this.translation.noAdventure;
     }
 
     async executeGive(channel, playerName, message, target, parameter){
-        if(this.isRunning)
+        if(this.element.isActive)
             return await this.giveItem(channel, playerName, parameter);
         return this.translation.noAdventure;
     }
 
     executeFind(channel, playerName, message, target, parameter){
-        if(this.isRunning)
+        if(this.element.isActive)
             return this.findItem(playerName, parameter);
         return this.translation.noAdventure;
     }
@@ -227,7 +213,7 @@ class Loot extends Module{
     async callMessage(channel){
         var message = "";
         try{
-            if(this.players.length > 0 && this.isRunning){                    
+            if(this.players.length > 0 && this.element.isActive){                    
                 var minimumIndex = this.players.min(x => x.items.length + x.startIndex);    
                 var minimumPlayers = this.players.filter(x => x.items.length + x.startIndex === minimumIndex);     
                 var player = minimumPlayers[this.randomNumber(0, minimumPlayers.length - 1)];     

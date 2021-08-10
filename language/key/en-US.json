@@ -1,12 +1,4 @@
 {
     "free" : "Gratis",
-    "key" : "Key",
-    "start" : "Keygeschenke wurden gestartet.",
-    "startError" : "Du kannst die Keygeschenke nicht starten.",
-    "alreadyStarted" : "Keygeschenke sind bereits gestartet.",
-    "stop" : "Keygeschenke wurden gestoppt.",
-    "stopError" : "Du kannst die Keygeschenke nicht anhalten.",
-    "clear" : "Keygeschenke wurde zurückgesetzt.",
-    "clearError" : "Du kannst die Keygeschenke nicht zurücksetzen.",
-    "alreadyStopped" : "Keygeschenke sind bereits gestoppt."
+    "key" : "Key"
 }

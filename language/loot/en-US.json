@@ -1,13 +1,5 @@
 {
     "noAdventure" : "There is no adventure going on right now",
-    "clear" : "Adventure has been reset.",
-    "clearError" : "You cannot reset the adventure.",
-    "start" : "Adventure has started.",
-    "startError" : "You cannot start the adventure.",
-    "alreadyStarted" : "Adventure has already started.",
-    "stop" : "Adventure stopped.",
-    "stopError" : "You can't stop the adventure.",
-    "alreadyStopped" : "Adventure has already stopped.",
     "noParticipation" : "you are currently not participating in the adventure. Tap !loot to participate.",
     "noItems" : "has no items in inventory.",
     "hasItems" : "has the following items",

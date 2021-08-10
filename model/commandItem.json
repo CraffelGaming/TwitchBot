@@ -7,7 +7,8 @@
             "!donatedestination",
             "!donatestart",
             "!donatestop",
-            "!donateclear"
+            "!donateclear",
+            "!donatehelp"
         ]
     },
     {
@@ -16,16 +17,8 @@
             "!time",
             "!timestart",
             "!timestop",
-            "!timeclear"
-        ]
-    },
-    {
-        "name": "support",
-        "commands":[
-            "!support",
-            "!supportstart",
-            "!supportstop",
-            "!supportclear"
+            "!timeclear",
+            "!timehelp"
         ]
     },
     {
@@ -48,6 +41,7 @@
         "name": "loot",
         "commands":[
             "!loot",
+            "!loothelp",
             "!inventory",
             "!steal",
             "!give",
@@ -67,7 +61,8 @@
         "commands":[
             "!keystart",
             "!keystop",
-            "!keyclear"
+            "!keyclear",
+            "!keyhelp"
         ]
     }
 ]

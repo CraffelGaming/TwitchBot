@@ -1,8 +1,8 @@
 const Module = require('./module');
 
 class Donate extends Module {
-    constructor(translation, element){
-        super(translation, element);
+    constructor(translation, element, language){
+        super(translation, element, language);
         this.donationCurrent = 0;
         this.donationUser = [];
     }
@@ -12,10 +12,13 @@ class Donate extends Module {
     }
     
     execute(channel, playerName, message, target, parameter){
+        var result = super.execute(channel, playerName, message, target, parameter, "donate");
+        if(result) return result;
+
         try{
             switch(message){
                 case "!donate":
-                    if(this.isRunning){
+                    if(this.element.isActive){
                         const state = this.countDonation(playerName);
                         switch(state){
                             case 1:
@@ -42,18 +45,10 @@ class Donate extends Module {
                             return `${this.translation.donationDestinationChanged} ${this.element.destination}`;
                         } else return this.translation.noDonationParameter;
                     } else return this.translation.donationDestinationError;
-                case "!donatestart":
-                    if(this.isOwner(target, playerName))
-                        return this.start();
-                    else return this.translation.startError;
-                case "!donatestop":
-                    if(this.isOwner(target, playerName))
-                        return this.stop();
-                    else return this.translation.stopError;
                 case "!donateclear":
                     if(this.isOwner(target, playerName))
                         return this.clear(channel);
-                    else return this.translation.clearError;
+                    else return this.basicTranslation.clearError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);
@@ -63,7 +58,7 @@ class Donate extends Module {
     clear(channel){
         this.donationCurrent = 0;
         this.donationUser = [];
-        return this.translation.clear;
+        return this.basicTranslation.clear;
     }
 
     countDonation (playerName) {
@@ -78,7 +73,7 @@ class Donate extends Module {
 
     callMessage(channel){ 
         var message = "";
-        if(this.isRunning){                    
+        if(this.element.isActive){                    
             message = `${this.translation.donationInformation} ${this.element.destination}. (${this.translation.ofMaximum}: ${this.element.donationMax}€). ${this.translation.donationStatus}: ${this.donationCurrent}€ ${this.translation.ofMaximum} ${this.element.donationMax}€`;  
         }
         return message;

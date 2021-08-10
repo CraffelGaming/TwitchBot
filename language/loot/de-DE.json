@@ -1,13 +1,5 @@
 {
     "noAdventure" : "Gerade läuft kein Abenteuer",
-    "clear" : "Abenteuer wurde zurückgesetzt.",
-    "clearError" : "Du kannst das Abenteuer nicht zurücksetzen.",
-    "start" : "Abenteuer wurde gestartet.",
-    "startError" : "Du kannst das Abenteuer nicht starten.",
-    "alreadyStarted" : "Abenteuer ist bereits gestartet.",
-    "stop" : "Abenteuer wurde gestoppt.",
-    "stopError" : "Du kannst das Abenteuer nicht anhalten.",
-    "alreadyStopped" : "Abenteuer ist bereits gestoppt.",
     "noParticipation" : "du nimmt aktuell nicht am Abenteuer teil. Tippe !loot um teilzunehmen.",
     "noItems" : "hat keine Items im Inventar.",
     "hasItems" : "hat folgende Items",

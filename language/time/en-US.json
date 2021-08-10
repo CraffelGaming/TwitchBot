@@ -1,12 +1,3 @@
 {
-    "clear" : "Streaming time reset.",
-    "clearError" : "You cannot reset the time.",
-    "streaming" : "streaming time is",
-    "start" : "Zeit wurden gestartet.",
-    "startError" : "Du kannst die Zeit nicht starten.",
-    "alreadyStarted" : "Zeit ist bereits gestartet.",
-    "stop" : "Zeit wurde gestoppt.",
-    "stopError" : "Du kannst die Zeit nicht anhalten.",
-    "alreadyStopped" : "Zeit ist bereits gestoppt.",
-    "noTime" : "Zeit ist deaktiviert."
+    "streaming" : "streaming time is"
 }

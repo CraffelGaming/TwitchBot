@@ -1,8 +1,8 @@
 const Module = require('./module');
 
 class Time extends Module {
-    constructor(translation, element, channelName){
-        super(translation, element);
+    constructor(translation, element, channelName, language){
+        super(translation, element, language);
         this.channelName = channelName;
         this.startTime = Date.now();
     }
@@ -12,24 +12,19 @@ class Time extends Module {
     }
     
     execute(channel, playerName, message, target, parameter){
+        var result = super.execute(channel, playerName, message, target, parameter, "time");
+        if(result) return result;
+
         try{
             switch(message){
                 case "!time":
-                    if(this.isRunning)
+                    if(this.element.isActive)
                         return this.getStreamingTime();  
                     else return this.translation.noTime;
                 case "!timeclear":
                     if(this.isOwner(target, playerName))
                         return this.clear(channel);
-                    else return this.translation.resetError;
-                case "!timestart":
-                    if(this.isOwner(target, playerName))
-                        return this.start();
-                    else return this.translation.startError;
-                case "!timestop":
-                    if(this.isOwner(target, playerName))
-                        return this.stop();
-                    else return this.translation.stopError;
+                    else return this.basicTranslation.resetError;
             }     
         } catch(ex){
             console.error(`ERROR [LOOT]`, ex);
@@ -38,12 +33,12 @@ class Time extends Module {
 
     async clear(channel){
         this.startTime = Date.now();
-        return this.translation.clear;
+        return this.basicTranslation.clear;
     }
 
     async callMessage(channel){
         var message = "";
-        if(this.isRunning){                    
+        if(this.element.isActive){                    
             message = this.getStreamingTime();
         }
         return message;
