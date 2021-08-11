@@ -11,5 +11,9 @@
     "intervalChanged": "Intervall geändert auf",
     "noParameter": "Du hast keinen Parameter angegeben",
     "clear" : "Modul wurde zurückgesetzt.",
-    "clearError" : "Du kannst das Modul nicht zurücksetzen."
+    "clearError" : "Du kannst das Modul nicht zurücksetzen.",
+    "add" : "Modul erfolgreich hinzugefügt.",
+    "addError" : "Du kannst das Modul nicht hinzufügen.",
+    "remove" : "Modul erfolgreich entfernt.",
+    "removeError" : "Du kannst das Modul nicht entfernen."
 }

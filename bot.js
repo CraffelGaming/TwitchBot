@@ -95,14 +95,12 @@ async function onMessageHandler (target, context, message, self) {
     if (self) { return; } // Ignore messages from the bot
     if(!message.trim().toLowerCase().startsWith('!')) { return; } // Ignore normal chat messages
     
-    var command = new Command(channel, target, context, message);
-    var response = await command.execute();
-    
-    if(!response) {return;}
-
     var channelItem = channel.channels.find(x => x.name === target)
-    
     if(channelItem){
+      var command = new Command(channel, target, context, message);
+      var response = await command.execute(channelItem);
+      
+      if(!response) {return;}
       channelItem.puffer.addMessage(response);
     }
   } catch (ex){

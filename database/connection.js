@@ -69,6 +69,7 @@ class Connection {
 
             LootHeroItem.initialize(this.sequelize);
             LootInventoryItem.initialize(this.sequelize);
+            CommandItem.initialize(this.sequelize); 
 
             this.sequelize.models.loot_hero.hasMany(this.sequelize.models.loot_inventory, {foreignKey: 'heroHandle'} );
             this.sequelize.models.loot_inventory.belongsTo(this.sequelize.models.loot_hero, {foreignKey: 'heroHandle'});
@@ -79,6 +80,7 @@ class Connection {
             await this.sequelize.sync();
             
             await VersionItem.fill(this.sequelize);
+  
             await this.updater();
 
             await ObjectItem.fill(this.sequelize);
@@ -97,6 +99,9 @@ class Connection {
             await ModuleLootItem.fill(this.sequelize);
             await ModuleTimeItem.fill(this.sequelize);
             await ModuleSayItem.fill(this.sequelize);
+            
+            await CommandItem.fill(this.sequelize);
+
             console.log('DATABASE Connection has been established successfully.');
             return true;
         }  catch (ex){
@@ -113,14 +118,12 @@ class Connection {
 
             ChannelItem.initialize(this.sequelize);
             ModuleItem.initialize(this.sequelize);
-            CommandItem.initialize(this.sequelize); 
             TwitchItem.initialize(this.sequelize);
             TwitchUserItem.initialize(this.sequelize);
             
             await this.sequelize.sync();
             
             await ModuleItem.fill(this.sequelize);
-            await CommandItem.fill(this.sequelize);
 
             console.log('DATABASE Connection has been established successfully.');
             return true;

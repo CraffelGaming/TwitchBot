@@ -17,10 +17,10 @@ class Command {
         }
     }
 
-    async execute(){
+    async execute(channelItem){
         try{
             
-            for (var item of Object.values(this.channel.commands)) {
+            for (var item of Object.values(channelItem.commands)) {
                 if(item.command == this.commandName){
                     console.log(`* Executed command ${item.command} for module ${item.name} on channel ${this.target} with parameter ${this.parameter}`); 
                     return await this.channel.execute(this.target, item.name, item.command, this.context['display-name'], this.parameter);   

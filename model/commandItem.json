@@ -34,7 +34,9 @@
         "name": "administration",
         "commands":[
             "!adminstart",
-            "!adminstop"
+            "!adminstop",
+            "!adminadd",
+            "!adminremove"
         ]
     },
     {
