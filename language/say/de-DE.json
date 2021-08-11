@@ -15,5 +15,7 @@
     "add" : "Modul erfolgreich hinzugefügt.",
     "addError" : "Du kannst das Modul nicht hinzufügen.",
     "remove" : "Modul erfolgreich entfernt.",
-    "removeError" : "Du kannst das Modul nicht entfernen."
+    "removeError" : "Du kannst das Modul nicht entfernen.",
+    "moduleExists" : "Modul existiert bereits.",
+    "moduleNotExists" : "Modul existiert nicht."
 }

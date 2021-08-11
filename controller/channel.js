@@ -150,7 +150,6 @@ class Channel {
     }
 
     async removeSay(element, channelItem){
-        console.log(channelItem);
         await channelItem.database.sequelize.models.module_say.destroy({ where: { command: element.name } })
         channelItem.commands = channelItem.commands.filter(x => !x.command.startsWith(`!${element.name}`));
         channelItem.modules = channelItem.modules.filter(x => x.name != element.name);     

@@ -50,7 +50,7 @@ class Administration extends Module {
                 await this.channel.addSay(translation, element, channelItem, module);
                 return this.basicTranslation.add;
             }
-            return "modul existiert";
+            return this.basicTranslation.moduleExists;
         } else return this.basicTranslation.noParameter;
     }
 
@@ -61,14 +61,13 @@ class Administration extends Module {
             if(moduleItem){
                 await this.channel.removeSay(moduleItem, channelItem);
                 return this.basicTranslation.remove;
-            } else return "modul existiert nicht";
+            } else return this.basicTranslation.moduleNotExists;
         } else return this.basicTranslation.noParameter;
     }
 
     adminStart(channelItem){
         if(channelItem && !channelItem.isActive){
             channelItem.isActive = true;
-            channelItem.save();
             return this.basicTranslation.start;
         } else return this.basicTranslation.startExists;
     }
@@ -76,7 +75,6 @@ class Administration extends Module {
     adminStop(channelItem){
         if(channelItem && channelItem.isActive){
             channelItem.isActive = false;
-            channelItem.save();
             this.modulesStop(channelItem);
             return this.basicTranslation.stop;
         } else return this.basicTranslation.stopExists;
