@@ -67,6 +67,8 @@ class Loot extends Module{
                     return await this.showChest(channel, playerName);
                 case "!adventure":
                     return await this.showAdventure(channel);
+                case "!blut":
+                    return await this.showBlood(channel, playerName);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -560,6 +562,24 @@ class Loot extends Module{
     //#region Adventure
     async showAdventure(channel){
         return `${this.translation.thereAre} ${this.players.length.toString()} ${this.translation.heroesOnAdventure}`
+    }
+    //#endregion
+
+    //#region Blood
+    async showBlood(channel, playerName){
+        try{
+            var hero = this.players.find(x => x.name === playerName)
+            if(hero != undefined){
+                var bloodPoints = this.randomNumber(1 + this.players.length, 10 + this.players.length);
+                hero.bloodPoints += bloodPoints;
+                console.log(hero);
+                await hero.save();
+                return `${hero.name} ${this.translation.bloodHunt} ${this.translation.andGet} ${bloodPoints} ${this.translation.bloodPoints}`;
+            } else return `${playerName}, ${this.translation.noParticipation}`; 
+        } catch (ex){
+            console.error(`ERR: loot - collect gold`, ex);
+            return '';
+        }
     }
     //#endregion
 }

@@ -13,6 +13,7 @@ class LootHeroItem {
         this.stealMultipler = 0;
         this.defenceMultipler = 0;
         this.isActive = false;
+        this.bloodPoints = 0;
     }
 
     static initialize(sequelize){
@@ -71,6 +72,11 @@ class LootHeroItem {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: true
+            },
+            bloodPoints: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             }
           }, {freezeTableName: true});
     }

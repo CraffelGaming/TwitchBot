@@ -42,5 +42,8 @@
     "level": "Du bist Level",
     "levelError": "Dein Level ist unbeschreiblich.",
     "thereAre": "Es befinden sich",
-    "heroesOnAdventure" : "Helden auf Abenteuer"
+    "heroesOnAdventure" : "Helden auf Abenteuer",
+    "bloodHunt" : " verfällt im Blutrausch ",
+    "bloodPoints": "Blutpunkte",
+    "andGet": "und erhält"
 }
