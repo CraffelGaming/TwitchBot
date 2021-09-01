@@ -1,0 +1,19 @@
+{
+    "devDependencies": {
+      "sqlite3": "^5.0.2"
+    },
+    "dependencies": {
+      "bootstrap": "^5.1.0",
+      "cookie-parser": "^1.4.5",
+      "express": "^4.17.1",
+      "express-session": "^1.17.2",
+      "jquery": "^3.6.0",
+      "pug": "^3.0.2",
+      "sequelize": "^6.6.5",
+      "serve-favicon": "^2.5.0",
+      "tmi": "^2.0.0",
+      "tmi.js": "^1.8.5",
+      "uniqid": "^5.4.0"
+    }
+  }
+  
