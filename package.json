@@ -1,19 +1,39 @@
 {
-    "devDependencies": {
-      "sqlite3": "^5.0.2"
-    },
-    "dependencies": {
-      "bootstrap": "^5.1.0",
-      "cookie-parser": "^1.4.5",
-      "express": "^4.17.1",
-      "express-session": "^1.17.2",
-      "jquery": "^3.6.0",
-      "pug": "^3.0.2",
-      "sequelize": "^6.6.5",
-      "serve-favicon": "^2.5.0",
-      "tmi": "^2.0.0",
-      "tmi.js": "^1.8.5",
-      "uniqid": "^5.4.0"
-    }
-  }
-  
+  "name": "twitchbot",
+  "version": "1.0.0",
+  "description": "Bot für Twitch und Webseite.",
+  "main": "bot.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.1",
+    "bootstrap-input-spinner": "^3.0.2",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jquery": "^3.6.0",
+    "popper": "^1.0.1",
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
+    "sequelize": "^6.6.2",
+    "serve-favicon": "^2.5.0",
+    "sqlite3": "^5.0.2",
+    "tmi.js": "^1.8.3",
+    "uniqid": "^5.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bot",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CraffelGaming/TwitchBot.git"
+  },
+  "author": "Craffel | Martin Rosbund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CraffelGaming/TwitchBot/issues"
+  },
+  "homepage": "https://github.com/CraffelGaming/TwitchBot#readme"
+}
