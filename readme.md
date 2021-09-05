@@ -123,3 +123,6 @@ Befehl | Beschreibung
 ------ | ------------
 **!adminstart** | Startet alle aktiven Module.
 **!adminstop** | Beendet alle aktiven Module.
+
+
+# Node Version

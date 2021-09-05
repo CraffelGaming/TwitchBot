@@ -1,0 +1,14 @@
+version: '3'
+services:
+  bot-dev:
+    build:
+      context: ../../
+      dockerfile: ./docker/development/Dockerfile
+    image: bot:development
+    ports:
+      - '8000:80'
+    restart: always
+    volumes:
+      - ../../:/app
+      - ../../public:/public
+      - /app/node_modules

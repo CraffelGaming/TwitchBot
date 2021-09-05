@@ -3,9 +3,9 @@ const api = require('./routes/api');
 const tmi = require('tmi.js');
 const Channel = require('./controller/channel');
 const Command = require('./controller/command');
-const opts = require('./bot.json');
-const settings = require('./settings.json');
-const twitch = require('./twitch.json');
+const opts = require('./config/bot.json');
+const settings = require('./config/settings.json');
+const twitch = require('./config/twitch.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -14,6 +14,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs')
 var path = require('path');
+
  
 let channel = new Channel();
 let client = {};
@@ -43,9 +44,9 @@ app.use(cookieParser());
 
 app.use('/', routes);
 app.use('/api', api);
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
-app.use('/popper', express.static(__dirname + '/node_modules/popper.js/dist'));
-app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use('/jquery', express.static(__dirname + '/../node_modules/jquery/dist/'));
+app.use('/popper', express.static(__dirname + '/../node_modules/popper.js/dist'));
+app.use('/bootstrap', express.static(__dirname + '/../node_modules/bootstrap/dist'));
 
 app.set('port', settings.port);
 app.set('channel', channel);
