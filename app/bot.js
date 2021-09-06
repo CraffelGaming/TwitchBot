@@ -4,7 +4,7 @@ const tmi = require('tmi.js');
 const Channel = require('./controller/channel');
 const Command = require('./controller/command');
 const opts = require('./config/bot.json');
-const settings = require('./config/settings.json');
+import settings from './config/settings';
 const twitch = require('./config/twitch.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');

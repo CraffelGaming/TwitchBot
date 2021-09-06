@@ -3,7 +3,7 @@ help:
 	@echo -e "  \033[0;32mstart_dev                \033[0m Starts development container"
 	@echo -e "  \033[0;32mstop_dev                 \033[0m Stops development container"
 	@echo -e "  \033[0;32mstart_dev_build          \033[0m Rebuilds development container and starts it. Needed for adding new node_modules"
-	@echo -e "  \033[0;32mstart_prod               \033[0m Starts the production container with the newest image"
+	@echo -e "  \033[0;32mstart_prod               \033[0m Starts the production container with the newest image. Requires that deploy did at least run 1 time."
 	@echo -e "  \033[0;32mstop_prod                \033[0m Stops the production container"
 	@echo -e "  \033[0;32mdeploy                   \033[0m Builds a new Production image. Than tries stops the production container. Than starts it again with the new image."
 

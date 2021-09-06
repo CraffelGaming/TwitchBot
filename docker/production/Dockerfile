@@ -5,4 +5,4 @@ COPY package*.json ./
 RUN npm install ts-node -g
 RUN npm install
 COPY . .
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "prod" ]

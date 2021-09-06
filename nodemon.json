@@ -7,5 +7,5 @@
   "ignore": [
     "app/**/*.spec.ts"
   ],
-  "exec": "ts-node --transpile-only ./app/bot.ts"
+  "exec": "ts-node --transpile-only ./app/bot.js"
 }

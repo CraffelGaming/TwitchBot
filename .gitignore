@@ -1,4 +1,5 @@
 /node_modules
+build
 bot.json
 twitch.json
 ssl/craffel.de_ssl_certificate.cer

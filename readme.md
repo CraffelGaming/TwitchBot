@@ -125,4 +125,30 @@ Befehl | Beschreibung
 **!adminstop** | Beendet alle aktiven Module.
 
 
-# Node Version
+# Starten des Bots
+## Docker Empfohlen
+Nutze die im Projekt hinterlegte make file um das Projekt einfach zu starten.
+
+Führe `make` oder `make help` aus um eine Übersicht aller Befehle zu erhalten.
+
+Befehl | Beschreibung
+------ | ------------
+**help**       | Zeigt alle make Befehle + Erklärung.
+**start_dev**       | Startet den development container. Port 80
+**stop _dev**       | Stopt den development container
+**start_dev_build** | Baut den dev container neu. Benötigt für das hinzufügen neuer node_models. Started anschließen den development container
+**start_prod**       | Startet den Production Container mit dem neusten Image. Setzt vorraus wenigstens 1 mal deploy ausgeführt wurde. Port 443
+**stop_prod**       | Stopt den Production Container.
+**deploy**       | Baut ein neues Production Image. Stopt den Production Container wenn aktiv und started in sofort wieder mit dem neuen Image neu
+
+## Node.js local
+Installiere Node.js `v14.17.6`
+Es ist außerdem empfehlenswert `npm install ts-node -g` auszuführen. 
+Da das hinzufügen in der package.json meistens nicht auzureichen scheint.
+
+Befehl | Beschreibung
+------ | ------------
+**npm run serve**       | Startet die Anwendung im development mode. Port 80
+**npm run prod**        | Startet die Anwendung im production mode. Port 443
+
+
