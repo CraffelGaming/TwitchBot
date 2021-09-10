@@ -7,7 +7,9 @@ class ModuleLootItem {
         this.name = "";
         this.minutes = 0;
         this.help = "";
-        this.stealTimeout = 0;;
+        this.stealTimeout = 0;
+        this.joinTimeout = 0;
+        this.bloodTimeout = 0;
         this.isActive = false;
     }
 
@@ -41,6 +43,11 @@ class ModuleLootItem {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 30
+            },
+            bloodTimeout: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 60
             },
             isActive: {
                 type: DataTypes.BOOLEAN,

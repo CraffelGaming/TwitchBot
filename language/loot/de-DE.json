@@ -12,6 +12,7 @@
     "dontFindAPlayer" : "hat keinen gefunden, den er bestehlen kann.",
     "minutes" : "Minuten",
     "noPower" : "ist noch zu erschöpft, um zu stehlen und wartet lieber noch",
+    "noBlood" : "ist noch im Blutrausch und wartet lieber noch",
     "tried" : "hat versucht",
     "nothingFound1" : "zu bestehlen.",
     "nothingFound2" : "Hat aber nichts brauchbares gefunden.",

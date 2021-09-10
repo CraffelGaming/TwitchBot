@@ -69,7 +69,7 @@ class Administration extends Module {
         if(channelItem && !channelItem.isActive){
             channelItem.isActive = true;
             return this.basicTranslation.start;
-        } else return this.basicTranslation.startExists;
+        } else return this.basicTranslation.alreadyStarted;
     }
 
     adminStop(channelItem){
@@ -77,7 +77,7 @@ class Administration extends Module {
             channelItem.isActive = false;
             this.modulesStop(channelItem);
             return this.basicTranslation.stop;
-        } else return this.basicTranslation.stopExists;
+        } else return this.basicTranslation.alreadyStopped;
     }
 
     modulesStop(channelItem){

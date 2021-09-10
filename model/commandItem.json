@@ -45,6 +45,7 @@
             "!loot",
             "!loothelp",
             "!inventory",
+            "!inv",
             "!steal",
             "!give",
             "!find",

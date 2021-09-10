@@ -31,7 +31,7 @@ class LootHeroItem {
             lastSteal: {
                 type: DataTypes.DATE,
                 allowNull: false,
-                defaultValue: Date.now()
+                defaultValue: Date.UTC(2020, 1, 1)
             },
             lastJoin: {
                 type: DataTypes.DATE,
@@ -77,6 +77,11 @@ class LootHeroItem {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 0
+            },
+            lastBlood: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: Date.UTC(2020, 1, 1)
             }
           }, {freezeTableName: true});
     }

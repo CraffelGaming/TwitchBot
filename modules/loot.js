@@ -52,6 +52,7 @@ class Loot extends Module{
                 case "!lootclear":
                     return await this.executeClear(channel, playerName, message, target, parameter);
                 case "!inventory":
+                case "!inv":
                     return this.showInventory(playerName, parameter);
                 case "!steal":
                     return await this.executeSteal(channel, playerName, message, target, parameter);
@@ -68,7 +69,7 @@ class Loot extends Module{
                 case "!adventure":
                     return await this.showAdventure(channel);
                 case "!blut":
-                    return await this.showBlood(channel, playerName);
+                    return await this.startBlood(channel, playerName);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -231,7 +232,12 @@ class Loot extends Module{
                     if(endingActive == 1 && this.players.length > 1){
                         message = await this.collectItemSpecial(channel, player, action, location, item);
                     } else message = await this.collectItem(channel, player, action, location, item);
-                    
+
+                    var difference = Math.floor((Date.now() - player.lastBlood) / 1000 / 60);
+                    var rest = difference - this.element.bloodTimeout;
+                    if(rest > -1){
+                        player.bloodPoints = 0;
+                    } 
                     message += await this.collectGold(player);
                     message += await this.collectExperience(player);
                     await player.save();
@@ -248,11 +254,15 @@ class Loot extends Module{
     async collectExperience(hero){
         try{
             var enemy = this.enemies[this.randomNumber(0, this.enemies.length - 1)];
-            
-            if(enemy != null)
-                hero.experience += enemy.experience;
-            
-            return `${enemy.experience} ${this.translation.experience})`;
+            var experience = 0;
+
+            if(enemy != null){
+                console.log(`INT: ${hero.bloodPoints} EXP: ${enemy.experience}`);
+                experience = enemy.experience + hero.bloodPoints
+                hero.experience += experience;
+              
+            }
+            return `${experience} ${this.translation.experience})`;
         } catch (ex){
             console.error(`ERR: loot - collect experience`, ex);
             return '';
@@ -280,8 +290,9 @@ class Loot extends Module{
         try{
             var gold = this.randomNumber(50 + this.players.length, 150 + this.players.length);
             gold *= hero.goldMultipler;
-            hero.gold += gold;
-    
+            console.log(`INT: ${hero.bloodPoints} Gold: ${gold}`);
+            gold += hero.bloodPoints;
+            hero.gold += gold;  
             return ` (${gold} ${this.translation.gold}/`;
         } catch (ex){
             console.error(`ERR: loot - collect gold`, ex);
@@ -566,20 +577,37 @@ class Loot extends Module{
     //#endregion
 
     //#region Blood
-    async showBlood(channel, playerName){
+    async startBlood(channel, playerName){
         try{
             var hero = this.players.find(x => x.name === playerName)
             if(hero != undefined){
-                var bloodPoints = this.randomNumber(1 + this.players.length, 10 + this.players.length);
-                hero.bloodPoints += bloodPoints;
-                console.log(hero);
-                await hero.save();
-                return `${hero.name} ${this.translation.bloodHunt} ${this.translation.andGet} ${bloodPoints} ${this.translation.bloodPoints}`;
+                var now = Date.now();
+                var difference = Math.floor((now - hero.lastBlood) / 1000 / 60);
+                var rest = difference - this.element.bloodTimeout;
+                if(rest > -1){
+                    var bloodPoints = this.randomNumber(1 + this.players.length, 10 + this.players.length);
+                    hero.bloodPoints = bloodPoints;
+                    hero.lastBlood = now;
+                    await hero.save();
+                    return `${hero.name} ${this.translation.bloodHunt} ${this.translation.andGet} ${bloodPoints} ${this.translation.bloodPoints}`;
+                } else {
+                    rest *= -1;
+                    return `${hero.name} ${this.translation.noBlood} ${rest} ${this.translation.minutes} (${hero.bloodPoints} ${this.translation.bloodPoints}).`;
+                }
             } else return `${playerName}, ${this.translation.noParticipation}`; 
         } catch (ex){
             console.error(`ERR: loot - collect gold`, ex);
             return '';
         }
+    }
+
+    showGold(playerName){
+        if(this.players.length > 0){
+            var player = this.players.find(x => x.name === playerName);
+            if(player != undefined){
+                return `${playerName}, ${this.translation.youHave} ${player.gold} ${this.translation.gold}`;
+            } else return `${playerName}, ${this.translation.noParticipation}`;
+        } else return `${playerName}, ${this.translation.noParticipation}`;
     }
     //#endregion
 }

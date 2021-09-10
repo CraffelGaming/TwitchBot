@@ -5,6 +5,8 @@ class ObjectItem {
     constructor(){
         this.handle = 0;
         this.value = "";
+        this.gold = 0;
+        this.type = 0;
     }
 
     static initialize(sequelize){

@@ -127,10 +127,12 @@
     {"handle": 126, "type": 5,  "gold": 17,     "value":"atmunksaktive Socken ohne Zehen"},
     {"handle": 127, "type": 5,  "gold": 39,     "value":"ein paar Lederschuhe zum schleichen von Schleicher und Co."},
     {"handle": 128, "type": 5,  "gold": 79,     "value":"einen einzelner Iridiumschuh"},
-    {"handle": 129, "type": 5,  "gold": 3,      "value":"typische Sandalen und (leicht vergilbte) weiße Sochen"},
+    {"handle": 129, "type": 5,  "gold": 3,      "value":"typische Sandalen und (leicht vergilbte) weiße Socken"},
     {"handle": 130, "type": 2,  "gold": 50,     "value":"eine undurchdringliche Brustrüstung (Bauchfrei)"},
-    {"handle": 131, "type": 2,  "gold": 12,     "value":"Panzertape"},
-    {"handle": 132, "type": 2,  "gold": 100,    "value":"Tamagotchi"},
-    {"handle": 133, "type": 2,  "gold": 3,      "value":"einen alten Lachs"}
-    
+    {"handle": 131, "type": 3,  "gold": 12,     "value":"Panzertape"},
+    {"handle": 132, "type": 3,  "gold": 100,    "value":"Tamagotchi"},
+    {"handle": 133, "type": 3,  "gold": 3,      "value":"einen alten Lachs"},
+    {"handle": 134, "type": 7,  "gold": 3,      "value":"ein zitternden auf Koffeinentzugleidenden Craffel"},
+    {"handle": 135, "type": 7,  "gold": 3,      "value":"angekettete SuperLootgeil"},
+    {"handle": 136, "type": 7,  "gold": 3,      "value":"viele neue Craffelmat features"}
 ]

@@ -12,6 +12,7 @@
     "dontFindAPlayer" : "didn't find anyone to steal from.",
     "minutes" : "Minutes",
     "noPower" : "is still too exhausted to steal and prefers to wait",
+    "noBlood" : "is still in a blood frenzy and prefers to wait",
     "tried" : "has tried",
     "nothingFound1" : "to steal from.",
     "nothingFound2" : "But didn't find anything useful.",
