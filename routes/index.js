@@ -6,6 +6,7 @@ let hero = require('./hero');
 let twitch = require('./twitch');
 let error = require('./error');
 let impressum = require('./impressum');
+let command = require('./command');
 
 let Authorize = require('./twitch/authorize');
 
@@ -21,6 +22,7 @@ router.get('/hero', hero);
 router.get('/twitch', twitch);
 router.get('/error', error);
 router.get('/impressum', impressum);
+router.get('/command', command);
 
 //index
 router.get('/', (req, res) => {

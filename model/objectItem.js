@@ -37,10 +37,10 @@ class ObjectItem {
         for(var item of Object.values(items))
             if(await sequelize.models.loot_object.count({ where: { handle: item.handle } }) == 0)
                 await sequelize.models.loot_object.create(item);
-                else await sequelize.models.loot_object.update(
-                    { title: item.title, gold: item.gold, type: item.type },
+            else await sequelize.models.loot_object.update(
+                    { title: item.title, gold: item.gold, type: item.type, value: item.value },
                     { where: { handle: item.handle } }
-                  )
+                )
     }
 }
 

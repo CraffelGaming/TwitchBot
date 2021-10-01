@@ -2,30 +2,37 @@
 [
     {
         "name": "loot",
-        "description" : ""
+        "displayName": "Abenteuer",
+        "description" : "Gehe gemeinsam mit der Community auf Schatzsuche."
     },
     {
         "name": "donate",
-        "description" : ""
+        "displayName": "Spenden",
+        "description" : "Der Streamer spendet für einen guten Zweck. Sei mit dabei."
     },
     {
         "name": "time",
-        "description" : ""
+        "displayName": "Streamingzeit",
+        "description" : "Zeigt die Streamingzeit des Streamers an."
     },
     {
         "name": "key",
-        "description" : ""
+        "displayName": "Keyschleuder",
+        "description" : "Heute gibt es geschenke. Gratis Keys für alle."
     },
     {
         "name": "help",
-        "description" : ""
+        "displayName": "Hilfe",
+        "description" : "Der Craffelmat ist vollgestopft mit extras. Hier erfährst du mehr."
     },
     {
         "name": "administration",
-        "description" : ""
+        "displayName": "Administration",
+        "description" : "Nur für den Streamer, versuch es nur."
     },
     {
         "name": "say",
-        "description" : ""
+        "displayName": "Say",
+        "description" : "Der Streamer kann neue Befehle aus den tiefen des Craffelmats beschwören. "
     }
 ]

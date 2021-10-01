@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const items = require('./versionItem.json');
+const itemsGlobal = require('./versionGlobalItem.json');
 
 class VersionItem {
     constructor(data){
@@ -24,10 +25,17 @@ class VersionItem {
           }, {freezeTableName: true});
     }
 
-    static async fill(sequelize){
-        for(var item of Object.values(items))
+    static async fill(sequelize, isGlobal){
+        if(!isGlobal){
+            for(var item of Object.values(items))
             if(await sequelize.models.version.count({ where: { handle: item.handle } }) == 0)
                 await sequelize.models.version.create(item);
+        } else {
+            for(var itemGlobal of Object.values(itemsGlobal))
+            if(await sequelize.models.version.count({ where: { handle: itemGlobal.handle } }) == 0)
+                await sequelize.models.version.create(itemGlobal);
+        }
+
     }
 }
 module.exports = VersionItem

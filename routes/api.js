@@ -8,6 +8,7 @@ let level = require("./api/api.level");
 let hero = require("./api/api.hero");
 let twitch = require("./api/api.twitch");
 let shop = require("./api/api.shop");
+let command = require("./api/api.command");
 
 let router = express.Router();
 
@@ -31,6 +32,10 @@ router.get("/level/:experience", level);
 
 router.get("/hero", hero);
 router.get("/hero/:handle", hero);
+
+router.get("/command", command);
+router.get("/command/dynamic/say", command);
+router.get("/command/:name", command);
 
 router.get("/twitch", twitch);
 

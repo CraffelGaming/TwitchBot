@@ -79,9 +79,9 @@ class Connection {
             
             await this.sequelize.sync();
             
-            await VersionItem.fill(this.sequelize);
+            await VersionItem.fill(this.sequelize, false);
   
-            await this.updater();
+            await this.updater("migrations");
 
             await ObjectItem.fill(this.sequelize);
             await ObjectTypeItem.fill(this.sequelize);
@@ -116,13 +116,18 @@ class Connection {
 
             await this.sequelize.authenticate();
 
+            VersionItem.initialize(this.sequelize);
             ChannelItem.initialize(this.sequelize);
             ModuleItem.initialize(this.sequelize);
             TwitchItem.initialize(this.sequelize);
             TwitchUserItem.initialize(this.sequelize);
             
             await this.sequelize.sync();
-            
+
+            await VersionItem.fill(this.sequelize, true);
+
+            await this.updater("migrations_global");
+
             await ModuleItem.fill(this.sequelize);
 
             console.log('DATABASE Connection has been established successfully.');
@@ -132,13 +137,13 @@ class Connection {
             return false;
         }
     }
-    async updater(){
+    async updater(folder){
         try{
             var updates = await this.sequelize.models.version.findAll({where: {isInstalled: false}});
 
             for (var update of updates) {
                 if(!this.isNewDatabase){
-                    var fileName = path.join(__dirname, "migrations", update.handle + '.js') ;
+                    var fileName = path.join(__dirname, folder, update.handle + '.js') ;
                     var file = require(fileName);
                     await file.up(this.sequelize.getQueryInterface(), this.sequelize);
                 }

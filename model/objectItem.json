@@ -132,7 +132,8 @@
     {"handle": 131, "type": 3,  "gold": 12,     "value":"Panzertape"},
     {"handle": 132, "type": 3,  "gold": 100,    "value":"Tamagotchi"},
     {"handle": 133, "type": 3,  "gold": 3,      "value":"einen alten Lachs"},
-    {"handle": 134, "type": 7,  "gold": 3,      "value":"ein zitternden auf Koffeinentzugleidenden Craffel"},
-    {"handle": 135, "type": 7,  "gold": 3,      "value":"angekettete SuperLootgeil"},
-    {"handle": 136, "type": 7,  "gold": 3,      "value":"viele neue Craffelmat features"}
+    {"handle": 134, "type": 7,  "gold": 10,     "value":"ein zitternden auf Koffeinentzugleidenden Craffel"},
+    {"handle": 135, "type": 7,  "gold": 10,     "value":"eine angekettete SuperLootgeil"},
+    {"handle": 136, "type": 7,  "gold": 5,      "value":"einen Popoklatschender Popoklatscher"},
+    {"handle": 137, "type": 7,  "gold": 5,      "value":"einen frischgebackenen Blaubeermuffin"}  
 ]

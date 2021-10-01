@@ -15,6 +15,10 @@ class ModuleItem {
                 type: DataTypes.STRING,
                 allowNull: false,
                 primaryKey: true
+            },            
+            displayName: {
+                type: DataTypes.STRING,
+                allowNull: true
             },
             description: {
                 type: DataTypes.STRING,
@@ -27,6 +31,10 @@ class ModuleItem {
         for(var item of Object.values(items))
             if(await sequelize.models.module.count({ where: { name: item.name } }) == 0)
                 await sequelize.models.module.create(item);
+            else await sequelize.models.module.update(
+                    { description: item.description, displayName: item.displayName },
+                    { where: { name: item.name } }
+                )
     }
 }
 module.exports = ModuleItem

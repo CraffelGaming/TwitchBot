@@ -7,6 +7,7 @@ Array.prototype.min = function(propertySelector) { return Math.min(...this.map(p
 Array.prototype.max = function(propertySelector) { return Math.max(...this.map(propertySelector)) };
 
 class Loot extends Module{
+
     //#region Constructor
     constructor(translation, element, language){
         super(translation, element, language);
@@ -63,6 +64,7 @@ class Loot extends Module{
                 case "!gold":
                     return this.showGold(playerName);
                 case "!level":
+                case "!lvl":
                     return await this.showExperience(channel, playerName);
                 case "!chest":
                     return await this.showChest(channel, playerName);
@@ -70,6 +72,8 @@ class Loot extends Module{
                     return await this.showAdventure(channel);
                 case "!blut":
                     return await this.startBlood(channel, playerName);
+                case "!rank":
+                    return await this.showRank(channel, playerName);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -608,6 +612,32 @@ class Loot extends Module{
                 return `${playerName}, ${this.translation.youHave} ${player.gold} ${this.translation.gold}`;
             } else return `${playerName}, ${this.translation.noParticipation}`;
         } else return `${playerName}, ${this.translation.noParticipation}`;
+    }
+    //#endregion
+
+    //#region Rank
+    async showRank(channel, playerName){
+        if(this.players.length > 0){
+            let player = this.players.find(x => x.name === playerName);
+
+            if(player != undefined){
+                let [gold, goldMetadata] = await channel.database.sequelize.query(this.getRankStatement(playerName, "loot_hero", "gold"));
+                let [experience, experienceMetadata] = await channel.database.sequelize.query(this.getRankStatement(playerName, "loot_hero", "experience"));
+        
+                return `${gold[0].gold} ${this.translation.gold}: ${this.translation.rank} ${gold[0].rank} - ${experience[0].experience} ${this.translation.experience}: ${this.translation.rank} ${experience[0].rank}`
+            } else return `${playerName}, ${this.translation.noParticipation}`;  
+        } else return `${playerName}, ${this.translation.noParticipation}`;
+    }
+
+    getRankStatement(playerName, table, column){
+        return "SELECT rank, " + column + ", name FROM (" + 
+               "    SELECT" + 
+               "        ROW_NUMBER () OVER ( " + 
+               "            ORDER BY " + column + " DESC" + 
+               "        ) rank," + column + ", name" +
+               "    FROM " + table +
+               " ) t" + 
+               " WHERE name = '" + playerName + "'";
     }
     //#endregion
 }

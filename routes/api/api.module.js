@@ -5,8 +5,8 @@ let endpoint = 'module';
 
 module.exports = router;
 
-router.get('/' + endpoint + '/', function (req, res) {
-    var channel = req.app.get('channel').channels.find(x => x.name === Buffer.from(req.query.channel, 'base64').toString('ascii'))
-	res.status(200).json(channel.modules);
+router.get('/' + endpoint + '/', async function (req, res) {
+    res.status(200).json(await req.app.get('channel').globalDatabase.sequelize.models.module.findAll());
 });
+
 module.exports = router;

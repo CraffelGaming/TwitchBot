@@ -43,5 +43,6 @@
     "level": "Your are level",
     "levelError": "Your level is unbelievable.",
     "thereAre": "There are",
-    "heroesOnAdventure" : "heroes on adventure"
+    "heroesOnAdventure" : "heroes on adventure",
+    "rank": "Rank"
 }

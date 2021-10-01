@@ -2,71 +2,73 @@
     {
         "name": "donate",
         "commands": [
-            "!donate",
-            "!donatemax",
-            "!donatedestination",
-            "!donatestart",
-            "!donatestop",
-            "!donateclear",
-            "!donatehelp"
+            {"name": "!donate", "isAdmin": false, "description": "Der Streamer soll mehr spenden."},
+            {"name": "!donatemax", "isAdmin": true, "description": "Verändert das das Spendenlimit: !donatemax:10"},
+            {"name": "!donatedestination", "isAdmin": true, "description": "Setzt das Spendenziel: !donatedestination:name"},
+            {"name": "!donatestart", "isAdmin": true, "description": "Startet das Modul."},
+            {"name": "!donatestop", "isAdmin": true, "description": "Stoppt das Modul"},
+            {"name": "!donateclear", "isAdmin": true, "description": "Setzt den Spendenstand auf 0"},
+            {"name": "!donatehelp", "isAdmin": false, "description": "Zeige die Hilfe."}
         ]
     },
     {
         "name": "time",
         "commands":[
-            "!time",
-            "!timestart",
-            "!timestop",
-            "!timeclear",
-            "!timehelp"
+            {"name": "!time", "isAdmin": false, "description": "Zeigt die aktuelle Streamingzeit an."},
+            {"name": "!timestart", "isAdmin": true, "description": "Startet das Modul."},
+            {"name": "!timestop", "isAdmin": true, "description": "Stoppt das Modul"},
+            {"name": "!timeclear", "isAdmin": true, "description": "Setzt die Zeit zurück."},
+            {"name": "!timehelp", "isAdmin": false, "description": "Zeige die Hilfe."}
         ]
     },
     {
         "name": "help",
         "commands":[
-            "!help",
-            "!helpstart",
-            "!helpstop",
-            "!helpclear"
+            {"name": "!help", "isAdmin": false, "description": "Zeige die Hilfe."},
+            {"name": "!helpstart", "isAdmin": true, "description": "Startet das Modul."},
+            {"name": "!helpstop", "isAdmin": true, "description": "Stoppt das Modul"},
+            {"name": "!helpclear", "isAdmin": true, "description": "Setzt die Hilfe zurück."}
         ]
     },
     {
         "name": "administration",
         "commands":[
-            "!adminstart",
-            "!adminstop",
-            "!adminadd",
-            "!adminremove"
+            {"name": "!adminadd", "isAdmin": true, "description": "Füge ein neues Modul hinzu: !adminadd:modulname"},
+            {"name": "!adminremove", "isAdmin": true, "description": "Lösche ein vorhandenes Modul hinzu: !adminremove:modulname"},
+            {"name": "!adminstart", "isAdmin": true, "description": "Startet das Modul"},
+            {"name": "!adminstop", "isAdmin": true, "description": "Stoppt das Modul"}
         ]
     },
     {
         "name": "loot",
         "commands":[
-            "!loot",
-            "!loothelp",
-            "!inventory",
-            "!inv",
-            "!steal",
-            "!give",
-            "!find",
-            "!leave",
-            "!lootstart",
-            "!lootstop",
-            "!lootclear",
-            "!gold",
-            "!chest",
-            "!level",
-            "!adventure",
-            "!blut"
+            {"name": "!loot", "isAdmin": false, "description": "Starte deine Schatzsuche."},
+            {"name": "!inventory", "isAdmin": false, "description": "Zeige dein aktuelles Inventar. Inventar von anderen: !inventory @spieler."},
+            {"name": "!inv", "isAdmin": false, "description":  "Zeige dein aktuelles Inventar. Inventar von anderen: !inventory @spieler."},
+            {"name": "!steal", "isAdmin": false, "description": "Stehle einen zufälligen Gegenstand. Bestimter Gegenstand: !steal:nummer @spieler."},
+            {"name": "!give", "isAdmin": false, "description": "Gib einen Spieler einen Gegenstand: !give:nummer @spieler."},
+            {"name": "!find", "isAdmin": false, "description": "Finde heraus, wo sich ein Gegenstand befindet: !find:nummer."},
+            {"name": "!leave", "isAdmin": false, "description": "Verlasse das Abenteuer."},
+            {"name": "!gold", "isAdmin": false, "description": "Zeigt dein gesammeltes Gold an."},
+            {"name": "!chest", "isAdmin": false, "description": "Zeigt die Anzahl der gefundenen Gegenstände."},
+            {"name": "!level", "isAdmin": false, "description": "Zeigt dein aktuelles Level an."},
+            {"name": "!lvl", "isAdmin": false, "description": "Zeigt dein aktuelles Level an."},
+            {"name": "!adventure", "isAdmin": false, "description": "Zeigt an, wie viele gerade auf Abenteuer sind."},
+            {"name": "!blut", "isAdmin": false, "description": "Starte einen Blutrausch."},
+            {"name": "!rank", "isAdmin": false, "description": "Zeige deine Platzierung in der Rangliste an."},
+            {"name": "!lootstart", "isAdmin": true, "description": "Startet das Modul."},
+            {"name": "!lootstop", "isAdmin": true, "description": "Stoppt das Modul."},
+            {"name": "!lootclear", "isAdmin": true, "description": "Setzt das Abenteuer zurück. Alle Fortschritte werden gespeichert."},
+            {"name": "!loothelp", "isAdmin": false, "description": "Zeige die Hilfe."}
         ]
     },
     {
         "name": "key",
         "commands":[
-            "!keystart",
-            "!keystop",
-            "!keyclear",
-            "!keyhelp"
+            {"name": "!keystart", "isAdmin": true, "description": "Startet das Modul."},
+            {"name": "!keystop", "isAdmin": true, "description": "Stoppt das Modul."},
+            {"name": "!keyclear", "isAdmin": true, "description": "Setzt alle Keys zurück."},
+            {"name": "!keyhelp", "isAdmin": false, "description": "Zeige die Hilfe."}
         ]
     }
 ]
