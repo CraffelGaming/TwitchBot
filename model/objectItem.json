@@ -135,5 +135,9 @@
     {"handle": 134, "type": 7,  "gold": 10,     "value":"ein zitternden auf Koffeinentzugleidenden Craffel"},
     {"handle": 135, "type": 7,  "gold": 10,     "value":"eine angekettete SuperLootgeil"},
     {"handle": 136, "type": 7,  "gold": 5,      "value":"einen Popoklatschender Popoklatscher"},
-    {"handle": 137, "type": 7,  "gold": 5,      "value":"einen frischgebackenen Blaubeermuffin"}  
+    {"handle": 137, "type": 7,  "gold": 5,      "value":"einen frischgebackenen Blaubeermuffin"} ,
+    {"handle": 138, "type": 3,  "gold": 10,     "value":"Käsekuchen"},
+    {"handle": 139, "type": 3,  "gold": -100,   "value":"Passierschein A38"},
+    {"handle": 140, "type": 9,  "gold": -15,    "value":"einen nassen Joint"}
 ]
+

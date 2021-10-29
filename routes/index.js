@@ -7,6 +7,8 @@ let twitch = require('./twitch');
 let error = require('./error');
 let impressum = require('./impressum');
 let command = require('./command');
+let help = require('./help');
+
 
 let Authorize = require('./twitch/authorize');
 
@@ -23,6 +25,7 @@ router.get('/twitch', twitch);
 router.get('/error', error);
 router.get('/impressum', impressum);
 router.get('/command', command);
+router.get('/help', help);
 
 //index
 router.get('/', (req, res) => {

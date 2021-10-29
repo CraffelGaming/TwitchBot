@@ -40,7 +40,7 @@ class Administration extends Module {
             if(!channelItem.modules.find(x => x.name == parameter)){
                 var module = await this.channel.globalDatabase.sequelize.models.module.findOne({ where: { name: 'say' } })
                 var element = new ModuleItem(module);
-                element.command = parameter;
+                element.command = parameter.toLowerCase();
                 element.minutes = 0;
                 element.help = '';
                 element.text = '';
@@ -57,7 +57,7 @@ class Administration extends Module {
     async adminRemove(channelItem, parameter){
         var expressions = /^[a-z0-9]+$/i;
         if(parameter && expressions.test(parameter)){
-            var moduleItem = channelItem.modules.find(x => x.name == parameter);
+            var moduleItem = channelItem.modules.find(x => x.name == parameter.toLowerCase());
             if(moduleItem){
                 await this.channel.removeSay(moduleItem, channelItem);
                 return this.basicTranslation.remove;
