@@ -10,11 +10,13 @@ router.get('/' + endpoint + '/', async function (req, res) {
 });
 
 router.put('/' + endpoint + '/', async function (req, res) {
-	var twitchItem = await req.app.get('channel').globalDatabase.sequelize.models.twitch.findOne({ where: { state: req.session.state } });
-	if(twitchItem){
-		req.app.get('channel').addChannel(twitchItem.channelName, req.app.get('client'));
-		res.status(200);
-	} else res.status(401);	
+	if(req.session.state){
+		var twitchItem = await req.app.get('channel').globalDatabase.sequelize.models.twitch.findOne({ where: { state: req.session.state } });
+		if(twitchItem){
+			req.app.get('channel').addChannel(twitchItem.channelName, req.app.get('client'));
+			res.status(201);
+		} else res.status(401);	
+	} else res.status(401);
 });
 
 router.get('/' + endpoint + '/select/', async function (req, res) {	

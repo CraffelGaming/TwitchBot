@@ -7,21 +7,28 @@
         "debug": "node bot.js"
       },
     "configurations": [
-    {
-        "name": "Attach",
-        "port": 9229,
-        "request": "attach",
-        "skipFiles": [
-            "<node_internals>/**"
-        ],
-        "type": "pwa-node"
-    },
+        {
+            "name": "Attach",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
         {
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node"
         }
     ]
 }
