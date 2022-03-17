@@ -1,4 +1,4 @@
-[
+[   { "handle": 0, "name": "Anderes"},
     { "handle": 1, "name": "Kopf"},
     { "handle": 2, "name": "Brust"},
     { "handle": 3, "name": "Hand"},

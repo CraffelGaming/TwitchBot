@@ -1,5 +1,6 @@
 const Module = require('./module');
 const LootHeroItem = require('../model/loot/lootHeroItem');
+const ObjectItem = require('../model/objectItem');
 const LootInventoryItem = require('../model/loot/lootInventoryItem');
 const { Op } = require("sequelize");
 
@@ -74,6 +75,8 @@ class Loot extends Module{
                     return await this.startBlood(channel, playerName);
                 case "!rank":
                     return await this.showRank(channel, playerName);
+                case "!lootclear":
+                    return await this.addItem(channel, playerName, parameter);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -116,6 +119,43 @@ class Loot extends Module{
         if(this.element.isActive)
             return this.findItem(playerName, parameter);
         return this.translation.noAdventure;
+    }
+    //#endregion
+
+    //#region Item
+    async addItem(channel, playerName, parameter){
+        if(this.isOwner(target, playerName)){
+            var elements = this.getParameterItem(parameter);
+
+            if(elements && elements.value.length > 0){
+                var item = new ObjectItem();
+                item.handle = await ObjectItem.get(channel.database.sequelize, playerName) + 1;
+                item.value = elements.value;
+                item.gold = elements.gold;
+                item.type = elements.type;
+                await item.save();
+            }
+
+        }
+        return this.basicTranslation.clearError;
+    }
+
+    getParameterItem(parameter){
+        var result = {};
+        result.value= "";
+        result.gold = 100;
+        result.type = 0;
+
+        var item = parameter.split(' ');
+
+        if(item.length > 1)
+            result.value= item[1];
+        if(item.length > 2)
+            result.gold= item[2];
+        if(item.length > 3)
+            result.type= item[3];
+
+        return result;
     }
     //#endregion
 

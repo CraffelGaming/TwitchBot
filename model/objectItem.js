@@ -42,6 +42,14 @@ class ObjectItem {
             //        { where: { handle: item.handle } }
             //    )
     }
+    static async getMaxHandle(sequelize, heroName, heroStartIndex){
+        var [hero, created] = await sequelize.models.loot_object.findAll({
+            attributes: [Sequelize.fn('max', Sequelize.col('handle'))],
+            raw: true,
+        });
+        console.log(`INF: new hero ${hero.name}, created: ${created}`);
+        return hero;
+    }
 }
 
 module.exports = ObjectItem
