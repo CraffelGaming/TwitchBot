@@ -42,13 +42,20 @@ class ObjectItem {
             //        { where: { handle: item.handle } }
             //    )
     }
-    static async getMaxHandle(sequelize, heroName, heroStartIndex){
-        var [hero, created] = await sequelize.models.loot_object.findAll({
-            attributes: [Sequelize.fn('max', Sequelize.col('handle'))],
+
+    static async create(sequelize, item){
+        var object = await sequelize.models.loot_object.create(item);
+        console.log(`INF: new object ${object.handle}`);
+        return object;
+    }
+
+    static async getMaxHandle(sequelize){
+        var [hero] = await sequelize.models.loot_object.findAll({
+            attributes: [sequelize.fn('max', sequelize.col('handle'))],
             raw: true,
         });
-        console.log(`INF: new hero ${hero.name}, created: ${created}`);
-        return hero;
+        console.log(`INF: next id  ${hero["max(`handle`)"]}`);
+        return hero["max(`handle`)"];
     }
 }
 

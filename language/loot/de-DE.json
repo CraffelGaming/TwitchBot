@@ -47,5 +47,7 @@
     "bloodHunt" : " verfällt im Blutrausch ",
     "bloodPoints": "Blutpunkte",
     "andGet": "und erhält",
-    "rank": "Platz"
+    "rank": "Platz",
+    "addItem": "Gegenstand angelegt: ",
+    "addItemError": "Fehler beim Anlegen des Gegenstandes"
 }

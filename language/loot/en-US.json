@@ -44,5 +44,7 @@
     "levelError": "Your level is unbelievable.",
     "thereAre": "There are",
     "heroesOnAdventure" : "heroes on adventure",
-    "rank": "Rank"
+    "rank": "Rank",
+    "addItem": "Item created: ",
+    "addItemError": "Error creating item"
 }

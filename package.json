@@ -29,7 +29,7 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "start": "node bot"
+    "start": "node bot && tsc --build "
   },
   "repository": {
     "type": "git",

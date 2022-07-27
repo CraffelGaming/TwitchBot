@@ -75,8 +75,8 @@ class Loot extends Module{
                     return await this.startBlood(channel, playerName);
                 case "!rank":
                     return await this.showRank(channel, playerName);
-                case "!lootclear":
-                    return await this.addItem(channel, playerName, parameter);
+                case "!lootadd":
+                    return await this.addItem(channel, playerName, target, parameter);
             }
         } catch(ex){
             console.error(`ERR: loot - general`, ex);
@@ -123,21 +123,29 @@ class Loot extends Module{
     //#endregion
 
     //#region Item
-    async addItem(channel, playerName, parameter){
+    async addItem(channel, playerName, target, parameter){
         if(this.isOwner(target, playerName)){
             var elements = this.getParameterItem(parameter);
-
-            if(elements && elements.value.length > 0){
+            
+            if(elements && elements.value.length > 0 && this.isNumeric(elements.gold) && this.isNumeric(elements.type)){
+                var handle = await ObjectItem.getMaxHandle(channel.database.sequelize) + 1;
                 var item = new ObjectItem();
-                item.handle = await ObjectItem.get(channel.database.sequelize, playerName) + 1;
+                item.handle = handle;
                 item.value = elements.value;
                 item.gold = elements.gold;
                 item.type = elements.type;
-                await item.save();
+                await ObjectItem.create(channel.database.sequelize, item);
+
+                this.items.push(item);
+                return this.translation.addItem + elements.value + " - " + elements.gold + " " +  this.translation.gold + " (" + item.handle + ")";
             }
 
         }
-        return this.basicTranslation.clearError;
+        return this.translation.addItemError;
+    }
+
+    isNumeric(value) {
+        return /^-?\d+$/.test(value);
     }
 
     getParameterItem(parameter){
@@ -148,12 +156,12 @@ class Loot extends Module{
 
         var item = parameter.split(' ');
 
+        if(item.length > 0)
+            result.value= item[0];
         if(item.length > 1)
-            result.value= item[1];
+            result.gold= item[1];
         if(item.length > 2)
-            result.gold= item[2];
-        if(item.length > 3)
-            result.type= item[3];
+            result.type= item[2];
 
         return result;
     }

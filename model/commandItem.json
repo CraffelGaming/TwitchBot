@@ -59,7 +59,8 @@
             {"name": "!lootstart", "isAdmin": true, "description": "Startet das Modul."},
             {"name": "!lootstop", "isAdmin": true, "description": "Stoppt das Modul."},
             {"name": "!lootclear", "isAdmin": true, "description": "Setzt das Abenteuer zurück. Alle Fortschritte werden gespeichert."},
-            {"name": "!loothelp", "isAdmin": false, "description": "Zeige die Hilfe."}
+            {"name": "!loothelp", "isAdmin": false, "description": "Zeige die Hilfe."},
+            {"name": "!lootadd", "isAdmin": false, "description": "Legt einen neuen Gegenstand an: !lootadd value [gold] [type]"}
         ]
     },
     {

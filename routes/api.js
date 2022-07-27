@@ -379,8 +379,8 @@ router.post("/shop/sell", shop);
  *   get:
  *     tags:
  *     - Twitch
- *     summary: Anzeige der aktuellen Twitch-Anmeldung.
- *     description: Anzeige der aktuellen Twitch-Anmeldung.
+ *     summary: Anzeige des aktuellen Twitch-Anmeldungslinks.
+ *     description: Anzeige des aktuellen Twitch-Anmeldungslinks.
  *     consumes:
  *     - application/json
  *     responses:
