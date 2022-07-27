@@ -17,6 +17,33 @@ $(() => {
             for (var module of Object.values(json)) {
                 getCommand(module); 
             }
+
+            let say = document.getElementById("containerSay");
+
+            let h1  = document.createElement("div");
+            h1.setAttribute('class', 'mb-2');
+            h1.innerHTML = "<b> Alle folgenden Befehle besitzen folgende Funktionen <b/>";
+            say.appendChild(h1);
+
+            let h2  = document.createElement("div");
+            h2.setAttribute('class', 'mb-2');
+            h2.innerHTML = "!<modulname>intervall:zahl um den Interval festzulegen (Beispiel: !testinterval:10 setzt den Interval für das Modul test auf 10 Minuten).";
+            say.appendChild(h2);
+
+            let h3  = document.createElement("div");
+            h3.setAttribute('class', 'mb-2');
+            h3.innerHTML = "!<modulname>start und !<modulname>start um das Modul zu starten bzw. beenden (Beispiel: !teststart startet Modul test).";
+            say.appendChild(h3);
+
+            let h4  = document.createElement("div");
+            h4.setAttribute('class', 'mb-2');
+            h4.innerHTML = "!<modulname>text um den Test des Moduls zu ändern (Beispiel: !test:Hallo setzt den Text für das Modul test auf Hallo).";
+            say.appendChild(h4);
+
+            let h5  = document.createElement("div");
+            h5.setAttribute('class', 'mb-2');
+            h5.innerHTML = "<br/>";
+            say.appendChild(h5);
         });
     }
 
@@ -33,7 +60,6 @@ $(() => {
         }).then(async function (json) {
             if(json.length > 0){  
                 showCommand(module, json)
-
             }
         });
     }
